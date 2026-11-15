@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2027학년도 정시 미대·디자인 비실기 전형 및 수학 반영 분석</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+    body { font-family: 'Pretendard', sans-serif; }
+    .badge-no-math { background-color: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+    .badge-opt-math { background-color: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .badge-req-math { background-color: #fff1f2; color: #be123c; border: 1px solid #fecdd3; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-500/30 text-indigo-300 border border-indigo-400/30">2027 정시 모집요강 원문 전수 검증</span>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">비실기(수능 100% / 수능+서류) 특화</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1">
+            2027 정시 미대·디자인 비실기 전형
+          </h1>
+          <p class="text-slate-400 text-sm mt-0.5">수학 미반영 vs 수학 필수 반영 대학·전형 및 모집 인원 총정리</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="https://github.com/Jaygoo13" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium border border-slate-700 transition">
+            <i class="fa-brands fa-github text-lg"></i>
+            <span>Jaygoo13</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+
+    <!-- Overview Stats -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+        <div>
+          <p class="text-xs font-medium text-slate-500">조사 대상 전형</p>
+          <p class="text-2xl font-bold text-slate-900 mt-1">정시 비실기</p>
+          <p class="text-xs text-slate-400 mt-0.5">수능 100% / 수능+서류</p>
+        </div>
+        <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 text-xl">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+      </div>
+
+      <div class="bg-white p-5 rounded-2xl border border-emerald-100 shadow-sm flex items-center justify-between">
+        <div>
+          <p class="text-xs font-medium text-emerald-600 font-semibold">수학 완전 미반영</p>
+          <p class="text-2xl font-bold text-emerald-700 mt-1">31명</p>
+          <p class="text-xs text-slate-400 mt-0.5">경희대(25), 서울과기대(6)</p>
+        </div>
+        <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 text-xl">
+          <i class="fa-solid fa-ban"></i>
+        </div>
+      </div>
+
+      <div class="bg-white p-5 rounded-2xl border border-blue-100 shadow-sm flex items-center justify-between">
+        <div>
+          <p class="text-xs font-medium text-blue-600 font-semibold">수학 선택 미반영</p>
+          <p class="text-2xl font-bold text-blue-700 mt-1">161명</p>
+          <p class="text-xs text-slate-400 mt-0.5">홍익대 서울(80), 세종(81)</p>
+        </div>
+        <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 text-xl">
+          <i class="fa-solid fa-shuffle"></i>
+        </div>
+      </div>
+
+      <div class="bg-white p-5 rounded-2xl border border-rose-100 shadow-sm flex items-center justify-between">
+        <div>
+          <p class="text-xs font-medium text-rose-600 font-semibold">수학 필수 반영</p>
+          <p class="text-2xl font-bold text-rose-700 mt-1">157명 + α</p>
+          <p class="text-xs text-slate-400 mt-0.5">중앙·연세·한양·건국 등</p>
+        </div>
+        <div class="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center text-rose-600 text-xl">
+          <i class="fa-solid fa-calculator"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters & Search Toolbar -->
+    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm mb-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <!-- Tab Filter -->
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="setMathFilter('all')" id="tab-all" class="filter-tab px-4 py-2 rounded-xl text-sm font-semibold transition bg-slate-900 text-white shadow">
+            전체 보기 (<span id="count-all">0</span>)
+          </button>
+          <button onclick="setMathFilter('none')" id="tab-none" class="filter-tab px-4 py-2 rounded-xl text-sm font-semibold transition bg-slate-100 text-slate-600 hover:bg-slate-200">
+            수학 미반영 (<span id="count-none">0</span>)
+          </button>
+          <button onclick="setMathFilter('required')" id="tab-required" class="filter-tab px-4 py-2 rounded-xl text-sm font-semibold transition bg-slate-100 text-slate-600 hover:bg-slate-200">
+            수학 필수 반영 (<span id="count-required">0</span>)
+          </button>
+        </div>
+
+        <!-- Search & Gun Filter -->
+        <div class="flex items-center gap-3 w-full md:w-auto">
+          <div class="relative flex-1 md:w-64">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+            <input type="text" id="search-input" oninput="applyFilters()" placeholder="대학명, 학과명 검색..." class="w-full pl-9 pr-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition">
+          </div>
+          <select id="gun-filter" onchange="applyFilters()" class="px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium">
+            <option value="all">모든 군</option>
+            <option value="가">가군</option>
+            <option value="나">나군</option>
+            <option value="다">다군</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert Box for Critical Cautions -->
+    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-6 flex items-start gap-3">
+      <i class="fa-solid fa-triangle-exclamation text-amber-600 mt-0.5 text-lg"></i>
+      <div class="text-sm text-amber-900 leading-relaxed">
+        <span class="font-bold">수험생 필수 주의사항:</span>
+        <ul class="list-disc list-inside mt-1 space-y-0.5 text-amber-800">
+          <li><strong>서울과기대 비실기</strong>: 시각디자인(3명)·금속공예(3명)는 <strong>수학 0% 미반영</strong>이지만, 산업디자인 비실기(7명)는 <strong>수학 25% 필수</strong>입니다.</li>
+          <li><strong>중앙대 디자인학부</strong>: 가군 실기형은 수학 미반영이지만, <strong>다군 비실기 일반형(54명)은 수학 30% 필수</strong>입니다.</li>
+          <li><strong>비실기 미운영 대학</strong>: 국민대, 고려대, 서울대 등은 정시 조형/디자인 계열에서 비실기 전형이 없으며 실기고사를 필수로 반영합니다.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Table Container -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-100/75 border-b border-slate-200 text-xs font-semibold text-slate-600 uppercase tracking-wider">
+              <th class="py-4 px-4 sm:px-6">대학명</th>
+              <th class="py-4 px-3 text-center">군</th>
+              <th class="py-4 px-4">모집단위 (학과)</th>
+              <th class="py-4 px-3 text-center">모집인원</th>
+              <th class="py-4 px-4">전형명 / 방식</th>
+              <th class="py-4 px-4">수학 반영 여부</th>
+              <th class="py-4 px-4">수능 세부 반영비율</th>
+              <th class="py-4 px-3 text-center">근거</th>
+            </tr>
+          </thead>
+          <tbody id="table-body" class="divide-y divide-slate-100 text-sm">
+            <!-- Dynamic rows will be inserted here -->
+          </tbody>
+        </table>
+      </div>
+
+      <div id="no-results" class="hidden py-16 text-center text-slate-400">
+        <i class="fa-solid fa-folder-open text-4xl mb-3 text-slate-300"></i>
+        <p class="text-base font-medium">검색 조건에 맞는 대학·전형이 없습니다.</p>
+        <p class="text-xs text-slate-400 mt-1">검색어나 필터를 다시 확인해 보세요.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4">
+      <p class="font-medium text-slate-700">2027학년도 정시 신입생 모집요강 원문 기반 데이터베이스</p>
+      <p class="mt-1 text-slate-400">자료 출처: 각 대학 입학처 2027학년도 정시 모집요강 | Hosted via GitHub Pages by <a href="https://github.com/Jaygoo13" class="text-indigo-600 font-semibold hover:underline">Jaygoo13</a></p>
+    </div>
+  </footer>
+
+  <!-- Script Data & Logic -->
+  <script>
+    const data = [
+      // 1. 수학 미반영 비실기
+      {
+        univ: "경희대학교",
+        campus: "국제캠퍼스",
+        gun: "나",
+        dept: "예술·디자인대학 (산업디자인, 시각디자인, 환경조경디자인, 의류디자인, 디지털콘텐츠, 도예)",
+        detailDept: "• 산업디자인 9명\n• 시각디자인 2명\n• 환경조경디자인 4명\n• 의류디자인 6명\n• 디지털콘텐츠 2명\n• 도예 2명",
+        count: 25,
+        type: "수능위주전형 (수능 100%)",
+        mathCategory: "none",
+        mathStatus: "완전 미반영 (0%)",
+        mathBadgeClass: "badge-no-math",
+        ratio: "국어 60% + 탐구(1과목) 40% (영어/한국사 감점제)",
+        source: "p.17, p.30, p.43"
+      },
+      {
+        univ: "서울과학기술대학교",
+        campus: "서울캠퍼스",
+        gun: "나",
+        dept: "조형대학 (시각디자인학과, 금속공예디자인학과)",
+        detailDept: "• 시각디자인학과 3명\n• 금속공예디자인학과 3명",
+        count: 6,
+        type: "비실기전형 (수능 100%)",
+        mathCategory: "none",
+        mathStatus: "완전 미반영 (0%)",
+        mathBadgeClass: "badge-no-math",
+        ratio: "국어 40% + 영어 25% + 탐구(2과목) 35% (한국사 감점)",
+        source: "p.6, p.8, p.22"
+      },
+      {
+        univ: "홍익대학교",
+        campus: "서울캠퍼스",
+        gun: "나",
+        dept: "미술대학 전 학과 (디자인학부, 예술학, 금속조형, 도예·유리, 목조형가구, 섬유·패션, 동양화, 회화, 판화, 조소, 미대자율전공)",
+        detailDept: "• 디자인학부 18명, 예술학과 5명\n• 회화과 10명, 조소과 5명, 동양화과 5명, 판화과 5명\n• 금속 4, 도예 4, 목조형 4, 섬유패션 4명\n• 미술대학자율전공 16명",
+        count: 80,
+        type: "수능우수자전형 (1단계 수능100 3배수 → 2단계 수능60 + 서류40)",
+        mathCategory: "none",
+        mathStatus: "선택 미반영 (택2)",
+        mathBadgeClass: "badge-opt-math",
+        ratio: "[국·수·탐(2) 중 택2 각 40%] + 영어 20%",
+        source: "p.24, p.28, p.29"
+      },
+      {
+        univ: "홍익대학교",
+        campus: "세종캠퍼스",
+        gun: "가",
+        dept: "조형대학 전 학과 (디자인컨버전스학부, 영상·애니메이션학부, 게임그래픽디자인전공)",
+        detailDept: "• 디자인컨버전스학부 44명\n• 영상·애니메이션학부 24명\n• 게임학부 게임그래픽디자인전공 13명",
+        count: 81,
+        type: "수능우수자전형 (1단계 수능100 4배수 → 2단계 수능60 + 서류40)",
+        mathCategory: "none",
+        mathStatus: "선택 미반영 (택2)",
+        mathBadgeClass: "badge-opt-math",
+        ratio: "[국·수·탐(2) 중 택2 각 40%] + 영어 20%",
+        source: "p.59, p.63, p.64"
+      },
+
+      // 2. 수학 필수 반영 비실기
+      {
+        univ: "중앙대학교",
+        campus: "다빈치캠퍼스",
+        gun: "다",
+        dept: "디자인학부 (패션, 실내환경디자인, 산업디자인, 시각디자인, 공예)",
+        detailDept: "• 패션 23명\n• 실내환경디자인 10명\n• 산업디자인 8명\n• 시각디자인 7명\n• 공예 6명",
+        count: 54,
+        type: "수능 일반형 (수능 100%)",
+        mathCategory: "required",
+        mathStatus: "수학 30% 필수",
+        mathBadgeClass: "badge-req-math",
+        ratio: "국어 35% + 수학 30% + 탐구(2과목) 35% (영/한 가산점)",
+        source: "p.19, p.20"
+      },
+      {
+        univ: "서울과학기술대학교",
+        campus: "서울캠퍼스",
+        gun: "나",
+        dept: "조형대학 산업디자인학과",
+        detailDept: "• 산업디자인학과 (비실기) 7명",
+        count: 7,
+        type: "비실기전형 (수능 100%)",
+        mathCategory: "required",
+        mathStatus: "수학 25% 필수",
+        mathBadgeClass: "badge-req-math",
+        ratio: "국어 30% + 수학 25% + 영어 25% + 탐구(2과목) 20%",
+        source: "p.8, p.22, p.42"
+      },
+      {
+        univ: "인천대학교",
+        campus: "송도본교",
+        gun: "가",
+        dept: "디자인학부",
+        detailDept: "• 디자인학부 (수능 100%) 14명",
+        count: 14,
+        type: "일반학생전형 (수능 100%)",
+        mathCategory: "required",
+        mathStatus: "수학 15% 필수",
+        mathBadgeClass: "badge-req-math",
+        ratio: "국어 45% + 수학 15% + 탐구(2과목) 30% + 영어 10%",
+        source: "p.5, p.6, p.28"
+      },
+      {
+        univ: "인천대학교",
+        campus: "송도본교",
+        gun: "나",
+        dept: "패션산업학과",
+        detailDept: "• 패션산업학과 9명",
+        count: 9,
+        type: "일반학생전형 (수능 100%)",
+        mathCategory: "required",
+        mathStatus: "수학 30% 필수",
+        mathBadgeClass: "badge-req-math",
+        ratio: "국어 35% + 수학 30% + 탐구(2과목) 25% + 영어 10%",
+        source: "p.5, p.28"
+      },
+      {
+        univ: "건국대학교",
+        campus: "서울캠퍼스",
+        gun: "나",
+        dept: "예술디자인대학 의상디자인학과 (인문계)",
+        detailDept: "• 의상디자인학과-인문계 17명",
+        count: 17,
+        type: "수능(KU일반학생) (수능 100%)",
+        mathCategory: "required",
+        mathStatus: "수학 25% 필수",
+        mathBadgeClass: "badge-req-math",
+        ratio: "국어 40% + 수학 25% + 탐구(2과목) 20% + 영어 15%",
+        source: "p.10, p.13, p.22"
+      },
+      {
+        univ: "한양대학교",
+        campus: "서울캠퍼스",
+        gun: "가",
+        dept: "생활과학대학 의류학과, 실내건축디자인학과",
+        detailDept: "• 의류학과 8명\n• 실내건축디자인학과 9명",
+        count: 17,
+        type: "일반전형 (수능 100%)",
+        mathCategory: "required",
+        mathStatus: "수학 35% 필수",
+        mathBadgeClass: "badge-req-math",
+        ratio: "국어 35% + 수학 35% + 탐구(2과목) 20% + 영어 10%",
+        source: "p.10, p.16"
+      },
+      {
+        univ: "연세대학교",
+        campus: "신촌본교",
+        gun: "가",
+        dept: "생활과학대학 통합디자인학과, 의류환경학과",
+        detailDept: "• 통합디자인학과 9명\n• 의류환경학과 9명",
+        count: 18,
+        type: "일반전형 (수능 100%)",
+        mathCategory: "required",
+        mathStatus: "수학 33.3% 필수",
+        mathBadgeClass: "badge-req-math",
+        ratio: "국어 200 + 수학 200 + 영어 100 + 탐구(2과목) 100",
+        source: "p.13"
+      },
+      {
+        univ: "성균관대학교",
+        campus: "인사캠(서울)",
+        gun: "가",
+        dept: "예술대학 의상학과",
+        detailDept: "• 의상학과 15명",
+        count: 15,
+        type: "일반전형 (수능 100%)",
+        mathCategory: "required",
+        mathStatus: "수학 30~40% 필수",
+        mathBadgeClass: "badge-req-math",
+        ratio: "국어 15% + 수학/탐구 우수순 40%, 30% + 영어 15%",
+        source: "p.9, p.27"
+      },
+      {
+        univ: "가천대학교",
+        campus: "글로벌(성남)",
+        gun: "다",
+        dept: "사회과학대학 패션산업학과",
+        detailDept: "• 패션산업학과 13명",
+        count: 13,
+        type: "일반전형 1 (수능 100%)",
+        mathCategory: "required",
+        mathStatus: "수학 30~40% 필수",
+        mathBadgeClass: "badge-req-math",
+        ratio: "국·수 우수순 40%, 30% + 영·탐 우수순 20%, 10%",
+        source: "p.16, p.34"
+      },
+      {
+        univ: "세종대학교",
+        campus: "서울캠퍼스",
+        gun: "다",
+        dept: "창의소프트학부 (디자인이노베이션전공, 만화애니메이션텍전공)",
+        detailDept: "• 디자인이노베이션전공 2명\n• 만화애니메이션텍전공 2명",
+        count: 4,
+        type: "수능(일반학생전형) (수능 100%)",
+        mathCategory: "required",
+        mathStatus: "수학 필수 응시",
+        mathBadgeClass: "badge-req-math",
+        ratio: "국어, 수학, 영어, 탐구(2), 한국사 필수 응시 일괄합산",
+        source: "p.5, p.11, p.47"
+      },
+      {
+        univ: "경기대학교",
+        campus: "수원캠퍼스",
+        gun: "다",
+        dept: "예술체육대학 디자인학부",
+        detailDept: "• 수시 미충원 이월 인원 선발",
+        count: 0,
+        type: "수능(일반학생전형) (수능 100% 이월)",
+        mathCategory: "required",
+        mathStatus: "수학 30% 필수",
+        mathBadgeClass: "badge-req-math",
+        ratio: "국어 35% + 수학 30% + 영어 20% + 탐구(1과목) 15%",
+        source: "p.6, p.31"
+      }
+    ];
+
+    let currentMathFilter = 'all';
+
+    function initCounts() {
+      document.getElementById('count-all').innerText = data.length;
+      document.getElementById('count-none').innerText = data.filter(d => d.mathCategory === 'none').length;
+      document.getElementById('count-required').innerText = data.filter(d => d.mathCategory === 'required').length;
+    }
+
+    function setMathFilter(filter) {
+      currentMathFilter = filter;
+      document.querySelectorAll('.filter-tab').forEach(btn => {
+        btn.classList.remove('bg-slate-900', 'text-white', 'shadow');
+        btn.classList.add('bg-slate-100', 'text-slate-600');
+      });
+
+      const activeBtn = document.getElementById(`tab-${filter}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
+        activeBtn.classList.add('bg-slate-900', 'text-white', 'shadow');
+      }
+
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const search = document.getElementById('search-input').value.trim().toLowerCase();
+      const gun = document.getElementById('gun-filter').value;
+
+      const filtered = data.filter(item => {
+        // math filter
+        if (currentMathFilter !== 'all' && item.mathCategory !== currentMathFilter) return false;
+        // gun filter
+        if (gun !== 'all' && item.gun !== gun) return false;
+        // search keyword
+        if (search) {
+          const matchUniv = item.univ.toLowerCase().includes(search);
+          const matchCampus = item.campus.toLowerCase().includes(search);
+          const matchDept = item.dept.toLowerCase().includes(search);
+          const matchDetail = item.detailDept.toLowerCase().includes(search);
+          if (!matchUniv && !matchCampus && !matchDept && !matchDetail) return false;
+        }
+        return true;
+      });
+
+      renderTable(filtered);
+    }
+
+    function renderTable(items) {
+      const tbody = document.getElementById('table-body');
+      const noResults = document.getElementById('no-results');
+      tbody.innerHTML = '';
+
+      if (items.length === 0) {
+        noResults.classList.remove('hidden');
+        return;
+      }
+      noResults.classList.add('hidden');
+
+      items.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50 transition border-b border-slate-100";
+
+        const countBadge = item.count > 0 
+          ? `<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-800">${item.count}명</span>`
+          : `<span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">수시이월</span>`;
+
+        tr.innerHTML = `
+          <td class="py-4 px-4 sm:px-6 font-bold text-slate-900">
+            <div>${item.univ}</div>
+            <div class="text-xs text-slate-400 font-normal">${item.campus}</div>
+          </td>
+          <td class="py-4 px-3 text-center">
+            <span class="inline-block w-7 h-7 leading-7 rounded-lg text-xs font-extrabold bg-slate-800 text-white shadow-sm">${item.gun}</span>
+          </td>
+          <td class="py-4 px-4">
+            <div class="font-semibold text-slate-800 text-sm leading-snug">${item.dept}</div>
+            <div class="text-xs text-slate-500 mt-1 whitespace-pre-line leading-relaxed bg-slate-50 p-2 rounded-lg border border-slate-100">${item.detailDept}</div>
+          </td>
+          <td class="py-4 px-3 text-center">
+            ${countBadge}
+          </td>
+          <td class="py-4 px-4">
+            <span class="text-xs font-medium text-slate-700 bg-slate-100 px-2 py-1 rounded border border-slate-200 block sm:inline-block">${item.type}</span>
+          </td>
+          <td class="py-4 px-4">
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold ${item.mathBadgeClass}">${item.mathStatus}</span>
+          </td>
+          <td class="py-4 px-4 text-xs text-slate-600 font-medium leading-relaxed">
+            ${item.ratio}
+          </td>
+          <td class="py-4 px-3 text-center text-xs text-slate-400 font-mono">
+            ${item.source}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Initialize
+    initCounts();
+    applyFilters();
+  </script>
+</body>
+</html>
