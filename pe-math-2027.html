@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>체육 계열 수학 반영 2027</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: 단일 칼럼. 결론 → 수시 → 정시(미반영 / 선택형) → 참고. hongik-art-2028과 같은 OMR 붉은 괘선 + 남색 잉크 */
+:root {
+  --bg: #fbfaf8; --paper: #ffffff; --ink: #1d2433; --muted: #5d6474; --line: #e6e2dc;
+  --omr: #c8414f; --omr-soft: #fbe9eb; --navy: #26407a; --navy-soft: #e9eef8; --sub: #f4f2ee;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #141821; --paper: #1b2030; --ink: #e8eaf0; --muted: #a2a9b8; --line: #2c3344;
+  --omr: #f07a86; --omr-soft: #3a2228; --navy: #9db4ea; --navy-soft: #222c44; --sub: #20263a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #141821; --paper: #1b2030; --ink: #e8eaf0; --muted: #a2a9b8; --line: #2c3344;
+  --omr: #f07a86; --omr-soft: #3a2228; --navy: #9db4ea; --navy-soft: #222c44; --sub: #20263a; color-scheme: dark }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.65; word-break: keep-all;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 56px; }
+.wrap { max-width: 880px; margin: 0 auto; }
+header { padding-block: 40px 20px; border-bottom: 2px solid var(--omr); position: relative; }
+header::after { content: ""; position: absolute; left: 0; right: 0; bottom: -7px; border-bottom: 1px solid var(--omr); opacity: .5; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; color: var(--omr); }
+h1 { font-size: clamp(26px, 5vw, 38px); line-height: 1.25; margin: 6px 0 8px; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0; font-size: 14px; }
+h2 { font-size: 20px; margin: 44px 0 6px; text-wrap: balance; }
+h3 { font-size: 16px; margin: 24px 0 6px; }
+.lead { color: var(--muted); font-size: 14px; margin: 0 0 8px; }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); margin: 10px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { font-size: 12px; color: var(--muted); font-weight: 500; background: var(--bg); white-space: nowrap; }
+td:first-child { white-space: nowrap; font-weight: 500; }
+td.p { font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 0; }
+td strong { color: var(--omr); }
+.note { font-size: 13px; color: var(--muted); margin: 6px 0; }
+ul { padding-left: 1.2em; margin: 8px 0; }
+li { margin: 4px 0; }
+.keys { display: grid; gap: 10px; margin: 14px 0; }
+.key { border-left: 3px solid var(--navy); background: var(--navy-soft); padding: 10px 14px; border-radius: 0 6px 6px 0; }
+.key b { color: var(--navy); }
+.tag { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; border: 1.5px solid var(--omr); color: var(--omr); border-radius: 999px; padding: 0 9px; margin-right: 6px; vertical-align: 2px; }
+.tag.navy { border-color: var(--navy); color: var(--navy); }
+nav.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
+nav.toc a { font-size: 13px; color: var(--navy); text-decoration: none; border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: 3px 12px; }
+nav.toc a:hover { border-color: var(--navy); }
+footer { margin-top: 48px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">2027학년도 · 수시 / 정시</div>
+    <h1>체육 계열, 수학 없이 갈 수 있는 곳</h1>
+    <p class="sub">2027 모집요강 원문 기준. 수학을 반영하지 않거나, 수학을 빼고 지원할 수 있는 체육·스포츠 계열 전형을 모았습니다.</p>
+    <nav class="toc" aria-label="목차">
+      <a href="#susi">수시 · 내신</a><a href="#jungsi-no">정시 · 수학 미반영</a><a href="#jungsi-opt">정시 · 선택형</a><a href="#ref">수학 반영 학과</a>
+    </nav>
+  </header>
+
+  <div class="keys">
+    <div class="key"><b>체육대학·스포츠과학</b> · 수시는 국어·영어 중심 내신, 정시는 국어·영어·탐구만 보거나 상위 영역만 반영하는 곳이 많습니다.</div>
+    <div class="key"><b>체육교육과는 주의</b> · 사범대 체육교육과는 대부분 수학을 반영합니다. 예외는 인하대(정시)와 인천대(수시 실기·정시)입니다.</div>
+    <div class="key"><b>선택형은 정시에만</b> · 수학을 "빼고 고를 수 있는" 방식은 정시 수능에만 있습니다. 수시 체육 계열은 수학을 아예 빼거나 필수로 넣습니다.</div>
+  </div>
+
+  <h2 id="susi"><span class="tag">수시</span>학생부 교과에서 수학 미반영</h2>
+  <p class="lead">내신 성적을 계산할 때 수학 교과를 넣지 않는 전형입니다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>대학</th><th>모집단위·전형</th><th>반영교과</th><th>원문</th></tr></thead>
+    <tbody>
+      <tr><td>경희대</td><td>예술·체육계열 (기회균형Ⅰ·Ⅱ 등)</td><td>국어, 영어</td><td class="p">p.64, 111</td></tr>
+      <tr><td>동국대 WISE</td><td>예체능 (스포츠과학·스포츠의학 포함)</td><td>국어, 영어 6과목</td><td class="p">p.30</td></tr>
+      <tr><td>명지대</td><td>스포츠·예술대학</td><td>국어, 영어</td><td class="p">p.95</td></tr>
+      <tr><td>단국대 죽전·천안</td><td>예능·체육 (체육교육과 제외)</td><td>국어, 영어, 사회</td><td class="p">죽전 p.82 · 천안 p.55</td></tr>
+      <tr><td>인천대</td><td>실기 전형 (스포츠과학부·스포츠의학부·체육교육과)</td><td>국 40 · 영 30 · 사 30<br><span class="note">스포츠의학부는 사회·과학 중 상위</span></td><td class="p">p.46</td></tr>
+      <tr><td>한양대 서울</td><td>실기/실적 (체육특기자 포함)</td><td>국어, 영어, 사회, 한국사</td><td class="p">p.60</td></tr>
+      <tr><td>홍익대</td><td>스포츠지도학과</td><td>국어, 영어, 사회·과학 택1<br><span class="note">교과별 상위 3과목</span></td><td class="p">p.108, 115</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 id="jungsi-no"><span class="tag">정시</span>수능에서 수학 미반영</h2>
+  <p class="lead">수학 점수를 아예 계산에 넣지 않습니다. 숫자는 영역별 반영비율(또는 배점)입니다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>대학</th><th>모집단위</th><th>반영 영역</th><th>원문</th></tr></thead>
+    <tbody>
+      <tr><td>경희대</td><td>예술·체육</td><td>국 60 · 탐 40 (영어 별도)</td><td class="p">2028 계획 p.6</td></tr>
+      <tr><td>경북대</td><td>예체능 (체육교육과 제외)</td><td>국 200 · 영 100 · 탐 200</td><td class="p">p.19–21</td></tr>
+      <tr><td>국민대</td><td>체육대학</td><td>국 200 · 영 200 · 탐 200</td><td class="p">p.45</td></tr>
+      <tr><td>세종대</td><td>체육학과</td><td>국 50 · 영 50</td><td class="p">p.47</td></tr>
+      <tr><td>숭실대</td><td>스포츠학부</td><td>국 50 · 영 50</td><td class="p">p.46–47</td></tr>
+      <tr><td>광운대</td><td>스포츠융합과학과</td><td>국 40 · 영 30 · 탐 30</td><td class="p">p.4</td></tr>
+      <tr><td>부산대</td><td>스포츠과학과</td><td>국 300 · 영 200 · 탐 300</td><td class="p">p.29</td></tr>
+      <tr><td>인천대</td><td>스포츠의학부</td><td>국 40 · 탐 40 · 영 20</td><td class="p">p.27</td></tr>
+      <tr><td>인천대</td><td>체육교육과 · 스포츠과학부</td><td>국 45 · 탐 45 · 영 10</td><td class="p">p.27</td></tr>
+      <tr><td>인하대</td><td>체육교육과</td><td>국 40 · 탐 30 · 영 30</td><td class="p">p.41</td></tr>
+      <tr><td>인하대</td><td>스포츠과학과</td><td>국 40 · 탐 20 · 영 40</td><td class="p">p.41</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 id="jungsi-opt"><span class="tag">정시</span><span class="tag navy">선택형</span>수학을 빼고 지원할 수 있는 곳</h2>
+  <p class="lead">성적이 좋은 영역만 골라 반영합니다. 수학이 다른 영역보다 낮으면 계산에서 자동으로 빠집니다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>대학</th><th>모집단위</th><th>반영 방식</th><th>원문</th></tr></thead>
+    <tbody>
+      <tr><td>건국대 서울</td><td>예체능</td><td>국 45 + 영 25 + <strong>수·탐 중 높은 1개</strong> 30</td><td class="p">p.22</td></tr>
+      <tr><td>단국대 천안</td><td>예체능</td><td>국 40 + 영 40 + <strong>수·탐 중 높은 1개</strong> 20</td><td class="p">p.50</td></tr>
+      <tr><td>용인대</td><td>예체능 (체육·무도 계열)</td><td><strong>국·수·영 중 상위 1개</strong> 60 + 탐 40</td><td class="p">p.25</td></tr>
+      <tr><td>상명대 서울</td><td>스포츠건강관리전공 등 예체능</td><td><strong>국·수·영 중 상위 2개</strong> 각 40 + 탐 20</td><td class="p">p.4</td></tr>
+      <tr><td>상명대 천안</td><td>예체능계열</td><td><strong>국·수·영 중 상위 2개</strong> 각 40 + 탐 20</td><td class="p">p.6</td></tr>
+      <tr><td>경기대</td><td>경호보안 · 스포츠과학</td><td>영 30 + <strong>국·수·탐 중 상위 2개</strong> 각 35</td><td class="p">p.28</td></tr>
+      <tr><td>동국대 WISE</td><td>스포츠과학 · 스포츠의학</td><td><strong>국·수·영·탐 중 상위 2개</strong> 각 50</td><td class="p">p.13</td></tr>
+      <tr><td>건국대 GLOCAL</td><td>의예과 외 전 모집단위</td><td><strong>국·수·영·탐 중 상위 2개</strong> 50 : 50</td><td class="p">p.22</td></tr>
+      <tr><td>삼육대</td><td>체육학과</td><td><strong>상위 2개 영역</strong> 각 50</td><td class="p">p.37</td></tr>
+      <tr><td>수원대</td><td>실기 (체육)</td><td><strong>국·수·영·탐 중 상위 2개</strong> 50 : 50</td><td class="p">p.20</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 id="ref">참고 · 수학을 반영하는 체육 계열</h2>
+  <ul>
+    <li><b>수시</b> · 숭실대 스포츠학부(국·수·영·사·한국사), 경기대 체육특기자(국·수·영·사·과·한국사 중 상위 10과목), 단국대 체육교육과(국·영·수·사·과), 전남대 체육교육과(사회·과학만 제외)</li>
+    <li><b>정시</b> · 경북대 체육교육과(수 200), 단국대 죽전 체육교육과(수 10), 전남대 체육교육과(수 210), 고려대 서울 체능(수 200)</li>
+  </ul>
+  <p class="note">실기 비중이 큰 전형은 수능·내신보다 실기 점수가 당락을 더 크게 좌우합니다. 42개 대학·캠퍼스의 모집요강을 조사한 결과이며, 이 밖의 대학은 포함되지 않습니다.</p>
+
+  <footer>출처: 각 대학 2027학년도 수시·정시 모집요강(진학사 모집요강 자료실). 경희대 정시는 2028 대입전형 시행계획에 실린 2027 기준표. 원문 쪽수는 각 대학 요강 PDF 기준. 정리 기준일 2026-11-15.</footer>
+</div>
+</body>
+</html>
