@@ -10,41 +10,52 @@
 :root {
   --bg: #fbfaf8; --paper: #ffffff; --ink: #1d2433; --muted: #5d6474; --line: #e6e2dc;
   --omr: #c8414f; --omr-soft: #fbe9eb; --navy: #26407a; --navy-soft: #e9eef8; --sub: #f4f2ee;
+  --green: #2f6b4f; --green-soft: #e6f1eb;
   --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #141821; --paper: #1b2030; --ink: #e8eaf0; --muted: #a2a9b8; --line: #2c3344;
-  --omr: #f07a86; --omr-soft: #3a2228; --navy: #9db4ea; --navy-soft: #222c44; --sub: #20263a; color-scheme: dark } }
+  --omr: #f07a86; --omr-soft: #3a2228; --navy: #9db4ea; --navy-soft: #222c44; --sub: #20263a;
+  --green: #8fd0ac; --green-soft: #1f3329; color-scheme: dark } }
 :root[data-theme="dark"] {
   --bg: #141821; --paper: #1b2030; --ink: #e8eaf0; --muted: #a2a9b8; --line: #2c3344;
-  --omr: #f07a86; --omr-soft: #3a2228; --navy: #9db4ea; --navy-soft: #222c44; --sub: #20263a; color-scheme: dark }
+  --omr: #f07a86; --omr-soft: #3a2228; --navy: #9db4ea; --navy-soft: #222c44; --sub: #20263a;
+  --green: #8fd0ac; --green-soft: #1f3329; color-scheme: dark }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.65; word-break: keep-all;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 56px; }
-.wrap { max-width: 880px; margin: 0 auto; }
+.wrap { max-width: 1040px; margin: 0 auto; }
 header { padding-block: 40px 20px; border-bottom: 2px solid var(--omr); position: relative; }
 header::after { content: ""; position: absolute; left: 0; right: 0; bottom: -7px; border-bottom: 1px solid var(--omr); opacity: .5; }
 .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; color: var(--omr); }
 h1 { font-size: clamp(26px, 5vw, 38px); line-height: 1.25; margin: 6px 0 8px; text-wrap: balance; }
 .sub { color: var(--muted); margin: 0; font-size: 14px; }
 h2 { font-size: 20px; margin: 44px 0 6px; text-wrap: balance; }
-h3 { font-size: 16px; margin: 24px 0 6px; }
 .lead { color: var(--muted); font-size: 14px; margin: 0 0 8px; }
 .tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); margin: 10px 0; }
-table { border-collapse: collapse; width: 100%; font-size: 14px; }
-th, td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
 th { font-size: 12px; color: var(--muted); font-weight: 500; background: var(--bg); white-space: nowrap; }
 td:first-child { white-space: nowrap; font-weight: 500; }
-td.p { font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+td.unit { min-width: 170px; }
+td.n { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--font-mono); white-space: nowrap; }
+td.p { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+td.c { white-space: nowrap; }
 tbody tr:last-child td { border-bottom: 0; }
 td strong { color: var(--omr); }
+.b { display: inline-block; font-size: 11.5px; border-radius: 4px; padding: 0 7px; white-space: nowrap; font-weight: 500; }
+.b.sil { background: var(--omr-soft); color: var(--omr); }
+.b.jeok { background: var(--navy-soft); color: var(--navy); }
+.b.no { background: var(--green-soft); color: var(--green); }
+.legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; color: var(--muted); margin: 8px 0 0; }
 .note { font-size: 13px; color: var(--muted); margin: 6px 0; }
 ul { padding-left: 1.2em; margin: 8px 0; }
 li { margin: 4px 0; }
 .keys { display: grid; gap: 10px; margin: 14px 0; }
 .key { border-left: 3px solid var(--navy); background: var(--navy-soft); padding: 10px 14px; border-radius: 0 6px 6px 0; }
 .key b { color: var(--navy); }
+.fix { border-left: 3px solid var(--omr); background: var(--omr-soft); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 13.5px; margin: 12px 0; }
 .tag { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; border: 1.5px solid var(--omr); color: var(--omr); border-radius: 999px; padding: 0 9px; margin-right: 6px; vertical-align: 2px; }
 .tag.navy { border-color: var(--navy); color: var(--navy); }
 nav.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
@@ -58,78 +69,96 @@ footer { margin-top: 48px; padding-top: 14px; border-top: 1px solid var(--line);
   <header>
     <div class="eyebrow">2027학년도 · 수시 / 정시</div>
     <h1>체육 계열, 수학 없이 갈 수 있는 곳</h1>
-    <p class="sub">2027 모집요강 원문 기준. 수학을 반영하지 않거나, 수학을 빼고 지원할 수 있는 체육·스포츠 계열 전형을 모았습니다.</p>
+    <p class="sub">2027 모집요강 원문 기준. 수학을 반영하지 않거나, 수학을 빼고 지원할 수 있는 체육·스포츠 계열 전형을 모았습니다. 모집인원·수능최저·실기 여부를 함께 적었습니다.</p>
     <nav class="toc" aria-label="목차">
       <a href="#susi">수시 · 내신</a><a href="#jungsi-no">정시 · 수학 미반영</a><a href="#jungsi-opt">정시 · 선택형</a><a href="#ref">수학 반영 학과</a>
     </nav>
   </header>
 
   <div class="keys">
-    <div class="key"><b>체육대학·스포츠과학</b> · 수시는 국어·영어 중심 내신, 정시는 국어·영어·탐구만 보거나 상위 영역만 반영하는 곳이 많습니다.</div>
-    <div class="key"><b>체육교육과는 주의</b> · 사범대 체육교육과는 대부분 수학을 반영합니다. 예외는 인하대(정시)와 인천대(수시 실기·정시)입니다.</div>
-    <div class="key"><b>선택형은 정시에만</b> · 수학을 "빼고 고를 수 있는" 방식은 정시 수능에만 있습니다. 수시 체육 계열은 수학을 아예 빼거나 필수로 넣습니다.</div>
+    <div class="key"><b>수시</b> · 대부분 실기·실적(특기자) 전형이고 수능최저가 없습니다. 실기 없이 교과로 뽑으면서 수학을 빼는 곳은 경희대 지역균형·기회균형, 단국대 천안 교과우수자뿐입니다.</div>
+    <div class="key"><b>정시</b> · 대부분 수능 + 실기입니다. 실기 없이 수능만 보는 곳은 경희대 나군(체육학·스포츠의학·골프산업·태권도), 용인대 무도·경호·골프, 국민대 스포츠건강재활(이월 시)입니다.</div>
+    <div class="key"><b>체육교육과는 주의</b> · 대부분 수학을 반영합니다. 예외는 인천대·인하대·용인대(특수체육교육과), 그리고 선택형인 건국대 서울입니다.</div>
   </div>
+  <div class="legend"><span><span class="b sil">실기</span> 실기고사 반영</span><span><span class="b jeok">실적</span> 경기실적(특기자) 위주</span><span><span class="b no">비실기</span> 실기·실적 없음</span><span>· 이월 = 수시 미충원 인원만 정시에서 선발</span></div>
 
   <h2 id="susi"><span class="tag">수시</span>학생부 교과에서 수학 미반영</h2>
-  <p class="lead">내신 성적을 계산할 때 수학 교과를 넣지 않는 전형입니다.</p>
+  <p class="lead">내신 성적을 계산할 때 수학 교과를 넣지 않는 전형입니다. 수능최저에 수학이 들어 있어도 다른 영역으로 채울 수 있습니다.</p>
   <div class="tbl"><table>
-    <thead><tr><th>대학</th><th>모집단위·전형</th><th>반영교과</th><th>원문</th></tr></thead>
+    <thead><tr><th>대학</th><th>모집단위</th><th>전형</th><th>구분</th><th>인원</th><th>수능최저</th><th>반영교과</th><th>원문</th></tr></thead>
     <tbody>
-      <tr><td>경희대</td><td>예술·체육계열 (기회균형Ⅰ·Ⅱ 등)</td><td>국어, 영어</td><td class="p">p.64, 111</td></tr>
-      <tr><td>동국대 WISE</td><td>예체능 (스포츠과학·스포츠의학 포함)</td><td>국어, 영어 6과목</td><td class="p">p.30</td></tr>
-      <tr><td>명지대</td><td>스포츠·예술대학</td><td>국어, 영어</td><td class="p">p.95</td></tr>
-      <tr><td>단국대 죽전·천안</td><td>예능·체육 (체육교육과 제외)</td><td>국어, 영어, 사회</td><td class="p">죽전 p.82 · 천안 p.55</td></tr>
-      <tr><td>인천대</td><td>실기 전형 (스포츠과학부·스포츠의학부·체육교육과)</td><td>국 40 · 영 30 · 사 30<br><span class="note">스포츠의학부는 사회·과학 중 상위</span></td><td class="p">p.46</td></tr>
-      <tr><td>한양대 서울</td><td>실기/실적 (체육특기자 포함)</td><td>국어, 영어, 사회, 한국사</td><td class="p">p.60</td></tr>
-      <tr><td>홍익대</td><td>스포츠지도학과</td><td>국어, 영어, 사회·과학 택1<br><span class="note">교과별 상위 3과목</span></td><td class="p">p.108, 115</td></tr>
+      <tr><td>경희대</td><td class="unit">체육학과 5 · 스포츠의학과 2</td><td class="c">지역균형 (교과)</td><td><span class="b no">비실기</span></td><td class="n">7</td><td><strong>국·수·영·탐 중 1개 3등급</strong></td><td>국어, 영어</td><td class="p">p.28–29</td></tr>
+      <tr><td>경희대</td><td class="unit">체육학 2 · 스포츠의학 2 · 태권도 2</td><td class="c">기회균형Ⅰ (종합)</td><td><span class="b no">비실기</span></td><td class="n">6</td><td>없음</td><td>국어, 영어</td><td class="p">p.46–48</td></tr>
+      <tr><td>경희대</td><td class="unit">체육학 3 · 태권도 3</td><td class="c">기회균형Ⅱ (종합)</td><td><span class="b no">비실기</span></td><td class="n">6</td><td>없음</td><td>국어, 영어</td><td class="p">p.56–57</td></tr>
+      <tr><td>경희대</td><td class="unit">골프산업 8 · 스포츠지도 96 · 태권도 32</td><td class="c">실기우수자</td><td><span class="b sil">실기</span></td><td class="n">136</td><td>없음</td><td>국어, 영어</td><td class="p">p.21, 93</td></tr>
+      <tr><td>동국대 WISE</td><td class="unit">스포츠과학 8 · 스포츠의학 27</td><td class="c">실기우수자</td><td><span class="b sil">실기</span></td><td class="n">35</td><td>없음</td><td>국어, 영어 6과목</td><td class="p">p.30</td></tr>
+      <tr><td>동국대 WISE</td><td class="unit">엘리트스포츠 23 · 스포츠과학 7 · 카누 2</td><td class="c">체육특기자</td><td><span class="b jeok">실적</span></td><td class="n">32</td><td>없음</td><td>국어, 영어</td><td class="p">p.33</td></tr>
+      <tr><td>명지대</td><td class="unit">체육학·스포츠산업 5 · 스포츠지도[야] 26</td><td class="c">특기자</td><td><span class="b jeok">실적</span><br><span class="note">축구·농구·배구는 실기 포함</span></td><td class="n">31</td><td>없음</td><td>국어, 영어</td><td class="p">p.18, 26, 95</td></tr>
+      <tr><td>단국대 천안</td><td class="unit">스포츠경영 7 · 운동처방재활 7</td><td class="c">교과우수자</td><td><span class="b no">비실기</span></td><td class="n">14</td><td><strong>국·수·영·탐 중 2합 8</strong></td><td>국어, 영어, 사회</td><td class="p">p.46, 55</td></tr>
+      <tr><td>단국대 천안</td><td class="unit">생활체육학과</td><td class="c">실기우수자</td><td><span class="b sil">실기</span></td><td class="n">14</td><td>없음</td><td>국어, 영어, 사회</td><td class="p">p.48</td></tr>
+      <tr><td>단국대 천안</td><td class="unit">국제스포츠 51 · 태권도 19 · 생활체육 8 · 스포츠경영 8 · 운동처방재활 1</td><td class="c">체육특기자</td><td><span class="b jeok">실적</span></td><td class="n">87</td><td>없음</td><td>국어, 영어, 사회</td><td class="p">p.30, 53</td></tr>
+      <tr><td>인천대</td><td class="unit">스포츠과학부 27 · 스포츠의학부 20 · 체육교육과 8</td><td class="c">실기우수자</td><td><span class="b sil">실기</span></td><td class="n">55</td><td>없음</td><td>국 40 · 영 30 · 사 30<br><span class="note">스포츠의학부는 사·과 중 상위</span></td><td class="p">p.3, 33</td></tr>
+      <tr><td>인천대</td><td class="unit">스포츠과학부 · 스포츠의학부</td><td class="c">특기자</td><td><span class="b jeok">실적</span></td><td class="n">18</td><td>없음</td><td>국 40 · 영 30 · 사 30</td><td class="p">p.36</td></tr>
+      <tr><td>홍익대 세종</td><td class="unit">스포츠지도학과 (축구 10 · 야구 10 · 배구 5)</td><td class="c">체육우수자</td><td><span class="b sil">실기</span></td><td class="n">25</td><td>없음</td><td>국어, 영어, 사회·과학 택1</td><td class="p">p.108, 115</td></tr>
     </tbody>
   </table></div>
+  <div class="fix"><b>정정</b> · 처음 올린 표에 있던 <b>한양대 서울 실기/실적</b>은 뺐습니다. 체육특기자는 경기실적 70 + 학생부종합평가 30이라 교과를 점수로 계산하지 않습니다. <b>단국대 죽전</b>도 뺐습니다. 죽전의 체육 모집단위는 체육교육과뿐이고 수학을 반영합니다.</div>
 
   <h2 id="jungsi-no"><span class="tag">정시</span>수능에서 수학 미반영</h2>
-  <p class="lead">수학 점수를 아예 계산에 넣지 않습니다. 숫자는 영역별 반영비율(또는 배점)입니다.</p>
+  <p class="lead">수학 점수를 아예 계산에 넣지 않습니다. 정시는 수능최저가 따로 없습니다.</p>
   <div class="tbl"><table>
-    <thead><tr><th>대학</th><th>모집단위</th><th>반영 영역</th><th>원문</th></tr></thead>
+    <thead><tr><th>대학</th><th>모집단위</th><th>군</th><th>구분</th><th>인원</th><th>전형 방법</th><th>수능 반영</th><th>원문</th></tr></thead>
     <tbody>
-      <tr><td>경희대</td><td>예술·체육</td><td>국 60 · 탐 40 (영어 별도)</td><td class="p">2028 계획 p.6</td></tr>
-      <tr><td>경북대</td><td>예체능 (체육교육과 제외)</td><td>국 200 · 영 100 · 탐 200</td><td class="p">p.19–21</td></tr>
-      <tr><td>국민대</td><td>체육대학</td><td>국 200 · 영 200 · 탐 200</td><td class="p">p.45</td></tr>
-      <tr><td>세종대</td><td>체육학과</td><td>국 50 · 영 50</td><td class="p">p.47</td></tr>
-      <tr><td>숭실대</td><td>스포츠학부</td><td>국 50 · 영 50</td><td class="p">p.46–47</td></tr>
-      <tr><td>광운대</td><td>스포츠융합과학과</td><td>국 40 · 영 30 · 탐 30</td><td class="p">p.4</td></tr>
-      <tr><td>부산대</td><td>스포츠과학과</td><td>국 300 · 영 200 · 탐 300</td><td class="p">p.29</td></tr>
-      <tr><td>인천대</td><td>스포츠의학부</td><td>국 40 · 탐 40 · 영 20</td><td class="p">p.27</td></tr>
-      <tr><td>인천대</td><td>체육교육과 · 스포츠과학부</td><td>국 45 · 탐 45 · 영 10</td><td class="p">p.27</td></tr>
-      <tr><td>인하대</td><td>체육교육과</td><td>국 40 · 탐 30 · 영 30</td><td class="p">p.41</td></tr>
-      <tr><td>인하대</td><td>스포츠과학과</td><td>국 40 · 탐 20 · 영 40</td><td class="p">p.41</td></tr>
+      <tr><td>경희대</td><td class="unit">체육학 33 · 스포츠의학 20 · 골프산업 23</td><td>나</td><td><span class="b no">비실기</span></td><td class="n">76</td><td>수능 100</td><td>국 60 · 탐 40 (영어 별도)</td><td class="p">p.30, 45</td></tr>
+      <tr><td>경희대</td><td class="unit">태권도 21 · 스포츠지도 이월</td><td>나</td><td><span class="b no">비실기</span></td><td class="n">21</td><td>수능 90 + 학생부 10</td><td>국 60 · 탐 40 (영어 별도)</td><td class="p">p.15, 30</td></tr>
+      <tr><td>경북대</td><td class="unit">체육학부(체육학)</td><td>나</td><td><span class="b sil">실기</span></td><td class="n">3</td><td>수능 70 + 실기 30</td><td>국 200 · 영 100 · 탐 200</td><td class="p">p.7, 19, 21</td></tr>
+      <tr><td>경북대</td><td class="unit">체육학부(건강운동관리)</td><td>나</td><td><span class="b no">비실기</span></td><td class="n">이월</td><td>수능 100</td><td>국 200 · 영 100 · 탐 200</td><td class="p">p.7, 19, 21</td></tr>
+      <tr><td>국민대</td><td class="unit">스포츠교육학과</td><td>가</td><td><span class="b sil">실기</span></td><td class="n">20</td><td>교과 20 + 수능 40 + 실기 40</td><td>국 200 · 영 400</td><td class="p">p.8, 13–14</td></tr>
+      <tr><td>국민대</td><td class="unit">스포츠산업경영 20 · 체육대학(광역) 이월</td><td>가</td><td><span class="b sil">실기</span></td><td class="n">20</td><td>교과 20 + 수능 40 + 실기 40</td><td>국 200 · 영 200 · 탐 200</td><td class="p">p.8, 13–14</td></tr>
+      <tr><td>국민대</td><td class="unit">스포츠건강재활학과</td><td>다</td><td><span class="b no">비실기</span></td><td class="n">이월</td><td>수능 100</td><td>국 300 · 영 500 · 탐 200</td><td class="p">p.28</td></tr>
+      <tr><td>세종대</td><td class="unit">체육학과</td><td>나</td><td><span class="b sil">실기</span></td><td class="n">23</td><td>수능 50 + 실기 30 + 교과 20</td><td>국 50 · 영 50</td><td class="p">p.3, 47</td></tr>
+      <tr><td>숭실대</td><td class="unit">스포츠학부</td><td>다</td><td><span class="b sil">실기</span></td><td class="n">36</td><td>수능 30 + 실기 70</td><td>국 50 · 영 50</td><td class="p">p.5, 46</td></tr>
+      <tr><td>광운대</td><td class="unit">스포츠융합과학과</td><td>다</td><td><span class="b sil">실기</span></td><td class="n">22</td><td>수능 40 + 학생부 30 + 실기 30</td><td>국 40 · 영 30 · 탐 30</td><td class="p">p.4</td></tr>
+      <tr><td>부산대</td><td class="unit">스포츠과학과</td><td>가</td><td><span class="b sil">실기</span></td><td class="n">10</td><td>1단계 수능 100(3배수) → 1단계 80 + 실기 20</td><td>국 300 · 영 200 · 탐 300</td><td class="p">p.11, 26, 29</td></tr>
+      <tr><td>인천대</td><td class="unit">스포츠과학부</td><td>가</td><td><span class="b sil">실기</span></td><td class="n">27</td><td>수능 40 + 실기 60</td><td>국 45 · 탐 45 · 영 10</td><td class="p">p.3, 6, 27</td></tr>
+      <tr><td>인천대</td><td class="unit">스포츠의학부</td><td>가</td><td><span class="b sil">실기</span></td><td class="n">23</td><td>수능 60 + 실기 40</td><td>국 40 · 탐 40 · 영 20</td><td class="p">p.3, 6, 27</td></tr>
+      <tr><td>인천대</td><td class="unit">체육교육과</td><td>가</td><td><span class="b sil">실기</span></td><td class="n">7</td><td>수능 50 + 실기 50</td><td>국 45 · 탐 45 · 영 10</td><td class="p">p.3, 6, 27</td></tr>
+      <tr><td>인하대</td><td class="unit">스포츠과학과</td><td>다</td><td><span class="b sil">실기</span></td><td class="n">21</td><td>수능 60 + 실기 40</td><td>국 40 · 탐 20 · 영 40</td><td class="p">p.5, 41</td></tr>
+      <tr><td>인하대</td><td class="unit">체육교육과</td><td>다</td><td><span class="b sil">실기</span></td><td class="n">12</td><td>수능 70 + 실기 30</td><td>국 40 · 탐 30 · 영 30</td><td class="p">p.5, 41</td></tr>
+      <tr><td>명지대</td><td class="unit">스포츠학부(체육학·스포츠산업)</td><td>다</td><td><span class="b sil">실기</span></td><td class="n">38</td><td>수능 60 + 실기 40</td><td>국 50 · 영 50</td><td class="p">p.20–21</td></tr>
+      <tr><td>용인대</td><td class="unit">특수체육교육과</td><td>나</td><td><span class="b sil">실기</span><br><span class="note">기초체력</span></td><td class="n">13</td><td>수능 70 + 기초체력 30</td><td>국 40 · 영 30 · 탐 30</td><td class="p">p.3, 9, 25</td></tr>
     </tbody>
   </table></div>
 
   <h2 id="jungsi-opt"><span class="tag">정시</span><span class="tag navy">선택형</span>수학을 빼고 지원할 수 있는 곳</h2>
   <p class="lead">성적이 좋은 영역만 골라 반영합니다. 수학이 다른 영역보다 낮으면 계산에서 자동으로 빠집니다.</p>
   <div class="tbl"><table>
-    <thead><tr><th>대학</th><th>모집단위</th><th>반영 방식</th><th>원문</th></tr></thead>
+    <thead><tr><th>대학</th><th>모집단위</th><th>군</th><th>구분</th><th>인원</th><th>전형 방법</th><th>수능 반영</th><th>원문</th></tr></thead>
     <tbody>
-      <tr><td>건국대 서울</td><td>예체능</td><td>국 45 + 영 25 + <strong>수·탐 중 높은 1개</strong> 30</td><td class="p">p.22</td></tr>
-      <tr><td>단국대 천안</td><td>예체능</td><td>국 40 + 영 40 + <strong>수·탐 중 높은 1개</strong> 20</td><td class="p">p.50</td></tr>
-      <tr><td>용인대</td><td>예체능 (체육·무도 계열)</td><td><strong>국·수·영 중 상위 1개</strong> 60 + 탐 40</td><td class="p">p.25</td></tr>
-      <tr><td>상명대 서울</td><td>스포츠건강관리전공 등 예체능</td><td><strong>국·수·영 중 상위 2개</strong> 각 40 + 탐 20</td><td class="p">p.4</td></tr>
-      <tr><td>상명대 천안</td><td>예체능계열</td><td><strong>국·수·영 중 상위 2개</strong> 각 40 + 탐 20</td><td class="p">p.6</td></tr>
-      <tr><td>경기대</td><td>경호보안 · 스포츠과학</td><td>영 30 + <strong>국·수·탐 중 상위 2개</strong> 각 35</td><td class="p">p.28</td></tr>
-      <tr><td>동국대 WISE</td><td>스포츠과학 · 스포츠의학</td><td><strong>국·수·영·탐 중 상위 2개</strong> 각 50</td><td class="p">p.13</td></tr>
-      <tr><td>건국대 GLOCAL</td><td>의예과 외 전 모집단위</td><td><strong>국·수·영·탐 중 상위 2개</strong> 50 : 50</td><td class="p">p.22</td></tr>
-      <tr><td>삼육대</td><td>체육학과</td><td><strong>상위 2개 영역</strong> 각 50</td><td class="p">p.37</td></tr>
-      <tr><td>수원대</td><td>실기 (체육)</td><td><strong>국·수·영·탐 중 상위 2개</strong> 50 : 50</td><td class="p">p.20</td></tr>
+      <tr><td>건국대 서울</td><td class="unit">체육교육과</td><td>나</td><td><span class="b sil">실기</span></td><td class="n">25</td><td>수능 60 + 실기 40</td><td>국 45 + 영 25 + <strong>수·탐 중 높은 1개</strong> 30</td><td class="p">p.13, 22</td></tr>
+      <tr><td>단국대 천안</td><td class="unit">생활체육 12 · 스포츠경영 22 · 운동처방재활 11</td><td>다</td><td><span class="b sil">실기</span></td><td class="n">45</td><td>수능 40 + 실기 60</td><td>국 40 + 영 40 + <strong>수·탐 중 높은 1개</strong> 20</td><td class="p">p.48, 50, 59</td></tr>
+      <tr><td>용인대</td><td class="unit">유도 18 · 태권도 4</td><td>나</td><td><span class="b sil">실기</span></td><td class="n">22</td><td>수능 30 + 실기 70</td><td><strong>국·수·영 중 상위 1개</strong> 60 + 탐 40</td><td class="p">p.3, 9, 25</td></tr>
+      <tr><td>용인대</td><td class="unit">체육학과 4 · 스포츠레저학과 3</td><td>나</td><td><span class="b sil">실기</span><br><span class="note">기초체력</span></td><td class="n">7</td><td>체육 수능 70 + 기초체력 30<br>스포츠레저 수능 30 + 기초체력 70</td><td><strong>국·수·영 중 상위 1개</strong> 60 + 탐 40</td><td class="p">p.3, 9, 25</td></tr>
+      <tr><td>용인대</td><td class="unit">무도학과(레슬링·씨름·복싱·검도) 4 · 경호학과 8 · 골프학부 2</td><td>나</td><td><span class="b no">비실기</span></td><td class="n">14</td><td>수능 100</td><td><strong>국·수·영 중 상위 1개</strong> 60 + 탐 40</td><td class="p">p.3, 9, 25</td></tr>
+      <tr><td>용인대</td><td class="unit">무도계열 10 · 체육계열 5 (전공학부, 자율전공 특별)</td><td>나</td><td><span class="b no">비실기</span></td><td class="n">15</td><td>수능 100</td><td><strong>국·수·영 중 상위 1개</strong> 60 + 탐 40</td><td class="p">p.3, 9, 25</td></tr>
+      <tr><td>상명대 서울</td><td class="unit">스포츠건강관리전공</td><td>나</td><td><span class="b sil">실기</span></td><td class="n">이월</td><td>수능 30 + 실기 70</td><td><strong>국·수·영 중 상위 2개</strong> 각 40 + 탐 20</td><td class="p">p.4, 6, 18</td></tr>
+      <tr><td>상명대 천안</td><td class="unit">스포츠융합자유전공학부</td><td>나</td><td><span class="b sil">실기</span></td><td class="n">26</td><td>수능 40 + 실기 60</td><td><strong>국·수·영 중 상위 2개</strong> 각 40 + 탐 20</td><td class="p">p.5, 6, 18</td></tr>
+      <tr><td>경기대</td><td class="unit">경호보안학과 · 스포츠과학부</td><td>나</td><td><span class="b sil">실기</span></td><td class="n">70</td><td>수능 60 + 실기 40</td><td>영 30 + <strong>국·수·탐 중 상위 2개</strong> 각 35</td><td class="p">p.14</td></tr>
+      <tr><td>동국대 WISE</td><td class="unit">스포츠과학 15 · 스포츠의학 3 · 엘리트스포츠 이월</td><td>가</td><td><span class="b sil">실기</span></td><td class="n">18</td><td>수능 30 + 실기 70</td><td><strong>국·수·영·탐 중 상위 2개</strong> 각 50</td><td class="p">p.4, 13</td></tr>
+      <tr><td>건국대 GLOCAL</td><td class="unit">스포츠건강학과 14 · 골프산업학과 이월</td><td>다</td><td><span class="b sil">실기</span></td><td class="n">14</td><td>수능 30 + 실기 70</td><td><strong>국·수·영·탐 중 상위 2개</strong> 50 : 50</td><td class="p">p.6, 8, 22</td></tr>
+      <tr><td>삼육대</td><td class="unit">체육학과</td><td>가</td><td><span class="b sil">실기</span></td><td class="n">15</td><td>수능 60 + 실기 40</td><td><strong>상위 2개 영역</strong> 각 50</td><td class="p">p.14, 37</td></tr>
+      <tr><td>수원대</td><td class="unit">스포츠과학부 (체육학·레저스포츠·운동건강관리)</td><td>나</td><td><span class="b sil">실기</span></td><td class="n">60</td><td>수능 40 + 실기 60</td><td><strong>국·수·영·탐 중 상위 2개</strong> 50 : 50</td><td class="p">p.17, 19–20</td></tr>
     </tbody>
   </table></div>
 
   <h2 id="ref">참고 · 수학을 반영하는 체육 계열</h2>
   <ul>
-    <li><b>수시</b> · 숭실대 스포츠학부(국·수·영·사·한국사), 경기대 체육특기자(국·수·영·사·과·한국사 중 상위 10과목), 단국대 체육교육과(국·영·수·사·과), 전남대 체육교육과(사회·과학만 제외)</li>
+    <li><b>수시</b> · 숭실대 스포츠학부, 경기대 체육특기자, 단국대 체육교육과(죽전), 전남대 체육교육과</li>
     <li><b>정시</b> · 경북대 체육교육과(수 200), 단국대 죽전 체육교육과(수 10), 전남대 체육교육과(수 210), 고려대 서울 체능(수 200)</li>
   </ul>
-  <p class="note">실기 비중이 큰 전형은 수능·내신보다 실기 점수가 당락을 더 크게 좌우합니다. 42개 대학·캠퍼스의 모집요강을 조사한 결과이며, 이 밖의 대학은 포함되지 않습니다.</p>
+  <p class="note">실기 비중이 큰 전형은 수능·내신보다 실기 점수가 당락을 더 크게 좌우합니다. 정시 인원은 수시 미충원 이월로 바뀔 수 있으니 원서접수 전 확정 인원을 확인하세요. 42개 대학·캠퍼스의 모집요강을 조사한 결과이며, 이 밖의 대학은 포함되지 않습니다.</p>
 
-  <footer>출처: 각 대학 2027학년도 수시·정시 모집요강(진학사 모집요강 자료실). 경희대 정시는 2028 대입전형 시행계획에 실린 2027 기준표. 원문 쪽수는 각 대학 요강 PDF 기준. 정리 기준일 2026-11-15.</footer>
+  <footer>출처: 각 대학 2027학년도 수시·정시 모집요강(진학사 모집요강 자료실). 원문 쪽수는 각 대학 요강 PDF 쪽 기준. 부산대·인천대 정시 모집인원은 원문 표 이미지를 직접 판독. 정리 기준일 2026-11-15.</footer>
 </div>
 </body>
 </html>
