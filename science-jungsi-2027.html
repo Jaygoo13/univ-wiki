@@ -104,6 +104,7 @@ details.how { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
 details.how summary { cursor: pointer; color: var(--navy); font-weight: 500; min-height: 32px; }
 .pager { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 8px 0 18px; font-size: 13px; }
 .pager[hidden] { display: none; }
+.pager.top { margin: 10px 0 4px; }
 .pager button { font: inherit; font-size: 13px; min-height: 36px; min-width: 64px; border: 1px solid var(--line); background: var(--paper); color: var(--navy); border-radius: 999px; padding: 4px 14px; cursor: pointer; }
 .pager button:disabled { opacity: .4; cursor: default; }
 .pager button:not(:disabled):hover { border-color: var(--navy); }
@@ -154,7 +155,7 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <body>
 <div class="wrap">
   <header>
-    <div class="eyebrow">2027학년도 · 정시 · 수도권 32개 대학</div>
+    <div class="eyebrow">2027학년도 · 정시 · 수도권 38개 대학</div>
     <h1>수도권 이공계 정시 전형</h1>
     <p class="sub">2027 정시 모집요강 원문 기준. 자연과학·공학·IT·SW·AI·생명·환경·사범(이과)·자연계 자유전공의 수능위주 일반전형(정원 내)을 군별·계열 묶음별로 정리했습니다. 대학 이름을 누르면 과목 반영 탭의 그 대학 줄로 이동합니다.</p>
   </header>
@@ -167,7 +168,7 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
       <button type="button" data-n="5" aria-pressed="false">5개</button><button type="button" data-n="10" aria-pressed="true">10개</button><button type="button" data-n="0" aria-pressed="false">전체</button>
     </div>
     <input class="q" id="q" type="search" list="univs" placeholder="대학 이름으로 거르기" aria-label="대학 이름으로 거르기" autocomplete="off">
-    <datalist id="univs"><option value="서울대"><option value="연세대"><option value="고려대"><option value="서강대"><option value="성균관대"><option value="한양대 서울"><option value="중앙대"><option value="경희대"><option value="한국외대"><option value="서울시립대"><option value="건국대 서울"><option value="동국대 서울"><option value="홍익대 서울"><option value="국민대"><option value="숭실대"><option value="세종대"><option value="광운대"><option value="명지대"><option value="상명대 서울"><option value="삼육대"><option value="서울과기대"><option value="가천대"><option value="가톨릭대"><option value="경기대"><option value="단국대 죽전"><option value="아주대"><option value="인하대"><option value="인천대"><option value="한양대 ERICA"><option value="한국항공대"><option value="수원대"><option value="용인대"></datalist>
+    <datalist id="univs"><option value="서울대"><option value="연세대"><option value="고려대"><option value="서강대"><option value="성균관대"><option value="한양대 서울"><option value="중앙대"><option value="경희대"><option value="한국외대"><option value="서울시립대"><option value="건국대 서울"><option value="동국대 서울"><option value="홍익대 서울"><option value="국민대"><option value="숭실대"><option value="세종대"><option value="광운대"><option value="명지대"><option value="상명대 서울"><option value="삼육대"><option value="서울과기대"><option value="덕성여대"><option value="동덕여대"><option value="서울여대"><option value="성신여대"><option value="숙명여대"><option value="이화여대"><option value="가천대"><option value="가톨릭대"><option value="경기대"><option value="단국대 죽전"><option value="아주대"><option value="인하대"><option value="인천대"><option value="한양대 ERICA"><option value="한국항공대"><option value="수원대"><option value="용인대"></datalist>
     <span class="cnt" id="cnt" aria-live="polite"></span>
   </div>
 
@@ -175,14 +176,14 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <section class="tab" id="overview" role="tabpanel" aria-labelledby="t-overview">
 <h2>개요와 주의</h2>
   <div class="keys">
-    <div class="key"><b>지정 과목</b> · 수학(미적분·기하)과 과학탐구를 필수로 요구하는 곳은 서울대뿐입니다. 나머지 31곳은 확률과 통계·사회탐구로도 지원할 수 있습니다.</div>
-    <div class="key"><b>가산점</b> · 24곳이 미적분·기하나 과학탐구에 가산점을 줍니다. 가장 큰 곳은 상명대·수원대(수학 10%), 명지대(과탐 10%)입니다. 가산점이 없는 곳은 8곳입니다.</div>
-    <div class="key"><b>탐구 1과목</b> · 명지대, 상명대, 삼육대, 가천대, 가톨릭대, 경기대, 한국항공대, 수원대, 용인대, 성균관대 다군.</div>
-    <div class="key"><b>학생부 반영</b> · 서울대, 연세대, 한양대 서울, 중앙대(출결), 동국대 다군, 경기대 자유전공학부. 나머지 26곳은 수능 100입니다.</div>
+    <div class="key"><b>지정 과목</b> · 수학(미적분·기하)과 과학탐구를 필수로 요구하는 곳은 서울대뿐입니다. 나머지 37곳은 확률과 통계·사회탐구로도 지원할 수 있습니다.</div>
+    <div class="key"><b>가산점</b> · 28곳이 미적분·기하나 과학탐구에 가산점을 줍니다. 가장 큰 곳은 서울여대 수학과(수학 20%), 상명대·수원대(수학 10%), 명지대·성신여대(과탐 10%)입니다. 가산점이 없는 곳은 10곳입니다.</div>
+    <div class="key"><b>탐구 1과목</b> · 명지대, 상명대, 삼육대, 덕성여대, 동덕여대, 서울여대, 가천대, 가톨릭대, 경기대, 한국항공대, 수원대, 용인대, 성균관대 다군.</div>
+    <div class="key"><b>학생부 반영</b> · 서울대, 연세대, 한양대 서울, 중앙대(출결), 동국대 다군, 덕성여대 다군 자유전공학부, 경기대 자유전공학부. 나머지 31곳은 수능 100입니다.</div>
   </div>
 <h3>기준과 읽는 법</h3>
 <ul>
-<li>기준: 2027학년도 정시 모집요강. 수도권 대학 32곳.</li>
+<li>기준: 2027학년도 정시 모집요강. 수도권 대학 38곳.</li>
 <li>범위: 정시 <strong>수능위주 일반전형, 정원 내</strong>. 자연과학·공학·IT·SW·AI·생명·환경·사범(이과)·자연계 자유전공. 의예·치의예·한의예·약학·수의예·간호·보건 계열과 인문·사회·예체능은 뺐다.</li>
 <li>정리 단위: 대학 × 군 × 계열 묶음. 계열 묶음은 단과대학 이름을 기준으로 붙였다.</li>
 <li>읽는 법: <strong>가군·나군·다군 탭</strong>의 표에는 계열 묶음별 모집단위·인원과 그 묶음에 적용되는 수능 과목 반영비율(국어 / 수학 / 영어 / 탐구 %)을 풀어 적었다. 영어·한국사 등급별 점수, 활용지표, 학생부 반영 같은 대학 전체 기준은 <strong>과목 반영 탭</strong>에 대학마다 한 줄로 있다. 군별 표에서 대학 이름을 누르면 그 줄로 간다.</li>
@@ -417,6 +418,55 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <li>조형대학(산업디자인·시각디자인·도예·금속공예·조형예술) 수능 100 비실기분 나군(산디 7·시각 3·금속 3)과 스포츠과학과 나군 3: 예체능이라 제외. 실기전형 126도 제외.</li>
 <li>문예창작학과: 정시 인원 0. 미래융합대학(융합기계공학과·건설환경융합공학과·정보통신융합공학과 등): 수시 미충원 인원만 선발이라 제외. 농어촌·특성화고졸재직자·특수교육·평생학습자 정원 외·이월이라 제외.</li>
 </ul>
+<li><strong>덕성여대</strong></li>
+<ul>
+<li>약학과(가군 30)는 약학 계열이라 제외했다.</li>
+<li>Art &amp; Design대학 미술실기전형·체육실기전형은 실기 반영 단위라 제외했다. 나군에는 이공계로 넣을 일반전형 단위가 없다.</li>
+<li>정원 외 기회균형전형Ⅰ 등은 정시 인원이 0이고 수시 미충원 이월 시에만 선발해 제외했다.</li>
+<li>과학기술대학은 6개 전공(디지털소프트웨어공학부·바이오공학·수학·정보통계·화학·식품영양학)을 통합 모집하며 전공별 인원이 없어 한 줄로 적고, 계열 묶음은 다수가 자연과학이라 "자연과학"으로 두었다. 디지털소프트웨어공학부(공학·IT)와 식품영양학전공(생활과학)이 함께 들어 있으며 요강이 과학기술대학 단위로 자연계 선발하므로 이공계에 포함했다.</li>
+<li>AI신약학과(미래인재대학)는 약학대학 소속이 아니고 약학과와 별도 모집단위라 포함하되, 계열 묶음은 바이오 성격으로 "생명·환경"에 두었다(요강에 계열 분류 없음).</li>
+<li>인원은 수시 미충원 이월 전 요강 표 값이다.</li>
+</ul>
+<li><strong>동덕여대</strong></li>
+<ul>
+<li>수시 미충원 시에만 모집(◉, 인원 미확정)이라 표에서 뺐다: 가군 자연정보과학대(식품영양·보건관리·응용화학·화장품·컴퓨터학·정보통계학전공)·HCI사이언스전공 (정시 p.8, p.9).</li>
+<li>자연정보융합학부(나군 43)는 식품영양·보건관리·응용화학·화장품·컴퓨터·정보통계 6개 전공 중에서 1학년 말에 전공별 기준인원의 150% 범위로 선택하는 통합 모집이다. 식품영양(생활과학)·보건관리는 개별 모집이 아니라 통합 모집이므로 포함하고 경계로 표시한다(정시 p.7, p.36). 자율전공학부는 23개 전공(자연정보과학대 6개 포함) 100% 보장이다.</li>
+<li>데이터사이언스전공은 첨단학과이며 수시 논술 유형이 자연이라 IT·SW·AI로 분류했다(해석, 정시 p.7).</li>
+<li>제외: 약학과(가군 20), 체육학·예술·디자인·공연예술 실기우수자(나·다군), 농어촌·특성화고교·기회균등(정원 외).</li>
+</ul>
+<li><strong>서울여대</strong></li>
+<ul>
+<li>식품영양학과(가군 18)는 과학기술융합대학 소속이고 동점자 기준이 자연계 쪽(수학 → 영어 → 과학탐구 선택 여부)이어서 이공계 생명·환경에 넣었다(정시 p.6, p.29). 영양교사 교직 승인 4명이 있다(정시 p.36).</li>
+<li>디지털미디어학과·지능정보보호학부·AI융합학부(인공지능·소프트웨어·데이터사이언스전공)는 미래산업융합대학 소속이지만 동점자 기준이 자연계 쪽이라 IT·SW·AI에 넣었다(정시 p.29).</li>
+<li>자유전공학부(미래산업융합) 27과 (광역) 16은 계열 구분 없이 모집하므로 문과에도 있다. 자유전공학부(과학기술융합) 33은 수학·화학·생명·식품 계열 전공 중에서 고르고 선택 불가 학과가 없다(정시 p.4). 학부로 입학한 경우 전공 결정 후 전과가 가능하다(정시 p.36).</li>
+<li>제외: 실기 반영 단위(문과 부분과 같음, 합계 73. 정시 p.4, p.6)와 정원 외 농어촌학생·특성화고교졸업자(정시 p.21, p.22). 의·치·한·약·수의·간호 계열 모집단위는 없다. 패션산업학과는 문과 부분 경계 절 참고.</li>
+<li>수시 미충원이 생기면 정시 인원이 변하며 확정 모집인원은 2026. 12. 31.(목) 입학처 홈페이지에 게재한다(정시 p.6). 표의 인원은 요강 값이다.</li>
+<li>계열 묶음 이름은 위키의 분류이며, 원문은 이 묶음을 구분하지 않고 같은 비율을 적용한다(정시 p.15, p.17, p.20).</li>
+</ul>
+<li><strong>성신여대</strong></li>
+<ul>
+<li>바이오헬스융합학부 7(바이오헬스서비스·식품영양학전공): 요강 계열이 자연(첨단)이라 생명·환경에 넣었다. 식품영양학전공은 영양교사 교직과정이 있는 생활과학 성격(정시 p.8, p.58).</li>
+<li>의류산업학과 7 · 소비자산업학과 6(생활산업대학): 원문 계열이 인문이라 이공계에 넣지 않았다(정시 p.8).</li>
+<li>창의융합학부(자유전공) 184 · 첨단분야전공 71: 첨단분야전공은 자연계열이며 입학 후 첨단분야전공(요강상 수리통계데이터사이언스학부·화학·에너지융합학부·바이오헬스융합학부·바이오신약의과학부·AI융합학과·융합AI반도체공학과) 내에서만 전공을 고른다(정시 p.8, p.9).</li>
+<li>간호학과(자연) 14: 간호 계열이라 제외(정시 p.8). 사범(교육·사회교육·윤리교육·한문교육·유아교육)은 문과 계열이라 이공계 사범(이과)은 없다.</li>
+<li>예체능·실기 반영 단위 제외(스포츠과학부, 미술·음악대학, 미디어영상연기, 현대실용음악, 디자인 등)(정시 p.8, p.9, p.19). 정원 외(농·어촌 68 · 특성화고교출신자 30 · 기회균형Ⅱ 15) 제외(정시 p.10, p.11).</li>
+</ul>
+<li><strong>숙명여대</strong></li>
+<ul>
+<li>자유전공학부(순헌칼리지)는 계열 구분 없이 모집하며 문과·이공계 두 부분에 모두 넣었다. 사범계·약학부·예체능계는 입학 후 전공 선택에서 제외된다(정시 p.3).</li>
+<li>첨단공학부는 무전공 모집이라 개별 학과가 아니다. 선택 가능 학과 5개가 공학·IT·SW·AI에 걸쳐 있어 공학에 넣었으며, 학과별 전공선택 가능 인원은 각 학과 입학정원의 50%이다(정시 p.4).</li>
+<li>의류학과·식품영양학과(생활과학대학)는 원문이 자연계로 선발하므로 이공계 생명·환경에 넣었다(정시 p.6 자연계 소계에 포함). 신소재물리학부는 공과대학 소속이라 공학에 넣었다.</li>
+<li>제외: 약학부(나군 일반 56, 사회배려 정원 외 6, 정시 p.6). 정원 외 전형(사회배려 자연 6, 농어촌학생 등 수시 미충원 선발, 정시 p.5·p.6). 예체능·실기 반영 단위(체육교육과 나군 20, 무용·음악·미술대학, 정시 p.7). 사범(이과) 모집단위는 없다.</li>
+<li>수시 미충원 이월 전 요강 값이다. 최종 인원은 원서접수 전 홈페이지에 공지된다(정시 p.5, p.47).</li>
+</ul>
+<li><strong>이화여대</strong></li>
+<ul>
+<li>계열별 통합선발은 인문 174 · 자연 149로 계열별 정원이 따로 있어 이공계에는 자연계열 149만 넣었다(정시 p.3, p.7). 식품영양학과·융합보건학과·의류산업학과(신산업융합대학)는 정시에 개별 모집인원이 없고 통합선발에서 입학 후 선택하는 단위라 생명·환경 묶음을 따로 만들지 않았다(정시 p.3, p.8).</li>
+<li>지능형반도체공학전공은 공과대학 소속이라 공학, 뇌·인지과학부는 스크랜튼대학 자연계열 선발이라 자연과학에 넣었다(묶음 이름은 위키 분류, 정시 p.12). 전자전기공학전공은 2027 정시에서 통합선발에 속해 별도 인원이 없다(2028부터 나군 독립 20).</li>
+<li>수학교육과·과학교육과는 자연계열로 선발하므로 사범(이과)에 넣었다. 과학교육과는 물리·화학·생물·지구과학교육 전공을 1학년 말 또는 2학년 말에 정한다(정시 p.9).</li>
+<li>제외: 의예과 자연 45(나군), 약학전공 65·미래산업약학전공 20(가군), 간호학부 29(다군) — 의·약·간호(정시 p.9, p.12). 수능(예체능실기전형) 226과 실기/실적(예체능실기전형) 142(정시 p.6, p.9). 정원 외 기회균형 189(정시 p.6).</li>
+<li>수시 이월로 최종 인원이 달라진다. 지능형반도체공학전공·인공지능데이터사이언스학부·뇌·인지과학부를 뺀 단위의 수시 결원은 계열별 통합선발로 이월한다. 표의 인원은 이월 전 요강 값이다(정시 p.9, p.35).</li>
+</ul>
 <li><strong>가천대</strong></li>
 <ul>
 <li>보건·의료 제외: 의예과 14, 한의예과 16, 약학과 11(가1), 간호학과 70·30(나), 치위생 13, 응급구조 10, 물리치료 13, 방사선 13, 운동재활 14(다1).</li>
@@ -540,6 +590,13 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <li>한양대 서울: 학생부종합평가 10의 점수 척도(최고·최저점)는 원문에서 수치를 확인하지 못했다 (정시 p.49).</li>
 <li>중앙대: 건축학부 35에 5년제 건축학 과정이 별도 구분 없이 들어 있는지 요강에서 확인하지 못했다.</li>
 <li>서울과기대: 자유전공학부(기술경영융합대학)에 과탐 7% 가산이 적용되는지: 가산점 표는 "자연계열 지원자"로만 적혀 있고 이 단위의 계열 분류는 인문 칸이라 불확실.</li>
+<li>덕성여대: 영역 순위를 매기는 "백분위 성적"에서 영어를 어떻게 환산하는지 요강에 명시가 없다.</li>
+<li>덕성여대: 계열 묶음 이름은 요강에 계열 구분이 없어 표 형식에 맞춘 대표값이다(과학기술대학 통합 84를 "자연과학"으로, AI신약학과를 "생명·환경"으로 둔 것은 해석).</li>
+<li>동덕여대: 수시 미충원 이월 인원은 2026.12.31. 입학처 공지 예정이라 최종 모집인원이 요강 값과 다를 수 있다(정시 p.8). 그 외 없음.</li>
+<li>서울여대: 문과 부분의 불확실 항목과 같다. 요강 안에서 가군 248(p.14, 합계 249와 불일치)·다군 249(p.20, 합계 261과 불일치)가 어긋나며, 이 표는 모집단위별 값이 있는 p.6을 따랐다(정시 p.6, p.14, p.20).</li>
+<li>서울여대: 수학과의 "가산점 20%"가 백분위에 1.2를 곱한다는 뜻인지 20점을 더한다는 뜻인지 원문이 수식으로 적지 않았다. 원문은 "수학 영역 백분위 점수에 가산점 20%를 선반영한 후 성적이 우수한 영역 순으로 환산"이라고만 쓴다(정시 p.28).</li>
+<li>성신여대: 계열 묶음 이름은 위키 분류다. 서비스디자인공학과(IT융합대학)는 공학에, 컴퓨터공학·융합보안공학은 IT·SW·AI에 넣었다.</li>
+<li>성신여대: 수시 미충원 이월로 인원이 바뀔 수 있고 2026.12.31. 입학 홈페이지에 공지 예정(정시 p.9).</li>
 <li>가톨릭대: 자연공학계열 통합 단위(94·37)와 바이오로직스공학부·AI의공학과 외에 학과별 모집인원은 원문에 없다(학과 정원의 150~200% 범위 배정).</li>
 <li>경기대: 한국사 감점 0.5·1.0이 전형 총점 100점 기준인지 원문에 명시가 없다(수능 100% = 100점 표기만 있음, 정시 p.5, p.28).</li>
 <li>인하대: 건축학부 다군 18은 건축공학전공·건축학전공(5년제)의 세부 인원 구분이 원문 정시 표에 없다 (정시 p.9). 합산값만 쓴다.</li>
@@ -552,7 +609,7 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <section class="tab" id="method" role="tabpanel" aria-labelledby="t-method" hidden>
 <h2>대학별 과목 반영</h2>
 <p class="lead">비율은 국어 / 수학 / 영어 / 탐구 순이다. 영어 칸의 숫자 넷은 1 / 2 / 3 / 4등급 값이다.</p>
-<h3>서울 21곳</h3>
+<h3>서울 27곳</h3>
 <div class="tbl"><table class="t-method"><thead><tr><th>대학</th><th>전형 방법</th><th>수능 반영 (국/수/영/탐)</th><th>지표 · 탐구</th><th>영어 (1~4등급)</th><th>한국사</th><th>선택과목 · 가산점</th><th>학생부</th><th>근거</th></tr></thead><tbody>
 <tr id="m-서울대" data-u="서울대"><td data-l="대학">서울대</td><td class="e" data-l="전형 방법">1단계 수능 100 (2배수) → 2단계 1단계 성적 80 + 교과평가 20. 사범대는 1단계 합격자 대상 교직적성·인성면접으로 가산점 부여·결격 판단</td><td class="w" data-l="수능 반영 (국/수/영/탐)"><strong>자연</strong> (응시영역 유형 2-1·2-2) 국 100 : 수 120 : 탐 80 (상대비율, 약 33.3 / 40.0 / 26.7%). 영어는 감점</td><td data-l="지표 · 탐구">국어 표준점수 ×1.0, 수학 표준점수 ×1.2, 탐구(과학탐구 2과목) 과목별 표준점수 합 ×0.8. 1단계 수능 성적 = 위 점수 합 − 감점 + 과탐 조정점수</td><td data-l="영어 (1~4등급)">1등급 0 / 2등급 −0.5 / 3등급 −2.0 / 4등급 −4.0 (5등급 −6.0, 9등급 −14.0)</td><td data-l="한국사">1~3등급 감점 없음, 4등급 −0.4, 5등급 −0.8 (9등급 −2.4)</td><td class="e" data-l="선택과목 · 가산점">수학 미적분 또는 기하 택1 (확률과 통계 응시 불가). 과학탐구 2과목 필수(Ⅰ+Ⅰ·Ⅰ+Ⅱ·Ⅱ+Ⅱ 중 선택, Ⅰ+Ⅱ는 서로 다른 분야 과목). 유형 2-1은 물리학Ⅰ·Ⅱ·화학Ⅰ·Ⅱ 중 1과목 이상 필수, 유형 2-2는 과목 지정 없음. 과탐 조정점수 Ⅰ+Ⅰ 없음 / Ⅰ+Ⅱ 3점 / Ⅱ+Ⅱ 5점. 미적분·기하 가산점 없음</td><td class="e" data-l="학생부">교과평가(정성) 20: 학생부 교과학습발달상황만 평가, 두 평가자 A(5)/B(3)/C(0) 조합 점수(A·A 5, A·B 4, B·B 3, B·C 1.5, C·C 0)에 15점 가산</td><td class="p" data-l="근거">정시 p.29, p.30, p.31, p.79</td></tr>
 <tr id="m-연세대" data-u="연세대"><td data-l="대학">연세대</td><td class="e" data-l="전형 방법">가군 일괄합산 수능 950 + 학생부 50 = 1,000. 언더우드국제대학(ISE)은 1단계(300%) 수능 900 + 학생부 50 → 2단계 면접 50 추가</td><td class="w" data-l="수능 반영 (국/수/영/탐)"><strong>자연(유형 Ⅱ)</strong> 국 200 · 수 300 · 영 100 · 탐 300 = 900 (약 22.2 / 33.3 / 11.1 / 33.3%), 총점 ×950/900. <strong>국제(유형 Ⅲ, ISE)</strong> 국 200 · 수 200 · 영 100 · 탐 100 = 600, 총점 ×900/600</td><td data-l="지표 · 탐구">국어·수학 표준점수(수학은 ×3/2), 탐구 백분위 기반 자체 변환점수 2과목 합(×3/2, 국제는 ×1/2). 제2외국어/한문은 탐구로 인정 안 함</td><td data-l="영어 (1~4등급)">1등급 100 / 2등급 95 / 3등급 87.5 / 4등급 75 (5등급 60, 9등급 5)</td><td data-l="한국사">4등급까지 감점 없음, 5등급 −0.2, 6등급 −0.4 (9등급 −1.0)</td><td class="e" data-l="선택과목 · 가산점">수학·탐구 선택과목 지정 없음(사탐/과탐 자유선택 2과목). 유형 Ⅱ는 과탐 응시 과목 변환점수에 3% 가산, 국제는 가산점 없음. 미적분·기하 가산점 없음</td><td class="e" data-l="학생부">50: 기본점수 40 + 전 과목 반영분(등급 과목 1~2등급 7 · 3~4등급 6 · 5등급 5 · 6~7등급 3 · 8~9등급 0 이수단위 가중평균, 절대평가 과목 A 3 · B 2 · C 0), 미인정 결석 3일 초과부터 감점</td><td class="p" data-l="근거">정시 p.12, p.23, p.24, p.25, p.26</td></tr>
@@ -575,6 +632,12 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <tr id="m-상명대-서울" data-u="상명대 서울"><td data-l="대학">상명대 서울</td><td class="e" data-l="전형 방법">수능 100 (서울캠퍼스는 나군 단일)</td><td class="w" data-l="수능 반영 (국/수/영/탐)"><strong>자연</strong> 국 25 · 수 35 · 영 20 · 탐 20</td><td data-l="지표 · 탐구">국·수·탐 백분위를 반영비율에 곱한 환산점수. 탐구는 상위 1개 과목(사탐·과탐 택1)</td><td data-l="영어 (1~4등급)">100 / 98 / 96 / 94 (5등급 90, 6등급 80, 7등급 60, 8등급 40, 9등급 0)</td><td data-l="한국사">전형 총점에 가산: 1~4등급 10, 5등급 9.8, 6등급 9.6, 7등급 9.4, 8등급 9.2, 9등급 9.0</td><td class="e" data-l="선택과목 · 가산점">국어·수학·탐구 지정 없음. 자연계열 지원자 중 미적분·기하 응시 시 수학 점수의 10%, 과탐 응시 시 탐구 점수의 5% 가산</td><td class="e" data-l="학생부">없음</td><td class="p" data-l="근거">정시-서울 p.31, p.32</td></tr>
 <tr id="m-삼육대" data-u="삼육대"><td data-l="대학">삼육대</td><td class="e" data-l="전형 방법">수능 100</td><td class="w" data-l="수능 반영 (국/수/영/탐)"><strong>자연계열</strong> 국·수·영·탐 4개 영역을 성적이 우수한 순으로 35 · 25 · 25 · 15 (영역별 고정 비율 없음)</td><td data-l="지표 · 탐구">백분위(영어는 등급 환산점수). 탐구 1과목(사회·과학·직업탐구 중 택1)</td><td data-l="영어 (1~4등급)">98 / 95 / 92 / 87 (5등급 82, 6등급 70, 7등급 50, 8등급 40, 9등급 30)</td><td data-l="한국사">필수 응시(탐구로 대체 불가), 점수 반영 없음</td><td class="e" data-l="선택과목 · 가산점">국어·수학·탐구 지정 없음. 수학 기하·미적분 선택 시 취득점수의 3% 가산(확률과통계는 가감 없음). 과탐 지정·가산 없음</td><td class="e" data-l="학생부">없음</td><td class="p" data-l="근거">정시 p.37, p.38</td></tr>
 <tr id="m-서울과기대" data-u="서울과기대"><td data-l="대학">서울과기대</td><td class="e" data-l="전형 방법">수능 100 (일괄합산, 총점 1,000점)</td><td class="w" data-l="수능 반영 (국/수/영/탐)"><strong>자연</strong> 국 20 · 수 35 · 영 20 · 탐 25. 자유전공학부(기술경영융합대학)만 국 25 · 수 30 · 영 20 · 탐 25</td><td data-l="지표 · 탐구">국·수·탐 표준점수, 영어는 등급을 가상 표준점수로 변환. 탐구 2과목(사탐·과탐·직탐 구분 없이)</td><td data-l="영어 (1~4등급)">가상 표준점수 135 / 132 / 128 / 120 (5등급 100, 6등급 80, 7등급 60, 8등급 30, 9등급 0)</td><td data-l="한국사">감산: 1~3등급 0, 4등급 -1, 5등급 -2, 6등급 -3, 7등급 -4, 8등급 -5, 9등급 -10</td><td class="e" data-l="선택과목 · 가산점">수학(확통·미적·기하)·탐구 구분 없이 지원 가능, 지정 없음. 자연계열 지원자가 과탐에 응시하면 과탐 취득 표준점수의 7% 가산. 수학 가산 없음</td><td class="e" data-l="학생부">없음</td><td class="p" data-l="근거">정시 p.6, p.8</td></tr>
+<tr id="m-덕성여대" data-u="덕성여대"><td data-l="대학">덕성여대</td><td class="e" data-l="전형 방법">수능 100% 일괄(가·나군 수능우수전형Ⅰ). 자유전공학부(다군 수능우수전형Ⅱ)는 수능 90% + 학생부(교과) 10%</td><td class="w" data-l="수능 반영 (국/수/영/탐)">국·수·영·탐 중 백분위 성적이 우수한 영역 순으로 30%·25%·25%·20% (영역별 고정 비율 아님)</td><td data-l="지표 · 탐구">백분위 활용, 탐구는 사회/과학 상위 1과목, 영어는 등급 환산점수 반영</td><td data-l="영어 (1~4등급)">100 / 98 / 96 / 80 (5~9등급 70·60·50·40·0)</td><td data-l="한국사">등급별 가산점: 수능우수전형Ⅰ 1~4등급 +10.0(5등급 9.0·6등급 8.0·7등급 7.0·8등급 6.0·9등급 0), 수능우수전형Ⅱ 1~4등급 +9.0(8.1·7.2·6.3·5.4·0)</td><td class="e" data-l="선택과목 · 가산점">수학·탐구 선택과목 가산점 없음, 그 외 가산점 없음</td><td class="e" data-l="학생부">가·나군 반영 없음. 다군 자유전공학부만 교과 10%(공통·일반선택 90 + 진로선택 10, 석차 1~2등급 100·3~4등급 98·5~7등급 94·8등급 80·9등급 0, 진로선택 A 100·B 99·C 97)</td><td class="p" data-l="근거">정시 p.6, p.18, p.26, p.27, p.28</td></tr>
+<tr id="m-동덕여대" data-u="동덕여대"><td data-l="대학">동덕여대</td><td class="e" data-l="전형 방법">수능우수자전형(정원 내, 가·나군). 수능 100% 일괄합산, 전형총점 1,000점</td><td class="w" data-l="수능 반영 (국/수/영/탐)">국·수 중 백분위가 높은 영역 35% · 낮은 영역 25% · 영어 20% · 탐구 20% (인문·자연 같은 비율)</td><td data-l="지표 · 탐구">국·수·탐 백분위, 영어는 등급 환산점수. 탐구는 사탐·과탐 중 우수 1과목만 반영(제2외국어/한문 미반영)</td><td data-l="영어 (1~4등급)">100점 · 99점 · 96점 · 85점 (5~9등급 70·55·40·20·0)</td><td data-l="한국사">필수 응시. 1~4등급 가산 3점, 5등급 2.5점·6등급 2점·7등급 1.5점·8등급 1점·9등급 0.5점(전형총점과 별도)</td><td class="e" data-l="선택과목 · 가산점">선택과목 지정 없음, 수학 미적분/기하 가산점 폐지(2026의 자연정보과학대·HCI사이언스·데이터사이언스·자연정보융합학부 5% 가산은 2027 폐지)</td><td class="e" data-l="학생부">교과성적 반영 없음. 학교폭력 조치 기재 시 1~3호 10점·4~5호 30점·6~7호 100점·8호 200점·9호 400점 감점</td><td class="p" data-l="근거">정시 p.25 · p.26 · p.5</td></tr>
+<tr id="m-서울여대" data-u="서울여대"><td data-l="대학">서울여대</td><td class="e" data-l="전형 방법">수능 100% 일괄합산, 총점 400점. 가군 과학기술융합대(식품)·미래산업융합대(디지털미디어·지능정보보호·AI융합학부), 나군 자유전공학부, 다군 과학기술융합대 일반학생(정원 내)</td><td class="w" data-l="수능 반영 (국/수/영/탐)">국·수·영·탐 4개 영역을 성적이 우수한 영역 순으로 35 · 30 · 20 · 15 (영역별 고정 비율이 아님, 백분위 × 비율 합 × 4)</td><td data-l="지표 · 탐구">국어·수학·탐구 백분위, 영어는 등급별 환산점수. 탐구는 사탐/과탐 구분 없이 2과목 중 상위 1과목의 백분위를 대학이 선택해 반영(직업탐구·제2외국어/한문 제외)</td><td data-l="영어 (1~4등급)">1등급 100 · 2등급 97 · 3등급 93 · 4등급 85 (5등급 70 · 6등급 50 · 7등급 35 · 8등급 20 · 9등급 0)</td><td data-l="한국사">총점에 가산(1~3등급 5.00 · 4등급 4.95 · 5등급 4.80 · 6등급 4.50 · 7등급 4.00 · 8등급 2.00 · 9등급 0, 400점 만점 기준, 가산으로 총점 초과해도 인정)</td><td class="e" data-l="선택과목 · 가산점">다군 수학과만 미적분 또는 기하 선택 시 수학 영역 백분위에 가산점 20%를 먼저 반영한 뒤 우수 영역 순으로 환산. 그 외 단위는 선택과목 지정·가산점 없음</td><td class="e" data-l="학생부">학생부 교과 반영 없음. 학교폭력 기재 시 총점 감점(1호 없음 · 2~3호 −10 · 4~6호 −20 · 7~9호 부적격)</td><td class="p" data-l="근거">정시 p.3, p.5, p.15, p.17, p.20, p.28</td></tr>
+<tr id="m-성신여대" data-u="성신여대"><td data-l="대학">성신여대</td><td class="e" data-l="전형 방법">수능 100%(500점) 일괄합산. 가·나군</td><td class="w" data-l="수능 반영 (국/수/영/탐)">자연과학·생명·환경(가군) 국 20 · 수 30 · 영 20 · 탐 30 / IT·SW·AI 중 AI융합·융합AI반도체 국 10 · 수 35 · 영 30 · 탐 25 / 공학·컴퓨터·융합보안(나군) 국 20 · 수 30 · 영 20 · 탐 30 / 자유전공(가군) 국 30 · 수 30 · 영 20 · 탐 20 / 첨단분야전공(나군) 국 20 · 수 30 · 영 20 · 탐 30</td><td data-l="지표 · 탐구">백분위 합산(표준점수 미사용). 탐구는 사회·과학 구분 없이 2과목 백분위 평균, 직업탐구·제2외국어/한문 불가</td><td data-l="영어 (1~4등급)">100 · 97 · 94 · 85 (백분위 환산점수, 5등급 60 · 6등급 40 · 7등급 25 · 8등급 10 · 9등급 0)</td><td data-l="한국사">필수 응시, 총점에 1등급 +2.0 · 2등급 +1.5 · 3등급 +1.0 · 4등급 +0.5 가산, 5등급 이하 0</td><td class="e" data-l="선택과목 · 가산점">수학 선택과목 지정 없음. 수리통계데이터사이언스학부·화학·에너지융합학부·바이오헬스융합학부·바이오신약의과학부·AI융합학과·융합AI반도체공학과(가군)와 청정신소재공학·바이오식품공학·컴퓨터공학·융합보안공학·서비스디자인공학(나군)은 과학탐구 최상위 1과목 백분위의 10% 가산. 자유전공·첨단분야전공은 가산 없음</td><td class="e" data-l="학생부">반영 안 함(지원자격 검증용)</td><td class="p" data-l="근거">정시 p.20, p.21, p.44</td></tr>
+<tr id="m-숙명여대" data-u="숙명여대"><td data-l="대학">숙명여대</td><td class="e" data-l="전형 방법">수능 100% 일괄합산, 전형총점 1,000점. 가군 자연계열 일반학생, 나군 첨단공학부·자유전공학부 일반학생</td><td class="w" data-l="수능 반영 (국/수/영/탐)">자연계열(가군)·첨단공학부(나군) 국 25 · 수 35 · 영 15 · 탐 25. 자유전공학부(나군) 국 30 · 수 30 · 영 15 · 탐 25</td><td data-l="지표 · 탐구">국어·수학 표준점수, 영어 등급별 환산점수, 탐구 변환표준점수(대학 자체 변환, 성적 발표 후 공개). 탐구는 사탐/과탐 구분 없이 2과목(직업탐구 제외), 2과목 합 25</td><td data-l="영어 (1~4등급)">1등급 100 · 2등급 98 · 3등급 94 · 4등급 88 (5등급 80 · 6등급 70 · 7등급 60 · 8등급 40 · 9등급 20)</td><td data-l="한국사">필수 응시. 가산점: 1~4등급 +3 · 5~6등급 +2 · 7~9등급 +1 (전형총점에 가산)</td><td class="e" data-l="선택과목 · 가산점">국어·수학 선택과목 미지정(미적분·기하 지정 없음). 자연계열·첨단공학부는 과학탐구 응시 시 과목당 변환표준점수 3% 가산(자유전공학부는 가산 없음)</td><td class="e" data-l="학생부">정시 일반학생전형은 학생부 교과 미반영. 학교폭력 조치사항 기재자만 전형총점에서 1~9호별 감점(최대 100점~최저 1점)</td><td class="p" data-l="근거">정시 p.5, p.16, p.36, p.41, p.45</td></tr>
+<tr id="m-이화여대" data-u="이화여대"><td data-l="대학">이화여대</td><td class="e" data-l="전형 방법">수능(수능전형) 100% 일괄합산, 1,000점 + 한국사. 가군 수학교육과, 나군 계열별 통합선발·지능형반도체·과학교육·뇌·인지과학부, 다군 인공지능데이터사이언스학부</td><td class="w" data-l="수능 반영 (국/수/영/탐)">자연계열 국 25 · 수 30 · 영 20 · 탐 25</td><td data-l="지표 · 탐구">국어·수학·탐구는 표준점수(영역별 최고점 대비), 영어는 등급별 환산점수. 탐구는 사회/과학 택2, 백분위를 본교 자체 변환표준점수로 바꿔 2과목 합 25 반영(변환표는 성적 발표 후 공개)</td><td data-l="영어 (1~4등급)">1등급 100 · 2등급 98 · 3등급 94 · 4등급 88 (5등급 84 · 6등급 80 · 7등급 76 · 8등급 72 · 9등급 68)</td><td data-l="한국사">등급별 점수 10점 만점: 1~4등급 10 · 5등급 9.8 · 6등급 9.6 · 7등급 9.4 · 8등급 9.2 · 9등급 8.5</td><td class="e" data-l="선택과목 · 가산점">응시 과목 지정 없음(수학 확률과통계·미적분·기하 택1, 국어 화법과작문·언어와매체 택1). 과학탐구 1과목당 변환표준점수의 6% 가산(과탐 가산, 요강에 수학 선택과목 가산은 없음)</td><td class="e" data-l="학생부">없음(수능 100%)</td><td class="p" data-l="근거">정시 p.7, p.13</td></tr>
 </tbody></table></div>
 <h3>경기·인천 11곳</h3>
 <div class="tbl"><table class="t-method"><thead><tr><th>대학</th><th>전형 방법</th><th>수능 반영 (국/수/영/탐)</th><th>지표 · 탐구</th><th>영어 (1~4등급)</th><th>한국사</th><th>선택과목 · 가산점</th><th>학생부</th><th>근거</th></tr></thead><tbody>
@@ -664,6 +727,22 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <tr data-u="서울과기대"><td data-l="대학"><a class="u" href="#m-서울과기대">서울과기대</a></td><td class="g" data-l="계열 묶음"><span>IT·SW·AI</span></td><td class="unit" data-l="모집단위">ICT융합공 11 · 컴퓨터공 21</td><td class="n" data-l="인원">32</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연</strong> 국 20 · 수 35 · 영 20 · 탐 25(2과목). 표준점수, 영어 가상표준점수. 과탐 응시 시 7% 가산. 수능 100</td><td class="p" data-l="근거">정시 p.8, p.13</td></tr>
 <tr data-u="서울과기대"><td data-l="대학"><a class="u" href="#m-서울과기대">서울과기대</a></td><td class="g" data-l="계열 묶음"><span>자연과학</span></td><td class="unit" data-l="모집단위">정밀화학 11 · 바이오메디컬 7 · 양자융합물리 4</td><td class="n" data-l="인원">22</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연</strong> 국 20 · 수 35 · 영 20 · 탐 25(2과목). 표준점수, 영어 가상표준점수. 과탐 응시 시 7% 가산. 수능 100</td><td class="p" data-l="근거">정시 p.8, p.13</td></tr>
 <tr data-u="서울과기대"><td data-l="대학"><a class="u" href="#m-서울과기대">서울과기대</a></td><td class="g" data-l="계열 묶음"><span>생명·환경</span></td><td class="unit" data-l="모집단위">환경공 21 · 식품생명공 9 · 안경광학 11</td><td class="n" data-l="인원">41</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연</strong> 국 20 · 수 35 · 영 20 · 탐 25(2과목). 표준점수, 영어 가상표준점수. 과탐 응시 시 7% 가산. 수능 100</td><td class="p" data-l="근거">정시 p.8, p.13</td></tr>
+<tr data-u="덕성여대"><td data-l="대학"><a class="u" href="#m-덕성여대">덕성여대</a></td><td class="g" data-l="계열 묶음"><span>자연과학</span></td><td class="unit" data-l="모집단위">과학기술대학 통합모집 84 (전공별 인원 미공개: 디지털소프트웨어공학부·바이오공학·수학·정보통계·화학·식품영양학)</td><td class="n" data-l="인원">84</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>과학기술대학 통합</strong> 국·수·영·탐 중 백분위 우수 영역 순 30·25·25·20. 백분위, 탐구 1과목(상위)</td><td class="p" data-l="근거">정시 p.10, p.17, p.26</td></tr>
+<tr data-u="덕성여대"><td data-l="대학"><a class="u" href="#m-덕성여대">덕성여대</a></td><td class="g" data-l="계열 묶음"><span>IT·SW·AI</span></td><td class="unit" data-l="모집단위">가상현실융합학과 15 · 데이터사이언스학과 15</td><td class="n" data-l="인원">30</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>미래인재대학</strong> 국·수·영·탐 중 백분위 우수 영역 순 30·25·25·20. 백분위, 탐구 1과목(상위)</td><td class="p" data-l="근거">정시 p.10, p.17, p.26</td></tr>
+<tr data-u="덕성여대"><td data-l="대학"><a class="u" href="#m-덕성여대">덕성여대</a></td><td class="g" data-l="계열 묶음"><span>생명·환경</span></td><td class="unit" data-l="모집단위">AI신약학과 15</td><td class="n" data-l="인원">15</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>미래인재대학</strong> 국·수·영·탐 중 백분위 우수 영역 순 30·25·25·20. 백분위, 탐구 1과목(상위)</td><td class="p" data-l="근거">정시 p.10, p.17, p.26</td></tr>
+<tr data-u="동덕여대"><td data-l="대학"><a class="u" href="#m-동덕여대">동덕여대</a></td><td class="g" data-l="계열 묶음"><span>IT·SW·AI</span></td><td class="unit" data-l="모집단위">데이터사이언스 30</td><td class="n" data-l="인원">30</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>IT·SW·AI</strong> 국/수 중 우수 35 · 열세 25 · 영 20 · 탐 20. 백분위, 탐구 1과목. 한국사 가산 3점, 수학 가산점 없음</td><td class="p" data-l="근거">정시 p.8</td></tr>
+<tr data-u="동덕여대"><td data-l="대학"><a class="u" href="#m-동덕여대">동덕여대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">자율전공학부 93 (계열 구분 없음)</td><td class="n" data-l="인원">93</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자유전공</strong> 국/수 중 우수 35 · 열세 25 · 영 20 · 탐 20. 백분위, 탐구 1과목. 한국사 가산 3점, 수학 가산점 없음</td><td class="p" data-l="근거">정시 p.8</td></tr>
+<tr data-u="서울여대"><td data-l="대학"><a class="u" href="#m-서울여대">서울여대</a></td><td class="g" data-l="계열 묶음"><span>생명·환경</span></td><td class="unit" data-l="모집단위">식품생명공학 18 · 식품영양 18</td><td class="n" data-l="인원">36</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">국 · 수 · 영 · 탐 중 우수 영역 순 35 · 30 · 20 · 15. 백분위(영어 등급 환산), 탐구 1과목</td><td class="p" data-l="근거">정시 p.6, p.15</td></tr>
+<tr data-u="서울여대"><td data-l="대학"><a class="u" href="#m-서울여대">서울여대</a></td><td class="g" data-l="계열 묶음"><span>IT·SW·AI</span></td><td class="unit" data-l="모집단위">디지털미디어 21 · 지능정보보호 20 · 인공지능 11 · 소프트웨어 13 · 데이터사이언스 18</td><td class="n" data-l="인원">83</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">국 · 수 · 영 · 탐 중 우수 영역 순 35 · 30 · 20 · 15. 백분위(영어 등급 환산), 탐구 1과목</td><td class="p" data-l="근거">정시 p.6, p.15</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td class="g" data-l="계열 묶음"><span>자연과학</span></td><td class="unit" data-l="모집단위">수리통계데이터사이언스학부(수학/핀테크) 8 · (통계학/빅데이터사이언스) 8 · 화학·에너지융합학부 5</td><td class="n" data-l="인원">21</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연과학</strong> 국 20 · 수 30 · 영 20 · 탐 30. 백분위, 탐구 2과목, 과탐 최상위 1과목 백분위 10% 가산</td><td class="p" data-l="근거">정시 p.8, 정시 p.20, 정시 p.21</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td class="g" data-l="계열 묶음"><span>생명·환경</span></td><td class="unit" data-l="모집단위">바이오헬스융합학부 7 · 바이오신약의과학부 16</td><td class="n" data-l="인원">23</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>생명·환경</strong> 국 20 · 수 30 · 영 20 · 탐 30. 백분위, 탐구 2과목, 과탐 최상위 1과목 백분위 10% 가산</td><td class="p" data-l="근거">정시 p.8, 정시 p.20, 정시 p.21</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td class="g" data-l="계열 묶음"><span>IT·SW·AI</span></td><td class="unit" data-l="모집단위">AI융합학과 15 · 융합AI반도체공학과 8</td><td class="n" data-l="인원">23</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>AI·반도체</strong> 국 10 · 수 35 · 영 30 · 탐 25. 백분위, 탐구 2과목, 과탐 최상위 1과목 백분위 10% 가산</td><td class="p" data-l="근거">정시 p.8, 정시 p.20, 정시 p.21</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">창의융합학부(자유전공) 184 (계열 구분 없음)</td><td class="n" data-l="인원">184</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자유전공</strong> 국 30 · 수 30 · 영 20 · 탐 20. 백분위, 탐구 2과목, 가산 없음. 입학 후 간호·사범·예체능계열을 뺀 모든 학과 선택</td><td class="p" data-l="근거">정시 p.9, 정시 p.20</td></tr>
+<tr data-u="숙명여대"><td data-l="대학"><a class="u" href="#m-숙명여대">숙명여대</a></td><td class="g" data-l="계열 묶음"><span>자연과학</span></td><td class="unit" data-l="모집단위">화학 10 · 수학 12 · 통계 10</td><td class="n" data-l="인원">32</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연계열</strong> 국 25 · 수 35 · 영 15 · 탐 25. 표준점수, 탐구 2과목, 과탐 3% 가산</td><td class="p" data-l="근거">정시 p.6</td></tr>
+<tr data-u="숙명여대"><td data-l="대학"><a class="u" href="#m-숙명여대">숙명여대</a></td><td class="g" data-l="계열 묶음"><span>공학</span></td><td class="unit" data-l="모집단위">화공생명공학 20 · 지능형전자시스템 10 · 신소재물리 6 · 기계시스템 12</td><td class="n" data-l="인원">48</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연계열</strong> 국 25 · 수 35 · 영 15 · 탐 25. 표준점수, 탐구 2과목, 과탐 3% 가산</td><td class="p" data-l="근거">정시 p.6</td></tr>
+<tr data-u="숙명여대"><td data-l="대학"><a class="u" href="#m-숙명여대">숙명여대</a></td><td class="g" data-l="계열 묶음"><span>IT·SW·AI</span></td><td class="unit" data-l="모집단위">인공지능공학 16 · 컴퓨터과학 13 · 데이터사이언스 8</td><td class="n" data-l="인원">37</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연계열</strong> 국 25 · 수 35 · 영 15 · 탐 25. 표준점수, 탐구 2과목, 과탐 3% 가산</td><td class="p" data-l="근거">정시 p.6</td></tr>
+<tr data-u="숙명여대"><td data-l="대학"><a class="u" href="#m-숙명여대">숙명여대</a></td><td class="g" data-l="계열 묶음"><span>생명·환경</span></td><td class="unit" data-l="모집단위">생명시스템 15 · 의류학 9 · 식품영양학 12</td><td class="n" data-l="인원">36</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연계열</strong> 국 25 · 수 35 · 영 15 · 탐 25. 표준점수, 탐구 2과목, 과탐 3% 가산</td><td class="p" data-l="근거">정시 p.6</td></tr>
+<tr data-u="이화여대"><td data-l="대학"><a class="u" href="#m-이화여대">이화여대</a></td><td class="g" data-l="계열 묶음"><span>사범(이과)</span></td><td class="unit" data-l="모집단위">수학교육과 13</td><td class="n" data-l="인원">13</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연계열</strong> 국 25 · 수 30 · 영 20 · 탐 25. 표준점수, 탐구 2과목 변환표준점수, 과탐 6% 가산</td><td class="p" data-l="근거">정시 p.12, p.13</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>공학</span></td><td class="unit" data-l="모집단위">[일반전형 1] 도시계획·조경학부 25 · 화공생명배터리공학부 60 · 전기공학과 21</td><td class="n" data-l="인원">106</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">일반전형 1. <strong>자연</strong> 국·수 중 우수 순 40 · 30, 영·탐(1과목) 중 우수 순 20 · 10. 백분위(영어 등급 환산). 수능 100. 한국사 필수, 지정·가산 없음</td><td class="p" data-l="근거">정시 p.6, p.7, p.12, p.13</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>IT·SW·AI</span></td><td class="unit" data-l="모집단위">[일반전형 1] 금융·빅데이터학부 35 · 컴퓨터공학과 30 · 인공지능시스템학과 17</td><td class="n" data-l="인원">82</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">일반전형 1. <strong>자연</strong> 국·수 중 우수 순 40 · 30, 영·탐(1과목) 중 우수 순 20 · 10. 백분위(영어 등급 환산). 수능 100. 한국사 필수, 지정·가산 없음</td><td class="p" data-l="근거">정시 p.6, p.7, p.12, p.13</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>생명·환경</span></td><td class="unit" data-l="모집단위">[일반전형 1] 생명과학과 15</td><td class="n" data-l="인원">15</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">일반전형 1. <strong>자연</strong> 국·수 중 우수 순 40 · 30, 영·탐(1과목) 중 우수 순 20 · 10. 백분위(영어 등급 환산). 수능 100. 한국사 필수, 지정·가산 없음</td><td class="p" data-l="근거">정시 p.6, p.12, p.13</td></tr>
@@ -750,6 +829,18 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <tr data-u="서울과기대"><td data-l="대학"><a class="u" href="#m-서울과기대">서울과기대</a></td><td class="g" data-l="계열 묶음"><span>공학</span></td><td class="unit" data-l="모집단위">기계시스템공학부 지능형로봇전공 25 · 미래자동차전공 14 · 기계공 37 · 안전공 15 · 신소재공 21 · 건설시스템공 29 · 건축학부 건축공학전공 18 · 건축학전공 12</td><td class="n" data-l="인원">171</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연</strong> 국 20 · 수 35 · 영 20 · 탐 25(2과목). 표준점수, 영어 가상표준점수. 과탐 응시 시 7% 가산. 수능 100</td><td class="p" data-l="근거">정시 p.8, p.13</td></tr>
 <tr data-u="서울과기대"><td data-l="대학"><a class="u" href="#m-서울과기대">서울과기대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">자유전공학부(정보통신대학) 35 · 자유전공학부(에너지바이오대학) 29</td><td class="n" data-l="인원">64</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연</strong> 국 20 · 수 35 · 영 20 · 탐 25(2과목). 표준점수, 영어 가상표준점수. 과탐 응시 시 7% 가산. 수능 100</td><td class="p" data-l="근거">정시 p.8, p.13</td></tr>
 <tr data-u="서울과기대"><td data-l="대학"><a class="u" href="#m-서울과기대">서울과기대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">자유전공학부(기술경영융합대학) 14 (계열 구분 없음: 원문 표는 인문 칸에 두지만 별도 비율 적용, 선택 제외 학과는 p.13 각주)</td><td class="n" data-l="인원">14</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자유전공(기술경영융합대학)</strong> 국 25 · 수 30 · 영 20 · 탐 25(2과목). 표준점수, 영어 가상표준점수. 과탐 7% 가산 적용 여부는 원문에 명시 없음. 수능 100</td><td class="p" data-l="근거">정시 p.8, p.13</td></tr>
+<tr data-u="동덕여대"><td data-l="대학"><a class="u" href="#m-동덕여대">동덕여대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">자연정보융합학부 43</td><td class="n" data-l="인원">43</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자유전공</strong> 국/수 중 우수 35 · 열세 25 · 영 20 · 탐 20. 백분위, 탐구 1과목. 한국사 가산 3점, 수학 가산점 없음</td><td class="p" data-l="근거">정시 p.8</td></tr>
+<tr data-u="서울여대"><td data-l="대학"><a class="u" href="#m-서울여대">서울여대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">자유전공학부(과학기술융합) 33 · (미래산업융합, 계열 구분 없음) 27 · (광역, 계열 구분 없음) 16</td><td class="n" data-l="인원">76</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">국 · 수 · 영 · 탐 중 우수 영역 순 35 · 30 · 20 · 15. 백분위(영어 등급 환산), 탐구 1과목</td><td class="p" data-l="근거">정시 p.6, p.17</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td class="g" data-l="계열 묶음"><span>공학</span></td><td class="unit" data-l="모집단위">청정신소재공학 8 · 서비스디자인공학 8</td><td class="n" data-l="인원">16</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>공학</strong> 국 20 · 수 30 · 영 20 · 탐 30. 백분위, 탐구 2과목, 과탐 최상위 1과목 백분위 10% 가산</td><td class="p" data-l="근거">정시 p.8, 정시 p.20, 정시 p.21</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td class="g" data-l="계열 묶음"><span>IT·SW·AI</span></td><td class="unit" data-l="모집단위">컴퓨터공학 8 · 융합보안공학 12</td><td class="n" data-l="인원">20</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>IT</strong> 국 20 · 수 30 · 영 20 · 탐 30. 백분위, 탐구 2과목, 과탐 최상위 1과목 백분위 10% 가산</td><td class="p" data-l="근거">정시 p.8, 정시 p.20, 정시 p.21</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td class="g" data-l="계열 묶음"><span>생명·환경</span></td><td class="unit" data-l="모집단위">바이오식품공학 4</td><td class="n" data-l="인원">4</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>생명·환경</strong> 국 20 · 수 30 · 영 20 · 탐 30. 백분위, 탐구 2과목, 과탐 최상위 1과목 백분위 10% 가산</td><td class="p" data-l="근거">정시 p.8, 정시 p.20, 정시 p.21</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">창의융합학부(첨단분야전공) 71 (자연계열 첨단분야 학과 한정)</td><td class="n" data-l="인원">71</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>첨단분야전공</strong> 국 20 · 수 30 · 영 20 · 탐 30. 백분위, 탐구 2과목, 가산 없음. 입학 후 첨단분야전공 내 학과 선택</td><td class="p" data-l="근거">정시 p.9, 정시 p.20, 정시 p.21</td></tr>
+<tr data-u="숙명여대"><td data-l="대학"><a class="u" href="#m-숙명여대">숙명여대</a></td><td class="g" data-l="계열 묶음"><span>공학</span></td><td class="unit" data-l="모집단위">첨단공학부 68 (무전공, 2학년 진급 시 인공지능공학부·지능형전자시스템학부·신소재물리학부·컴퓨터과학전공·데이터사이언스전공 중 선택)</td><td class="n" data-l="인원">68</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>첨단공학부</strong> 국 25 · 수 35 · 영 15 · 탐 25. 표준점수, 탐구 2과목, 과탐 3% 가산</td><td class="p" data-l="근거">정시 p.6, p.36</td></tr>
+<tr data-u="숙명여대"><td data-l="대학"><a class="u" href="#m-숙명여대">숙명여대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">자유전공학부 264 (계열 구분 없음, 문과에도 포함)</td><td class="n" data-l="인원">264</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자유전공학부</strong> 국 30 · 수 30 · 영 15 · 탐 25. 표준점수, 탐구 2과목, 탐구 가산 없음</td><td class="p" data-l="근거">정시 p.6, p.36</td></tr>
+<tr data-u="이화여대"><td data-l="대학"><a class="u" href="#m-이화여대">이화여대</a></td><td class="g" data-l="계열 묶음"><span>사범(이과)</span></td><td class="unit" data-l="모집단위">과학교육과 43</td><td class="n" data-l="인원">43</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연계열</strong> 국 25 · 수 30 · 영 20 · 탐 25. 표준점수, 탐구 2과목 변환표준점수, 과탐 6% 가산</td><td class="p" data-l="근거">정시 p.12, p.13</td></tr>
+<tr data-u="이화여대"><td data-l="대학"><a class="u" href="#m-이화여대">이화여대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">계열별 통합선발 자연계열 149 (입학 후 1학년 말 전공 선택, 계열 구분은 지원 시 선택)</td><td class="n" data-l="인원">149</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연계열</strong> 국 25 · 수 30 · 영 20 · 탐 25. 표준점수, 탐구 2과목 변환표준점수, 과탐 6% 가산</td><td class="p" data-l="근거">정시 p.3, p.7, p.12</td></tr>
+<tr data-u="이화여대"><td data-l="대학"><a class="u" href="#m-이화여대">이화여대</a></td><td class="g" data-l="계열 묶음"><span>공학</span></td><td class="unit" data-l="모집단위">융합전자반도체공학부 지능형반도체공학전공 37</td><td class="n" data-l="인원">37</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연계열</strong> 국 25 · 수 30 · 영 20 · 탐 25. 표준점수, 탐구 2과목 변환표준점수, 과탐 6% 가산</td><td class="p" data-l="근거">정시 p.12, p.13</td></tr>
+<tr data-u="이화여대"><td data-l="대학"><a class="u" href="#m-이화여대">이화여대</a></td><td class="g" data-l="계열 묶음"><span>자연과학</span></td><td class="unit" data-l="모집단위">뇌·인지과학부(자연계열) 16</td><td class="n" data-l="인원">16</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연계열</strong> 국 25 · 수 30 · 영 20 · 탐 25. 표준점수, 탐구 2과목 변환표준점수, 과탐 6% 가산</td><td class="p" data-l="근거">정시 p.12, p.13</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>공학</span></td><td class="unit" data-l="모집단위">[일반전형 1] 건축공학과 13 · 스마트팩토리학과 18 · 건설환경공학과 16 · 반도체대학(전자공학과·반도체공학과 통합 모집) 61 · 시스템반도체학과 18</td><td class="n" data-l="인원">126</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">일반전형 1. <strong>자연</strong> 국·수 중 우수 순 40 · 30, 영·탐(1과목) 중 우수 순 20 · 10. 백분위(영어 등급 환산). 수능 100. 한국사 필수, 지정·가산 없음</td><td class="p" data-l="근거">정시 p.6, p.7, p.14, p.15</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>IT·SW·AI</span></td><td class="unit" data-l="모집단위">[일반전형 1] 정보보호학과 17 · 스마트시티학과 16</td><td class="n" data-l="인원">33</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">일반전형 1. <strong>자연</strong> 국·수 중 우수 순 40 · 30, 영·탐(1과목) 중 우수 순 20 · 10. 백분위(영어 등급 환산). 수능 100. 한국사 필수, 지정·가산 없음</td><td class="p" data-l="근거">정시 p.7, p.14, p.15</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>공학</span></td><td class="unit" data-l="모집단위">[일반전형 2] 반도체대학(전자공학과·반도체공학과 통합 모집) 25</td><td class="n" data-l="인원">25</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">일반전형 2. <strong>자연</strong> 국·수 중 우수 순 40 · 30, 영·탐(1과목) 중 우수 순 20 · 10. 등급 환산(국·수·탐 100/96/89/77, 영어 98/95/92/86). 수능 100. 한국사 필수, 지정·가산 없음</td><td class="p" data-l="근거">정시 p.6, p.14, p.15</td></tr>
@@ -830,6 +921,10 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <tr data-u="서울과기대"><td data-l="대학"><a class="u" href="#m-서울과기대">서울과기대</a></td><td class="g" data-l="계열 묶음"><span>IT·SW·AI</span></td><td class="unit" data-l="모집단위">창의융합대학 인공지능응용학과 18</td><td class="n" data-l="인원">18</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연</strong> 국 20 · 수 35 · 영 20 · 탐 25(2과목). 표준점수, 영어 가상표준점수. 과탐 응시 시 7% 가산. 수능 100</td><td class="p" data-l="근거">정시 p.8, p.13</td></tr>
 <tr data-u="서울과기대"><td data-l="대학"><a class="u" href="#m-서울과기대">서울과기대</a></td><td class="g" data-l="계열 묶음"><span>공학</span></td><td class="unit" data-l="모집단위">창의융합대학 지능형반도체공 13 · 미래에너지 4</td><td class="n" data-l="인원">17</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연</strong> 국 20 · 수 35 · 영 20 · 탐 25(2과목). 표준점수, 영어 가상표준점수. 과탐 응시 시 7% 가산. 수능 100</td><td class="p" data-l="근거">정시 p.8, p.13</td></tr>
 <tr data-u="서울과기대"><td data-l="대학"><a class="u" href="#m-서울과기대">서울과기대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">ST자유전공학부 자연 26 (조형대학·스포츠과학과·MSDE·산업공학부 ITM전공·정보통신융합공학과 제외 전 학과 선택)</td><td class="n" data-l="인원">26</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연</strong> 국 20 · 수 35 · 영 20 · 탐 25(2과목). 표준점수, 영어 가상표준점수. 과탐 응시 시 7% 가산. 수능 100</td><td class="p" data-l="근거">정시 p.7, p.8, p.13</td></tr>
+<tr data-u="덕성여대"><td data-l="대학"><a class="u" href="#m-덕성여대">덕성여대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">자유전공학부 100 (계열 구분 없음)</td><td class="n" data-l="인원">100</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자유전공</strong> 수능 90%: 국·수·영·탐 중 백분위 우수 영역 순 30·25·25·20. 백분위, 탐구 1과목(상위). 학생부 교과 10% 별도</td><td class="p" data-l="근거">정시 p.10, p.18, p.26</td></tr>
+<tr data-u="서울여대"><td data-l="대학"><a class="u" href="#m-서울여대">서울여대</a></td><td class="g" data-l="계열 묶음"><span>자연과학</span></td><td class="unit" data-l="모집단위">수학 11 · 화학 16</td><td class="n" data-l="인원">27</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">국 · 수 · 영 · 탐 중 우수 영역 순 35 · 30 · 20 · 15. 백분위(영어 등급 환산), 탐구 1과목. 수학과는 미적분·기하 선택 시 수학 백분위 20% 가산</td><td class="p" data-l="근거">정시 p.6, p.20</td></tr>
+<tr data-u="서울여대"><td data-l="대학"><a class="u" href="#m-서울여대">서울여대</a></td><td class="g" data-l="계열 묶음"><span>생명·환경</span></td><td class="unit" data-l="모집단위">생명환경공학 12 · 바이오헬스융합 18 · 원예생명조경 21</td><td class="n" data-l="인원">51</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">국 · 수 · 영 · 탐 중 우수 영역 순 35 · 30 · 20 · 15. 백분위(영어 등급 환산), 탐구 1과목</td><td class="p" data-l="근거">정시 p.6, p.20</td></tr>
+<tr data-u="이화여대"><td data-l="대학"><a class="u" href="#m-이화여대">이화여대</a></td><td class="g" data-l="계열 묶음"><span>IT·SW·AI</span></td><td class="unit" data-l="모집단위">인공지능데이터사이언스학부(자연계열) 51</td><td class="n" data-l="인원">51</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자연계열</strong> 국 25 · 수 30 · 영 20 · 탐 25. 표준점수, 탐구 2과목 변환표준점수, 과탐 6% 가산</td><td class="p" data-l="근거">정시 p.12, p.13</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>공학</span></td><td class="unit" data-l="모집단위">[일반전형 1] 건축학부(실내건축학·건축학(5년) 전공) 22 · 기계공학부 45 · 신소재공학과 16 · 의공학과 17</td><td class="n" data-l="인원">100</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">일반전형 1. <strong>자연</strong> 국·수 중 우수 순 40 · 30, 영·탐(1과목) 중 우수 순 20 · 10. 백분위(영어 등급 환산). 수능 100. 한국사 필수, 지정·가산 없음</td><td class="p" data-l="근거">정시 p.6, p.7, p.16, p.17</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>생명·환경</span></td><td class="unit" data-l="모집단위">[일반전형 1] 바이오나노학과 16 · 식품생명공학과 16 · 식품영양학과 14 · 바이오로직스학과(메디컬캠퍼스) 30</td><td class="n" data-l="인원">76</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">일반전형 1. <strong>자연</strong> 국·수 중 우수 순 40 · 30, 영·탐(1과목) 중 우수 순 20 · 10. 백분위(영어 등급 환산). 수능 100. 한국사 필수, 지정·가산 없음</td><td class="p" data-l="근거">정시 p.6, p.7, p.16, p.17</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>자연과학</span></td><td class="unit" data-l="모집단위">[일반전형 1] 화학과 15</td><td class="n" data-l="인원">15</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">일반전형 1. <strong>자연</strong> 국·수 중 우수 순 40 · 30, 영·탐(1과목) 중 우수 순 20 · 10. 백분위(영어 등급 환산). 수능 100. 한국사 필수, 지정·가산 없음</td><td class="p" data-l="근거">정시 p.6, p.16, p.17</td></tr>
@@ -887,6 +982,12 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <tr data-u="상명대 서울"><td data-l="대학"><a class="u" href="#m-상명대-서울">상명대 서울</a></td><td data-l="가">—</td><td data-l="나">219</td><td data-l="다">—</td><td data-l="합계">219</td></tr>
 <tr data-u="삼육대"><td data-l="대학"><a class="u" href="#m-삼육대">삼육대</a></td><td data-l="가">24</td><td data-l="나">73</td><td data-l="다">13</td><td data-l="합계">110</td></tr>
 <tr data-u="서울과기대"><td data-l="대학"><a class="u" href="#m-서울과기대">서울과기대</a></td><td data-l="가">269</td><td data-l="나">249</td><td data-l="다">61</td><td data-l="합계">579</td></tr>
+<tr data-u="덕성여대"><td data-l="대학"><a class="u" href="#m-덕성여대">덕성여대</a></td><td data-l="가">129</td><td data-l="나">—</td><td data-l="다">100</td><td data-l="합계">229</td></tr>
+<tr data-u="동덕여대"><td data-l="대학"><a class="u" href="#m-동덕여대">동덕여대</a></td><td data-l="가">123</td><td data-l="나">43</td><td data-l="다">—</td><td data-l="합계">166</td></tr>
+<tr data-u="서울여대"><td data-l="대학"><a class="u" href="#m-서울여대">서울여대</a></td><td data-l="가">119</td><td data-l="나">76</td><td data-l="다">78</td><td data-l="합계">273</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td data-l="가">251</td><td data-l="나">111</td><td data-l="다">—</td><td data-l="합계">362</td></tr>
+<tr data-u="숙명여대"><td data-l="대학"><a class="u" href="#m-숙명여대">숙명여대</a></td><td data-l="가">153</td><td data-l="나">332</td><td data-l="다">—</td><td data-l="합계">485</td></tr>
+<tr data-u="이화여대"><td data-l="대학"><a class="u" href="#m-이화여대">이화여대</a></td><td data-l="가">13</td><td data-l="나">245</td><td data-l="다">51</td><td data-l="합계">309</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td data-l="가">271</td><td data-l="나">184</td><td data-l="다">295</td><td data-l="합계">750</td></tr>
 <tr data-u="가톨릭대"><td data-l="대학"><a class="u" href="#m-가톨릭대">가톨릭대</a></td><td data-l="가">58</td><td data-l="나">166</td><td data-l="다">131</td><td data-l="합계">355</td></tr>
 <tr data-u="경기대"><td data-l="대학"><a class="u" href="#m-경기대">경기대</a></td><td data-l="가">52</td><td data-l="나">89</td><td data-l="다">270</td><td data-l="합계">411</td></tr>
@@ -898,7 +999,7 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <tr data-u="한국항공대"><td data-l="대학"><a class="u" href="#m-한국항공대">한국항공대</a></td><td data-l="가">75</td><td data-l="나">57</td><td data-l="다">51</td><td data-l="합계">183</td></tr>
 <tr data-u="수원대"><td data-l="대학"><a class="u" href="#m-수원대">수원대</a></td><td data-l="가">—</td><td data-l="나">360</td><td data-l="다">—</td><td data-l="합계">360</td></tr>
 <tr data-u="용인대"><td data-l="대학"><a class="u" href="#m-용인대">용인대</a></td><td data-l="가">—</td><td data-l="나">77</td><td data-l="다">—</td><td data-l="합계">77</td></tr>
-<tr data-u="합계"><td data-l="대학">합계</td><td data-l="가">5575</td><td data-l="나">6295</td><td data-l="다">4010</td><td data-l="합계">15880</td></tr>
+<tr data-u="합계"><td data-l="대학">합계</td><td data-l="가">6363</td><td data-l="나">7102</td><td data-l="다">4239</td><td data-l="합계">17704</td></tr>
 </tbody></table></div>
 
 </section>
@@ -924,6 +1025,16 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
       t._page += +d; render(t);
       if (t.getBoundingClientRect().top < 0) t.scrollIntoView();
     });
+    // 위쪽에도 같은 넘기기를 둔다(누르면 그 자리에서 넘어간다)
+    var top = pg.cloneNode(true);
+    top.className = "pager top";
+    t.parentNode.insertBefore(top, t);
+    t._pagerTop = top;
+    top.addEventListener("click", function (e) {
+      var d = e.target.getAttribute && e.target.getAttribute("data-d");
+      if (!d || e.target.disabled) return;
+      t._page += +d; render(t);
+    });
   });
   function render(t) {
     var rows = Array.prototype.slice.call(t.querySelectorAll("tbody tr")).filter(function (r) { return !r.classList.contains("hide") && r.getAttribute("data-u") !== "합계"; });
@@ -931,11 +1042,13 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
     t._page = Math.min(Math.max(t._page, 0), pages - 1);
     rows.forEach(function (r, k) { r.classList.toggle("pg", !!size && Math.floor(k / size) !== t._page); });
     t.classList.toggle("empty", !rows.length);
-    t._pager.hidden = pages < 2;
     var from = t._page * size + 1, to = Math.min(rows.length, from + size - 1);
-    t._pager.querySelector(".pos").textContent = from + "–" + to + " / " + rows.length + "줄";
-    t._pager.querySelector('[data-d="-1"]').disabled = t._page === 0;
-    t._pager.querySelector('[data-d="1"]').disabled = t._page === pages - 1;
+    [t._pager, t._pagerTop].forEach(function (pg) {
+      pg.hidden = pages < 2;
+      pg.querySelector(".pos").textContent = from + "–" + to + " / " + rows.length + "줄";
+      pg.querySelector('[data-d="-1"]').disabled = t._page === 0;
+      pg.querySelector('[data-d="1"]').disabled = t._page === pages - 1;
+    });
   }
   function renderAll() { tbls.forEach(render); }
   function setView(v, save) {

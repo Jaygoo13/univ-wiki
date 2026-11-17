@@ -104,6 +104,7 @@ details.how { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
 details.how summary { cursor: pointer; color: var(--navy); font-weight: 500; min-height: 32px; }
 .pager { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 8px 0 18px; font-size: 13px; }
 .pager[hidden] { display: none; }
+.pager.top { margin: 10px 0 4px; }
 .pager button { font: inherit; font-size: 13px; min-height: 36px; min-width: 64px; border: 1px solid var(--line); background: var(--paper); color: var(--navy); border-radius: 999px; padding: 4px 14px; cursor: pointer; }
 .pager button:disabled { opacity: .4; cursor: default; }
 .pager button:not(:disabled):hover { border-color: var(--navy); }
@@ -154,7 +155,7 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <body>
 <div class="wrap">
   <header>
-    <div class="eyebrow">2027학년도 · 정시 · 수도권 32개 대학</div>
+    <div class="eyebrow">2027학년도 · 정시 · 수도권 38개 대학</div>
     <h1>수도권 문과 계열 정시 전형</h1>
     <p class="sub">2027 정시 모집요강 원문 기준. 인문·어문·사회·상경·법·행정·사범(문과)·문과 자유전공의 수능위주 일반전형(정원 내)을 군별·계열 묶음별로 정리했습니다. 대학 이름을 누르면 과목 반영 탭의 그 대학 줄로 이동합니다.</p>
   </header>
@@ -167,7 +168,7 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
       <button type="button" data-n="5" aria-pressed="false">5개</button><button type="button" data-n="10" aria-pressed="true">10개</button><button type="button" data-n="0" aria-pressed="false">전체</button>
     </div>
     <input class="q" id="q" type="search" list="univs" placeholder="대학 이름으로 거르기" aria-label="대학 이름으로 거르기" autocomplete="off">
-    <datalist id="univs"><option value="서울대"><option value="연세대"><option value="고려대"><option value="서강대"><option value="성균관대"><option value="한양대 서울"><option value="중앙대"><option value="경희대"><option value="한국외대"><option value="서울시립대"><option value="건국대 서울"><option value="동국대 서울"><option value="홍익대 서울"><option value="국민대"><option value="숭실대"><option value="세종대"><option value="광운대"><option value="명지대"><option value="상명대 서울"><option value="삼육대"><option value="서울과기대"><option value="가천대"><option value="가톨릭대"><option value="경기대"><option value="단국대 죽전"><option value="아주대"><option value="인하대"><option value="인천대"><option value="한양대 ERICA"><option value="한국항공대"><option value="수원대"><option value="용인대"></datalist>
+    <datalist id="univs"><option value="서울대"><option value="연세대"><option value="고려대"><option value="서강대"><option value="성균관대"><option value="한양대 서울"><option value="중앙대"><option value="경희대"><option value="한국외대"><option value="서울시립대"><option value="건국대 서울"><option value="동국대 서울"><option value="홍익대 서울"><option value="국민대"><option value="숭실대"><option value="세종대"><option value="광운대"><option value="명지대"><option value="상명대 서울"><option value="삼육대"><option value="서울과기대"><option value="덕성여대"><option value="동덕여대"><option value="서울여대"><option value="성신여대"><option value="숙명여대"><option value="이화여대"><option value="가천대"><option value="가톨릭대"><option value="경기대"><option value="단국대 죽전"><option value="아주대"><option value="인하대"><option value="인천대"><option value="한양대 ERICA"><option value="한국항공대"><option value="수원대"><option value="용인대"></datalist>
     <span class="cnt" id="cnt" aria-live="polite"></span>
   </div>
 
@@ -175,19 +176,19 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <section class="tab" id="overview" role="tabpanel" aria-labelledby="t-overview">
 <h2>개요와 주의</h2>
   <div class="keys">
-    <div class="key"><b>수능최저 없음</b> · 32곳 모두 일반전형에 수능최저학력기준이 없습니다. 26곳은 수능 100입니다.</div>
+    <div class="key"><b>수능최저 없음</b> · 38곳 모두 일반전형에 수능최저학력기준이 없습니다. 31곳은 수능 100입니다.</div>
     <div class="key"><b>수학 미반영</b> · 용인대 인문사회(국 40 · 영 30 · 탐 30), 국민대 미래융합전공(C)(국 50 · 영 20 · 탐 30).</div>
-    <div class="key"><b>탐구 1과목</b> · 명지대, 상명대, 삼육대, 가천대, 가톨릭대, 경기대, 한국항공대, 수원대, 용인대, 성균관대 다군.</div>
-    <div class="key"><b>학생부 반영</b> · 서울대, 연세대, 한양대 서울, 중앙대(출결), 동국대 다군, 경기대 자유전공학부.</div>
+    <div class="key"><b>탐구 1과목</b> · 명지대, 상명대, 삼육대, 덕성여대, 동덕여대, 서울여대, 가천대, 가톨릭대, 경기대, 한국항공대, 수원대, 용인대, 성균관대 다군.</div>
+    <div class="key"><b>학생부 반영</b> · 서울대, 연세대, 한양대 서울, 중앙대(출결), 동국대 다군, 덕성여대 다군 자유전공학부, 경기대 자유전공학부.</div>
   </div>
 <h3>기준과 읽는 법</h3>
 <ul>
-<li>기준: 2027학년도 정시 모집요강. 수도권 대학 32곳.</li>
+<li>기준: 2027학년도 정시 모집요강. 수도권 대학 38곳.</li>
 <li>범위: 정시 <strong>수능위주 일반전형, 정원 내</strong>. 인문·어문·사회·상경·법·행정·사범(문과)·문과 자유전공. 이공계·의약·간호·예체능은 뺐다.</li>
 <li>정리 단위: 대학 × 군 × 계열 묶음. 계열 묶음은 단과대학 이름을 기준으로 붙였다.</li>
 <li>읽는 법: <strong>가군·나군·다군 탭</strong>의 표에는 계열 묶음별 모집단위·인원과 그 묶음에 적용되는 수능 과목 반영비율(국어 / 수학 / 영어 / 탐구 %)을 풀어 적었다. 영어·한국사 등급별 점수, 활용지표, 학생부 반영 같은 대학 전체 기준은 <strong>과목 반영 탭</strong>에 대학마다 한 줄로 있다. 군별 표에서 대학 이름을 누르면 그 줄로 간다.</li>
 <li>인원은 수시 미충원 이월 전 값이다. 확정 인원은 각 대학이 원서접수 전에 따로 공지한다.</li>
-<li>수능최저학력기준은 32곳 모두 없다(일반전형 기준).</li>
+<li>수능최저학력기준은 38곳 모두 없다(일반전형 기준).</li>
 <li>작성 2026-11-17.</li>
 </ul>
 
@@ -201,11 +202,14 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <li>가천대: 국·수 중 높은 쪽 40, 낮은 쪽 30.</li>
 <li>가톨릭대 일반Ⅱ: 국·수 중 높은 1개만 40.</li>
 <li>용인대 무전공학부: 국·수 중 1개만 40.</li>
+<li>덕성여대: 국·수·영·탐 중 점수 높은 순으로 30 / 25 / 25 / 20.</li>
+<li>서울여대: 국·수·영·탐 중 점수 높은 순으로 35 / 30 / 20 / 15.</li>
+<li>동덕여대: 국·수 중 높은 쪽 35, 낮은 쪽 25.</li>
 </ul>
-<li><strong>수학 비율이 낮은 곳(25% 이하)</strong>: 숭실대 인문 20, 경희대 인문 25, 연세대 유형Ⅰ 25, 동국대 25, 서울시립대 인문Ⅱ 25, 광운대 인문 25, 서울과기대 인문 25, 명지대 인문사회 25, 상명대 25, 단국대 인문 25, 아주대 인문2 25, 인하대 인문 25.</li>
+<li><strong>수학 비율이 낮은 곳(25% 이하)</strong>: 숭실대 인문 20, 성신여대 어문·인문·사범 20, 숙명여대 인문 25, 성신여대 사회·상경 25, 경희대 인문 25, 연세대 유형Ⅰ 25, 동국대 25, 서울시립대 인문Ⅱ 25, 광운대 인문 25, 서울과기대 인문 25, 명지대 인문사회 25, 상명대 25, 단국대 인문 25, 아주대 인문2 25, 인하대 인문 25.</li>
 <li><strong>수학 비율이 높은 곳(40% 이상)</strong>: 중앙대 사회과학대·경영경제대 40, 건국대 B형 40, 국민대 B유형 40, 아주대 경영대학 40, 서강대 A형 43.3(B형과 비교해 유리한 쪽 적용), 성균관대 가군(국·수 중 높은 쪽 45).</li>
-<li><strong>탐구 1과목만 반영</strong>: 명지대, 상명대, 삼육대, 가천대, 가톨릭대, 경기대, 한국항공대, 수원대, 용인대, 성균관대 다군(글로벌경제·글로벌경영).</li>
-<li><strong>사탐 가산점이 있는 곳</strong>: 연세대 유형Ⅰ(과목당 3%), 중앙대 인문대·사범대(과목당 5%), 서울시립대(2과목 모두 사탐이면 3%), 숭실대(과목당 3%), 인하대 인문(3%), 한양대 ERICA 인문(과목당 3%), 동국대 컴퓨터·AI학부(인문)(3%).</li>
+<li><strong>탐구 1과목만 반영</strong>: 명지대, 상명대, 삼육대, 덕성여대, 동덕여대, 서울여대, 가천대, 가톨릭대, 경기대, 한국항공대, 수원대, 용인대, 성균관대 다군(글로벌경제·글로벌경영).</li>
+<li><strong>사탐 가산점이 있는 곳</strong>: 연세대 유형Ⅰ(과목당 3%), 중앙대 인문대·사범대(과목당 5%), 서울시립대(2과목 모두 사탐이면 3%), 숭실대(과목당 3%), 숙명여대 인문계열(과목당 3%), 인하대 인문(3%), 한양대 ERICA 인문(과목당 3%), 동국대 컴퓨터·AI학부(인문)(3%).</li>
 <li><strong>학생부를 반영하는 곳</strong></li>
 <ul>
 <li>서울대: 교과평가 20(정성).</li>
@@ -213,8 +217,9 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <li>한양대 서울: 학생부종합평가 10%(정성).</li>
 <li>중앙대: 출결만 10%.</li>
 <li>동국대 다군(경영대학·사범대학·열린전공): 학생부평가 10%(정성).</li>
+<li>덕성여대 다군 자유전공학부: 교과 10%.</li>
 <li>경기대 자유전공학부: 교과 5%.</li>
-<li>나머지 26곳은 수능 100이다.</li>
+<li>나머지 31곳은 수능 100이다.</li>
 </ul>
 <li><strong>제2외국어/한문이 필요한 곳</strong>: 서울대 인문·사회·경영·사범(문과).</li>
 <li><strong>면접이 있는 곳</strong>: 서울대 사범대(교직적성·인성), 연세대 언더우드(국제).</li>
@@ -250,6 +255,42 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <li>가천대 자유전공학부.</li>
 </ul>
 <li><strong>이 페이지에 넣지 않은 정시 전형</strong>: 기회균형·농어촌·특성화고·재직자 등 자격 제한 전형과 정원 외. 대학별로 대부분 있다. 고려대 교과우수전형(수능 80 + 학생부 20), 서울대 지역균형전형도 넣지 않았다.</li>
+<li><strong>여대 6곳(덕성·동덕·서울·성신·숙명·이화)의 경계 사례</strong></li>
+<ul>
+<li>덕성여대: 약학과(가군 30)는 약학 계열이라 제외했다.</li>
+<li>덕성여대: Art &amp; Design대학 미술실기전형(나군 23)·체육실기전형(나군 23)은 실기 반영 단위라 제외했다.</li>
+<li>덕성여대: 정원 외 기회균형전형Ⅰ 등(특성화고교·농어촌·기초생활수급자·장애인·재직자)은 정시 인원이 0이고 수시 미충원 이월 시에만 선발해 제외했다.</li>
+<li>덕성여대: 글로벌융합대학(인문사회)은 20개 전공을 통합 모집하며 전공별 정시 인원이 요강에 없어 한 줄로 적고 계열 묶음은 대표값 "인문"으로 두었다. 의상디자인전공도 글로벌융합대학(인문사회) 소속 통합모집에 포함된다(별도 인원 없음).</li>
+<li>덕성여대: 인원은 수시 미충원 이월 전 요강 표 값이다.</li>
+<li>동덕여대: 수시 미충원 시에만 모집(◉, 인원 미확정)이라 표에서 뺐다: 가군 인문대(국어국문·국사·문예창작·영어·일어일본·유러피언스터디즈·중어중국)·사회과학대(문헌정보·사회복지·아동)·경영융합학부·커뮤니케이션콘텐츠·문화예술경영·글로벌MICE융합전공 (정시 p.8, p.9).</li>
+<li>동덕여대: 큐레이터학전공은 예술대학 소속이나 수능우수자 일반 비율(실기 없음)이고 수시 논술 유형이 인문사회라 인문으로 분류했다(해석). 앙트러프러너십전공도 논술 유형 인문사회라 상경(경영·창업)으로 분류했다(해석).</li>
+<li>동덕여대: 인문사회문화학부는 인문대·사회과학대·경영융합학부·문화지식융합대(HCI사이언스·데이터사이언스 포함) 17개 전공 중에서 1학년 말에 전공별 기준인원의 150% 범위로 선택한다(정시 p.7, p.36). 자율전공학부는 23개 전공 100% 보장이다.</li>
+<li>동덕여대: 제외: 약학과(가군 20), 체육·예술·디자인·공연예술 실기우수자(나·다군), 농어촌·특성화고교·기회균등(정원 외), 재직자 ◉.</li>
+<li>서울여대: 자유전공학부(미래산업융합) 27과 자유전공학부(광역) 16은 계열 구분 없이 모집하며 문과·이공계 두 부분에 모두 넣었다(정시 p.6). 광역은 기독교학과·예체능계열 학과(전공)를 뺀 모든 학과 중 제1전공을 고를 수 있고, 미래산업융합은 경영·패션산업·IT 계열 전공에서 산업디자인학과를 뺀 학과 중에서 고른다(정시 p.4). 자유전공학부(인문) 29와 (사회과학) 40은 문과에만 넣었고, (과학기술융합) 33은 이공계에만 넣었다. 학부로 입학한 경우 전공 결정 후 전과가 가능하다(정시 p.36).</li>
+<li>서울여대: 패션산업학과(가군 14)는 의류·패션 생활과학이고 원문이 인문사회 쪽 동점자 기준을 적용하므로 문과에 넣지 않았다(이공계에도 넣지 않음)(정시 p.6, p.29).</li>
+<li>서울여대: 첨단미디어디자인전공(다군 10)은 디자인 전공이지만 실기 없이 수능 100%로 선발하고, 원문이 예체능계열에서 명시적으로 제외한다(정시 p.4, 입시결과 p.26). 계열 분류 근거가 따로 없어 동점자 기준(국어 → 영어 → 수학, 정시 p.29)이 인문사회 쪽과 같은 점을 따라 문과 인문에 넣었다.</li>
+<li>서울여대: AI융합콘텐츠전공(다군 12)은 글로벌ICT인문융합학부 소속이고 동점자 기준이 인문사회 쪽이라 인문에 넣었다(정시 p.29).</li>
+<li>서울여대: 제외: 실기 반영 단위(산업디자인학과 15 · 공예 컬렉터블디자인전공 13은 가군, 스포츠운동과학과 14 · 현대미술전공 15 · 시각디자인전공 16은 나군, 수능 60 + 실기 40, 합계 73. 정시 p.4, p.6). 정원 외 농어촌학생·특성화고교졸업자는 수시 미충원 시에만 수능 100%로 선발하고 인원은 홈페이지에 공고한다(정시 p.21, p.22). 의·치·한·약·수의·간호 계열 모집단위는 없다.</li>
+<li>서울여대: 수시 미충원이 생기면 정시 인원이 변하며 확정 모집인원은 2026. 12. 31.(목) 입학처 홈페이지에 게재한다(정시 p.6). 표의 인원은 요강 값이다.</li>
+<li>서울여대: 계열 묶음 이름은 위키의 분류이며, 원문은 이 묶음을 구분하지 않고 같은 비율(35 · 30 · 20 · 15)을 적용한다(정시 p.15, p.17, p.20).</li>
+<li>성신여대: 창의융합학부(자유전공) 184: 계열 구분 없음. 가군, 입학 후 간호·사범·예체능계열을 제외한 모든 학과를 인원 제한 없이 선택(정시 p.9).</li>
+<li>성신여대: 의류산업학과 7 · 소비자산업학과 6(나군, 생활산업대학): 원문 계열이 '인문'이고 사회계 비율(30/25/20/25)로 선발한다. 생활과학이라 문과 묶음 이름에 맞는 것이 없어 표에서 뺐다(정시 p.8, p.20). 넣을 경우 사회에 +13, 나군 문과 121.</li>
+<li>성신여대: 간호학과(인문) 11(가군): 간호 계열이라 제외(정시 p.8).</li>
+<li>성신여대: 예체능·실기 반영 단위 제외: 미디어영상연기 7 · 현대실용음악 9 · 스포츠과학부 50(레저 25 + 운동재활 25) · 동양화 7 · 서양화 10 · 조소 7 · 성악 8 · 작곡 6(가군), 공예 20 · 기악 22(나군), 디자인 36(다군)(정시 p.8, p.9, p.19).</li>
+<li>성신여대: 정원 외 제외: 농·어촌학생 68 · 특성화고교출신자 30 · 기회균형Ⅱ 15, 재직자 전형(수시 미충원 이월, 인원 없음)(정시 p.10, p.11).</li>
+<li>성신여대: 무용예술학과·뷰티산업학과는 정시 인원 0(정시 p.9).</li>
+<li>숙명여대: 자유전공학부(순헌칼리지)는 인문·자연 계열 구분 없이 모집하며 문과·이공계 두 부분에 모두 넣었다. 2학년 진급 시 전공을 정하고, 사범계(교육학부·체육교육과)·약학부·예체능계는 선택에서 제외된다(정시 p.3).</li>
+<li>숙명여대: 가족자원경영학과·아동복지학부는 원문이 인문계(생활과학대학)로 선발하므로 문과 사회에 넣었다(정시 p.6). 이 둘의 정원 외 전형(사회배려 등)은 제외.</li>
+<li>숙명여대: 문화관광외식학부(문화관광학전공·르꼬르동블루외식경영전공), 글로벌서비스학부(글로벌협력전공), 미디어학부의 계열 묶음 이름은 위키의 분류이며 원문은 인문계 단일 비율을 적용한다.</li>
+<li>숙명여대: 제외: 정원 외(사회배려 인문 18, 농어촌학생·특성화고교출신자·특성화고졸재직자·특수교육대상자는 수시 미충원 시 선발, 정시 p.5·p.6·p.7). 예체능·실기 반영 단위(체육교육과 나군 20, 무용·음악·미술대학, 정시 p.7). 약학부(나군 일반 56, 정시 p.6).</li>
+<li>숙명여대: 수시 미충원이 생기면 정시 일반학생전형의 해당 모집단위에서 모집하므로 최종 인원은 원서접수 전 홈페이지에 공지된다(정시 p.5, p.47). 표의 인원은 이월 전 요강 값이다.</li>
+<li>이화여대: 계열별 통합선발은 인문계열 174 · 자연계열 149로 계열별 정원이 따로 있어(원문 병합 셀 "323 [인문 174 자연 149]") 문과에는 인문계열 174만, 이공계에는 자연계열 149만 넣었다. 입학 후 1학년 말 인문과학·사회과학·자연과학·공과·경영·신산업융합·스크랜튼(뇌·인지과학부, 국제학전공, 글로벌한국학전공)·인공지능대학 각 학부/학과(전공) 중에서 입학계열·성적·인원 제한 없이 선택한다(정시 p.3, p.7). 통합선발에 속한 학과별 인원은 원문에 없다.</li>
+<li>이화여대: 뇌·인지과학부(스크랜튼대학)는 인문 5 · 자연 16으로 계열 선발이라 문과에는 인문으로 인문 5만 넣었다. 인공지능데이터사이언스학부도 인문 22 · 자연 51로 계열 선발이며, 문과 묶음 이름에 IT·SW·AI가 없어 인문에 넣고 이공계에는 IT·SW·AI로 51을 넣었다(묶음 이름은 위키 분류, 정시 p.12).</li>
+<li>이화여대: 의류산업학과·국제사무학과·식품영양학과·융합보건학과·융합콘텐츠학과(신산업융합대학)와 경영학부 등은 정시에 개별 모집인원이 없고 계열별 통합선발에서 선택하는 단위다. 원문 병합 셀에는 이 단위들의 인원이 따로 적혀 있지 않다(정시 p.3, p.8).</li>
+<li>이화여대: 사범대학: 문과 계열(인문)로 선발하는 8개 학과(초등·국어교육 가군, 나머지 6개 나군)를 사범(문과)에 넣었다. 특수교육과·사회과교육과는 입학 후 전공(유아·초등·중등특수, 역사·사회·지리)을 1학년 말 또는 2학년 말에 정한다(정시 p.9).</li>
+<li>이화여대: 제외: 의예과 인문 8(나군), 약학전공 65·미래산업약학전공 20(가군), 간호학부 29(다군, 인문·자연 겸용) — 의·약·간호(정시 p.9, p.12). 수능(예체능실기전형) 226과 실기/실적(예체능실기전형) 142(음악·조형예술·체육과학부, 정시 p.6, p.9). 정원 외 기회균형 189(농·어촌 117, 특성화고졸 26, 기초생활 등 30, 장애인 16, 정시 p.6).</li>
+<li>이화여대: 수시 이월로 최종 인원이 달라진다. 인문과학·사회과학·자연과학·공과(지능형반도체 제외)·경영·신산업융합·인공지능(AI데이터사이언스 제외)·스크랜튼(뇌인지 제외)대학의 수시 결원은 계열별 통합선발로 이월한다. 표의 인원은 이월 전 요강 값이다(정시 p.9, p.35).</li>
+</ul>
 </ul>
 
 <h3>확인 범위와 주의</h3>
@@ -263,15 +304,22 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <li>용인대 자율전공 인원(18, 8)은 표의 값이다. 같은 쪽 각주는 "수시 미충원 인원에 한하여"로 읽힐 수 있다.</li>
 <li>한국사 1~3(4)등급 "0" 중 한국외대·서울시립대·동국대·숭실대·서울과기대·단국대는 병합 셀로 읽은 값이다.</li>
 <li>명지대 인문대학 85명에는 문예창작학과 일반 선발분이 섞여 있다.</li>
+<li>덕성여대: 영역 순위를 매기는 "백분위 성적"에서 영어를 어떻게 환산하는지(영어는 등급별 반영점수표를 쓰는데 순위 판정 기준이 백분위인지 환산점수인지) 요강에 명시가 없다.</li>
+<li>덕성여대: 계열 묶음 이름은 요강에 계열 구분이 없어 표 형식에 맞춘 대표값이다.</li>
+<li>동덕여대: 수시 미충원 이월 인원은 2026.12.31. 입학처 공지 예정이라 최종 모집인원이 요강 값과 다를 수 있다(정시 p.8). 그 외 없음.</li>
+<li>서울여대: 요강 안에서 군별 인원이 어긋난다. 정시 p.14는 가군 모집인원을 248명, p.20은 다군을 249명이라 적었으나, p.4·p.6의 모집단위 합은 가군 일반 249(실기 28 별도), 다군 261이다. 이 표는 모집단위별 값이 있는 p.6을 따랐다(정시 p.6, p.14, p.20).</li>
+<li>성신여대: 계열 묶음(어문·인문, 사회·상경·법·행정)은 위키 분류이고 원문에는 비율 구분(어문·인문 / 사회군)만 있다. 국어국문학과를 어문에 넣었다.</li>
+<li>성신여대: 수시 미충원 이월로 인원이 바뀔 수 있고 2026.12.31. 입학 홈페이지에 공지 예정(정시 p.9).</li>
 </ul>
-<li>요강을 확보하지 못한 수도권 대학(이화여대, 숙명여대, 성신여대, 덕성여대, 동덕여대, 서울여대, 한성대, 서경대 등)은 포함하지 못했다.</li>
+<li>요강을 확보하지 못한 수도권 대학(한성대, 서경대, 한국체대 등)은 포함하지 못했다.</li>
+<li>여대 6곳(덕성·동덕·서울·성신·숙명·이화)은 나중에 대학별 에이전트로 추가했다. 군별 인원 합을 원문 합계와 대조한 것은 에이전트이고, 직접 다시 확인한 것은 덕성여대·서울여대·동덕여대의 영역별 반영 문구와 이화여대·성신여대의 군별 합계다. 이 대학들의 군별 표에는 반영 유형 약칭 대신 반영비율을 풀어 적었다.</li>
 <li>지원 전에는 반드시 해당 대학 요강의 근거 쪽과 최종 모집인원 공지를 확인해야 한다.</li>
 </ul>
 </section>
 <section class="tab" id="method" role="tabpanel" aria-labelledby="t-method" hidden>
 <h2>대학별 과목 반영</h2>
 <p class="lead">비율은 국어 / 수학 / 영어 / 탐구 순이다. 영어 칸의 숫자 넷은 1 / 2 / 3 / 4등급 값이다.</p>
-<h3>서울 21곳</h3>
+<h3>서울 27곳</h3>
 <div class="tbl"><table class="t-method"><thead><tr><th>대학</th><th>전형 방법</th><th>수능 반영 (국/수/영/탐)</th><th>지표 · 탐구</th><th>영어 (1~4등급)</th><th>한국사</th><th>선택과목 · 가산점</th><th>학생부</th><th>근거</th></tr></thead><tbody>
 <tr id="m-서울대" data-u="서울대"><td data-l="대학">서울대</td><td class="e" data-l="전형 방법">1단계 수능 100(2배수) → 1단계 80 + 교과평가 20. 사범대는 교직적성·인성면접 추가</td><td class="w" data-l="수능 반영 (국/수/영/탐)">국어 1.0 : 수학 1.2 : 탐구 0.8 (표준점수 가중). 영어는 감점</td><td data-l="지표 · 탐구">표준점수, 탐구 2과목</td><td data-l="영어 (1~4등급)">감점 0 / −0.5 / −2.0 / −4.0</td><td data-l="한국사">1~3등급 0, 4등급 −0.4</td><td class="e" data-l="선택과목 · 가산점">문과 단위는 제2외국어/한문 필수 응시(3등급부터 감점). 학부대학 광역·자유전공학부는 예외. 수학·탐구 지정 없음, 사탐 가산 없음</td><td class="e" data-l="학생부">교과평가 20(정성, A·B·C 평가)</td><td class="p" data-l="근거">정시 p.29~31, p.79~80</td></tr>
 <tr id="m-연세대" data-u="연세대"><td data-l="대학">연세대</td><td class="e" data-l="전형 방법">수능 950 + 학생부 50. 언더우드(국제)는 1단계 수능 900 + 학생부 50(3배수) → 면접 50</td><td class="w" data-l="수능 반영 (국/수/영/탐)"><strong>유형Ⅰ(인문)</strong> 국 300 · 수 200 · 영 100 · 탐 200 (37.5 / 25 / 12.5 / 25) / <strong>유형Ⅲ(상경대학·국제)</strong> 국 200 · 수 200 · 영 100 · 탐 100 (33.3 / 33.3 / 16.7 / 16.7)</td><td data-l="지표 · 탐구">표준점수, 탐구 2과목 변환점수</td><td data-l="영어 (1~4등급)">100 / 95 / 87.5 / 75</td><td data-l="한국사">1~4등급 0, 5등급 −0.2</td><td class="e" data-l="선택과목 · 가산점">지정 없음. 유형Ⅰ은 사탐 과목당 3% 가산, 유형Ⅲ은 가산 없음</td><td class="e" data-l="학생부">50점(기본 40 + 전 과목 등급 반영, 출결 감점)</td><td class="p" data-l="근거">정시 p.23~26, p.46</td></tr>
@@ -294,6 +342,12 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <tr id="m-상명대-서울" data-u="상명대 서울"><td data-l="대학">상명대 서울</td><td class="e" data-l="전형 방법">수능 100</td><td class="w" data-l="수능 반영 (국/수/영/탐)"><strong>인문</strong> 35 / 25 / 20 / 20</td><td data-l="지표 · 탐구">백분위, <strong>탐구 1과목</strong></td><td data-l="영어 (1~4등급)">100 / 98 / 96 / 94</td><td data-l="한국사">가산 1~4등급 10, 5등급 9.8</td><td class="e" data-l="선택과목 · 가산점">인문 가산 없음</td><td class="e" data-l="학생부">없음</td><td class="p" data-l="근거">정시 p.31~32</td></tr>
 <tr id="m-삼육대" data-u="삼육대"><td data-l="대학">삼육대</td><td class="e" data-l="전형 방법">수능 100</td><td class="w" data-l="수능 반영 (국/수/영/탐)">국·수·영·탐 중 <strong>점수 높은 순으로 35 / 25 / 25 / 15</strong></td><td data-l="지표 · 탐구">백분위, <strong>탐구 1과목</strong></td><td data-l="영어 (1~4등급)">98 / 95 / 92 / 87</td><td data-l="한국사">필수 응시, 점수 미반영</td><td class="e" data-l="선택과목 · 가산점">지정 없음. 가산 없음</td><td class="e" data-l="학생부">없음</td><td class="p" data-l="근거">정시 p.37~38</td></tr>
 <tr id="m-서울과기대" data-u="서울과기대"><td data-l="대학">서울과기대</td><td class="e" data-l="전형 방법">수능 100</td><td class="w" data-l="수능 반영 (국/수/영/탐)"><strong>인문</strong> 30 / 25 / 20 / 25 (인문사회대학, 경영학과·산업공학부 인문 선발분, 자유전공학부(인문사회대학)) · <strong>자유전공학부(기술경영융합대학)</strong> 25 / 30 / 20 / 25</td><td data-l="지표 · 탐구">표준점수, 탐구 2과목</td><td data-l="영어 (1~4등급)">135 / 132 / 128 / 120 (가상 표준점수)</td><td data-l="한국사">1~3등급 0, 4등급 −1</td><td class="e" data-l="선택과목 · 가산점">지정 없음. 인문 가산 없음</td><td class="e" data-l="학생부">없음</td><td class="p" data-l="근거">정시 p.6, p.8</td></tr>
+<tr id="m-덕성여대" data-u="덕성여대"><td data-l="대학">덕성여대</td><td class="e" data-l="전형 방법">수능 100% 일괄(가·나군 수능우수전형Ⅰ). 자유전공학부(다군 수능우수전형Ⅱ)는 수능 90% + 학생부(교과) 10%</td><td class="w" data-l="수능 반영 (국/수/영/탐)">국·수·영·탐 중 백분위 성적이 우수한 영역 순으로 30%·25%·25%·20% (영역별 고정 비율 아님)</td><td data-l="지표 · 탐구">백분위 활용, 탐구는 사회/과학 상위 1과목, 영어는 등급 환산점수 반영</td><td data-l="영어 (1~4등급)">100 / 98 / 96 / 80 (5~9등급 70·60·50·40·0)</td><td data-l="한국사">등급별 가산점: 수능우수전형Ⅰ 1~4등급 +10.0(5등급 9.0·6등급 8.0·7등급 7.0·8등급 6.0·9등급 0), 수능우수전형Ⅱ 1~4등급 +9.0(8.1·7.2·6.3·5.4·0)</td><td class="e" data-l="선택과목 · 가산점">수학·탐구 선택과목 가산점 없음, 그 외 가산점 없음</td><td class="e" data-l="학생부">가·나군 반영 없음. 다군 자유전공학부만 교과 10%(공통·일반선택 90 + 진로선택 10, 석차 1~2등급 100·3~4등급 98·5~7등급 94·8등급 80·9등급 0, 진로선택 A 100·B 99·C 97)</td><td class="p" data-l="근거">정시 p.6, p.18, p.26, p.27, p.28</td></tr>
+<tr id="m-동덕여대" data-u="동덕여대"><td data-l="대학">동덕여대</td><td class="e" data-l="전형 방법">수능우수자전형(정원 내, 가·나군). 수능 100% 일괄합산, 전형총점 1,000점</td><td class="w" data-l="수능 반영 (국/수/영/탐)">국·수 중 백분위가 높은 영역 35% · 낮은 영역 25% · 영어 20% · 탐구 20% (인문·자연 같은 비율)</td><td data-l="지표 · 탐구">국·수·탐 백분위, 영어는 등급 환산점수. 탐구는 사탐·과탐 중 우수 1과목만 반영(제2외국어/한문 미반영)</td><td data-l="영어 (1~4등급)">100점 · 99점 · 96점 · 85점 (5~9등급 70·55·40·20·0)</td><td data-l="한국사">필수 응시. 1~4등급 가산 3점, 5등급 2.5점·6등급 2점·7등급 1.5점·8등급 1점·9등급 0.5점(전형총점과 별도)</td><td class="e" data-l="선택과목 · 가산점">선택과목 지정 없음, 수학·탐구 가산점 없음(2026의 수학 미적분/기하 5% 가산은 2027 폐지)</td><td class="e" data-l="학생부">교과성적 반영 없음. 학교폭력 조치 기재 시 1~3호 10점·4~5호 30점·6~7호 100점·8호 200점·9호 400점 감점</td><td class="p" data-l="근거">정시 p.25 · p.26</td></tr>
+<tr id="m-서울여대" data-u="서울여대"><td data-l="대학">서울여대</td><td class="e" data-l="전형 방법">수능 100% 일괄합산, 총점 400점. 가군 사회과학대·경영, 나군 자유전공학부, 다군 인문대·경제·문헌정보·행정·첨단미디어디자인 일반학생(정원 내)</td><td class="w" data-l="수능 반영 (국/수/영/탐)">국·수·영·탐 4개 영역을 성적이 우수한 영역 순으로 35 · 30 · 20 · 15 (영역별 고정 비율이 아님, 백분위 × 비율 합 × 4)</td><td data-l="지표 · 탐구">국어·수학·탐구 백분위, 영어는 등급별 환산점수. 탐구는 사탐/과탐 구분 없이 2과목 중 상위 1과목의 백분위를 대학이 선택해 반영(직업탐구·제2외국어/한문 제외)</td><td data-l="영어 (1~4등급)">1등급 100 · 2등급 97 · 3등급 93 · 4등급 85 (5등급 70 · 6등급 50 · 7등급 35 · 8등급 20 · 9등급 0)</td><td data-l="한국사">총점에 가산(1~3등급 5.00 · 4등급 4.95 · 5등급 4.80 · 6등급 4.50 · 7등급 4.00 · 8등급 2.00 · 9등급 0, 400점 만점 기준, 가산으로 총점 초과해도 인정)</td><td class="e" data-l="선택과목 · 가산점">선택과목 지정 없음. 문과 묶음에는 수학 가산점이 없음</td><td class="e" data-l="학생부">학생부 교과 반영 없음. 학교폭력 기재 시 총점 감점(1호 없음 · 2~3호 −10 · 4~6호 −20 · 7~9호 부적격)</td><td class="p" data-l="근거">정시 p.3, p.5, p.15, p.17, p.20, p.28</td></tr>
+<tr id="m-성신여대" data-u="성신여대"><td data-l="대학">성신여대</td><td class="e" data-l="전형 방법">수능 100%(500점) 일괄합산. 가·나군</td><td class="w" data-l="수능 반영 (국/수/영/탐)">어문·인문 국 30 · 수 20 · 영 30 · 탐 20 / 사회·상경·법·행정 국 30 · 수 25 · 영 20 · 탐 25 / 사범(문과) 국 30 · 수 20 · 영 20 · 탐 30 / 자유전공 국 30 · 수 30 · 영 20 · 탐 20</td><td data-l="지표 · 탐구">백분위 합산(표준점수 미사용). 탐구는 사회·과학 구분 없이 2과목 백분위 평균, 직업탐구·제2외국어/한문 불가</td><td data-l="영어 (1~4등급)">100 · 97 · 94 · 85 (백분위 환산점수, 5등급 60 · 6등급 40 · 7등급 25 · 8등급 10 · 9등급 0)</td><td data-l="한국사">필수 응시, 총점에 1등급 +2.0 · 2등급 +1.5 · 3등급 +1.0 · 4등급 +0.5 가산, 5등급 이하 0</td><td class="e" data-l="선택과목 · 가산점">수학·탐구 선택과목 지정 없음. 문과 단위 가산점 없음</td><td class="e" data-l="학생부">반영 안 함(지원자격 검증용)</td><td class="p" data-l="근거">정시 p.20, p.44</td></tr>
+<tr id="m-숙명여대" data-u="숙명여대"><td data-l="대학">숙명여대</td><td class="e" data-l="전형 방법">수능 100% 일괄합산, 전형총점 1,000점. 가군 인문계열 일반학생, 나군 자유전공학부 일반학생</td><td class="w" data-l="수능 반영 (국/수/영/탐)">인문계열(가군) 국 35 · 수 25 · 영 15 · 탐 25. 자유전공학부(나군) 국 30 · 수 30 · 영 15 · 탐 25</td><td data-l="지표 · 탐구">국어·수학 표준점수, 영어 등급별 환산점수, 탐구 변환표준점수(대학 자체 변환, 성적 발표 후 공개). 탐구는 사탐/과탐 구분 없이 2과목(직업탐구 제외), 2과목 합 25</td><td data-l="영어 (1~4등급)">1등급 100 · 2등급 98 · 3등급 94 · 4등급 88 (5등급 80 · 6등급 70 · 7등급 60 · 8등급 40 · 9등급 20)</td><td data-l="한국사">필수 응시. 가산점: 1~4등급 +3 · 5~6등급 +2 · 7~9등급 +1 (전형총점에 가산)</td><td class="e" data-l="선택과목 · 가산점">국어·수학 선택과목 미지정. 인문계열은 사회탐구 응시 시 과목당 변환표준점수 3% 가산(자유전공학부는 가산 없음)</td><td class="e" data-l="학생부">정시 일반학생전형은 학생부 교과 미반영. 학교폭력 조치사항 기재자만 전형총점에서 1~9호별 감점(최대 100점~최저 1점)</td><td class="p" data-l="근거">정시 p.5, p.16, p.36, p.41, p.45</td></tr>
+<tr id="m-이화여대" data-u="이화여대"><td data-l="대학">이화여대</td><td class="e" data-l="전형 방법">수능(수능전형) 100% 일괄합산, 1,000점 + 한국사. 가군 사범 일부, 나군 계열별 통합선발·사범·뇌·인지과학부, 다군 인공지능데이터사이언스학부</td><td class="w" data-l="수능 반영 (국/수/영/탐)">인문계열 국 30 · 수 30 · 영 20 · 탐 20</td><td data-l="지표 · 탐구">국어·수학·탐구는 표준점수(영역별 최고점 대비), 영어는 등급별 환산점수. 탐구는 사회/과학 택2, 백분위를 본교 자체 변환표준점수로 바꿔 2과목 합 20 반영(변환표는 성적 발표 후 공개)</td><td data-l="영어 (1~4등급)">1등급 100 · 2등급 98 · 3등급 94 · 4등급 88 (5등급 84 · 6등급 80 · 7등급 76 · 8등급 72 · 9등급 68)</td><td data-l="한국사">등급별 점수 10점 만점: 1~3등급 10 · 4등급 9.8 · 5등급 9.6 · 6등급 9.4 · 7등급 9.2 · 8등급 9.0 · 9등급 8.5</td><td class="e" data-l="선택과목 · 가산점">응시 과목 지정 없음(수학 확률과통계·미적분·기하 택1, 국어 화법과작문·언어와매체 택1). 인문계열은 가산점 없음</td><td class="e" data-l="학생부">없음(수능 100%)</td><td class="p" data-l="근거">정시 p.7, p.13</td></tr>
 </tbody></table></div>
 <h3>경기·인천 11곳</h3>
 <div class="tbl"><table class="t-method"><thead><tr><th>대학</th><th>전형 방법</th><th>수능 반영 (국/수/영/탐)</th><th>지표 · 탐구</th><th>영어 (1~4등급)</th><th>한국사</th><th>선택과목 · 가산점</th><th>학생부</th><th>근거</th></tr></thead><tbody>
@@ -378,6 +432,20 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <tr data-u="삼육대"><td data-l="대학"><a class="u" href="#m-삼육대">삼육대</a></td><td class="g" data-l="계열 묶음"><span>사회</span></td><td class="unit" data-l="모집단위">사회복지 3 · 상담심리 3</td><td class="n" data-l="인원">6</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>높은 순 반영</strong> 국·수·영·탐 중 점수가 높은 순서대로 35 / 25 / 25 / 15. 가장 낮은 영역이 15%. 백분위, 탐구 1과목</td><td class="p" data-l="근거">정시 p.14</td></tr>
 <tr data-u="서울과기대"><td data-l="대학"><a class="u" href="#m-서울과기대">서울과기대</a></td><td class="g" data-l="계열 묶음"><span>어문·법행정</span></td><td class="unit" data-l="모집단위">영어영문 5 · 행정 9</td><td class="n" data-l="인원">14</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문</strong> 국 30 · 수 25 · 영 20 · 탐 25</td><td class="p" data-l="근거">정시 p.13</td></tr>
 <tr data-u="서울과기대"><td data-l="대학"><a class="u" href="#m-서울과기대">서울과기대</a></td><td class="g" data-l="계열 묶음"><span>상경</span></td><td class="unit" data-l="모집단위">경영학전공 9 · 글로벌테크노경영(인문) 8 · 산업공학부(인문) 4</td><td class="n" data-l="인원">21</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문</strong> 국 30 · 수 25 · 영 20 · 탐 25</td><td class="p" data-l="근거">정시 p.13</td></tr>
+<tr data-u="동덕여대"><td data-l="대학"><a class="u" href="#m-동덕여대">동덕여대</a></td><td class="g" data-l="계열 묶음"><span>인문</span></td><td class="unit" data-l="모집단위">큐레이터학 12</td><td class="n" data-l="인원">12</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문</strong> 국/수 중 우수 35 · 열세 25 · 영 20 · 탐 20. 백분위, 탐구 1과목. 한국사 가산 3점</td><td class="p" data-l="근거">정시 p.8</td></tr>
+<tr data-u="동덕여대"><td data-l="대학"><a class="u" href="#m-동덕여대">동덕여대</a></td><td class="g" data-l="계열 묶음"><span>상경</span></td><td class="unit" data-l="모집단위">앙트러프러너십 5</td><td class="n" data-l="인원">5</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>상경</strong> 국/수 중 우수 35 · 열세 25 · 영 20 · 탐 20. 백분위, 탐구 1과목. 한국사 가산 3점</td><td class="p" data-l="근거">정시 p.8</td></tr>
+<tr data-u="동덕여대"><td data-l="대학"><a class="u" href="#m-동덕여대">동덕여대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">자율전공학부 93 (계열 구분 없음)</td><td class="n" data-l="인원">93</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자유전공</strong> 국/수 중 우수 35 · 열세 25 · 영 20 · 탐 20. 백분위, 탐구 1과목. 한국사 가산 3점</td><td class="p" data-l="근거">정시 p.8</td></tr>
+<tr data-u="서울여대"><td data-l="대학"><a class="u" href="#m-서울여대">서울여대</a></td><td class="g" data-l="계열 묶음"><span>사회</span></td><td class="unit" data-l="모집단위">사회복지 18 · 아동 25 · 언론영상 26 · 심리·인지과학 17</td><td class="n" data-l="인원">86</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">국 · 수 · 영 · 탐 중 우수 영역 순 35 · 30 · 20 · 15. 백분위(영어 등급 환산), 탐구 1과목</td><td class="p" data-l="근거">정시 p.6, p.15</td></tr>
+<tr data-u="서울여대"><td data-l="대학"><a class="u" href="#m-서울여대">서울여대</a></td><td class="g" data-l="계열 묶음"><span>상경</span></td><td class="unit" data-l="모집단위">경영 30</td><td class="n" data-l="인원">30</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">국 · 수 · 영 · 탐 중 우수 영역 순 35 · 30 · 20 · 15. 백분위(영어 등급 환산), 탐구 1과목</td><td class="p" data-l="근거">정시 p.6, p.15</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td class="g" data-l="계열 묶음"><span>사범(문과)</span></td><td class="unit" data-l="모집단위">교육학 6 · 사회교육 6 · 윤리교육 6 · 한문교육 6 · 유아교육 7</td><td class="n" data-l="인원">31</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>사범</strong> 국 30 · 수 20 · 영 20 · 탐 30. 백분위, 탐구 2과목</td><td class="p" data-l="근거">정시 p.9</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">창의융합학부(자유전공) 184 (계열 구분 없음)</td><td class="n" data-l="인원">184</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자유전공</strong> 국 30 · 수 30 · 영 20 · 탐 20. 백분위, 탐구 2과목. 입학 후 2학년 전공배정에서 간호·사범·예체능계열을 뺀 모든 학과 선택</td><td class="p" data-l="근거">정시 p.9, 정시 p.20</td></tr>
+<tr data-u="숙명여대"><td data-l="대학"><a class="u" href="#m-숙명여대">숙명여대</a></td><td class="g" data-l="계열 묶음"><span>인문</span></td><td class="unit" data-l="모집단위">한국어문 17 · 역사문화 9 · 문헌정보 8</td><td class="n" data-l="인원">34</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문계열</strong> 국 35 · 수 25 · 영 15 · 탐 25. 표준점수, 탐구 2과목, 사탐 3% 가산</td><td class="p" data-l="근거">정시 p.6</td></tr>
+<tr data-u="숙명여대"><td data-l="대학"><a class="u" href="#m-숙명여대">숙명여대</a></td><td class="g" data-l="계열 묶음"><span>어문</span></td><td class="unit" data-l="모집단위">프랑스언어·문화 5 · 중어중문 20 · 독일언어·문화 5 · 일본학 4 · 영어영문 17 · 테슬 3</td><td class="n" data-l="인원">54</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문계열</strong> 국 35 · 수 25 · 영 15 · 탐 25. 표준점수, 탐구 2과목, 사탐 3% 가산</td><td class="p" data-l="근거">정시 p.6</td></tr>
+<tr data-u="숙명여대"><td data-l="대학"><a class="u" href="#m-숙명여대">숙명여대</a></td><td class="g" data-l="계열 묶음"><span>사회</span></td><td class="unit" data-l="모집단위">문화관광 9 · 르꼬르동블루외식경영 9 · 가족자원경영 9 · 아동복지 15 · 정치외교 11 · 홍보광고 11 · 사회심리 9 · 글로벌협력 4 · 미디어 15</td><td class="n" data-l="인원">92</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문계열</strong> 국 35 · 수 25 · 영 15 · 탐 25. 표준점수, 탐구 2과목, 사탐 3% 가산</td><td class="p" data-l="근거">정시 p.6</td></tr>
+<tr data-u="숙명여대"><td data-l="대학"><a class="u" href="#m-숙명여대">숙명여대</a></td><td class="g" data-l="계열 묶음"><span>상경</span></td><td class="unit" data-l="모집단위">소비자경제 7 · 경제 26 · 경영 35 · 앙트러프러너십 5</td><td class="n" data-l="인원">73</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문계열</strong> 국 35 · 수 25 · 영 15 · 탐 25. 표준점수, 탐구 2과목, 사탐 3% 가산</td><td class="p" data-l="근거">정시 p.6</td></tr>
+<tr data-u="숙명여대"><td data-l="대학"><a class="u" href="#m-숙명여대">숙명여대</a></td><td class="g" data-l="계열 묶음"><span>법·행정</span></td><td class="unit" data-l="모집단위">행정 8 · 법학 32</td><td class="n" data-l="인원">40</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문계열</strong> 국 35 · 수 25 · 영 15 · 탐 25. 표준점수, 탐구 2과목, 사탐 3% 가산</td><td class="p" data-l="근거">정시 p.6</td></tr>
+<tr data-u="숙명여대"><td data-l="대학"><a class="u" href="#m-숙명여대">숙명여대</a></td><td class="g" data-l="계열 묶음"><span>사범(문과)</span></td><td class="unit" data-l="모집단위">교육학 23</td><td class="n" data-l="인원">23</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문계열</strong> 국 35 · 수 25 · 영 15 · 탐 25. 표준점수, 탐구 2과목, 사탐 3% 가산</td><td class="p" data-l="근거">정시 p.6</td></tr>
+<tr data-u="이화여대"><td data-l="대학"><a class="u" href="#m-이화여대">이화여대</a></td><td class="g" data-l="계열 묶음"><span>사범(문과)</span></td><td class="unit" data-l="모집단위">초등교육과 16 · 국어교육과 12</td><td class="n" data-l="인원">28</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문계열</strong> 국 30 · 수 30 · 영 20 · 탐 20. 표준점수, 탐구 2과목 변환표준점수, 가산점 없음</td><td class="p" data-l="근거">정시 p.12, p.13</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>상경</span></td><td class="unit" data-l="모집단위">관광경영학과</td><td class="n" data-l="인원">15</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>일반전형1</strong> 국·수 중 높은 쪽 40, 낮은 쪽 30 · 영·탐 중 높은 쪽 20, 낮은 쪽 10. 백분위로 계산, 탐구 1과목</td><td class="p" data-l="근거">정시 p.6</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>사회</span></td><td class="unit" data-l="모집단위">경제 16 · 응용통계 16</td><td class="n" data-l="인원">32</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>일반전형1</strong> 국·수 중 높은 쪽 40, 낮은 쪽 30 · 영·탐 중 높은 쪽 20, 낮은 쪽 10. 백분위로 계산, 탐구 1과목</td><td class="p" data-l="근거">정시 p.6</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>법·행정</span></td><td class="unit" data-l="모집단위">법학 · 경찰행정 · 행정 (단과대 합계)</td><td class="n" data-l="인원">63 (일반1 45 + 일반2 18)</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>일반전형1·2로 나눠 모집</strong> 비율은 같다: 국·수 중 높은 쪽 40, 낮은 쪽 30 · 영·탐 중 높은 쪽 20, 낮은 쪽 10. 일반1은 백분위, 일반2는 등급 점수(1~4등급 100 / 96 / 89 / 77)로 계산. 탐구 1과목</td><td class="p" data-l="근거">정시 p.6</td></tr>
@@ -467,6 +535,19 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <tr data-u="상명대 서울"><td data-l="대학"><a class="u" href="#m-상명대-서울">상명대 서울</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">자유전공(인문계열)</td><td class="n" data-l="인원">75</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문</strong> 국 35 · 수 25 · 영 20 · 탐 20. 백분위, 탐구 1과목</td><td class="p" data-l="근거">정시 p.6</td></tr>
 <tr data-u="서울과기대"><td data-l="대학"><a class="u" href="#m-서울과기대">서울과기대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">자유전공학부(인문사회대학)</td><td class="n" data-l="인원">12</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문</strong> 국 30 · 수 25 · 영 20 · 탐 25</td><td class="p" data-l="근거">정시 p.13</td></tr>
 <tr data-u="서울과기대"><td data-l="대학"><a class="u" href="#m-서울과기대">서울과기대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">자유전공학부(기술경영융합대학)</td><td class="n" data-l="인원">14</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">국 25 · 수 30 · 영 20 · 탐 25</td><td class="p" data-l="근거">정시 p.13</td></tr>
+<tr data-u="덕성여대"><td data-l="대학"><a class="u" href="#m-덕성여대">덕성여대</a></td><td class="g" data-l="계열 묶음"><span>인문</span></td><td class="unit" data-l="모집단위">글로벌융합대학(인문사회) 통합모집 164 (전공별 인원 미공개: 국어국문·일어일문·중어중문·영어영문·스페인어·사학·철학·미술사학·문화인류학·경영·회계·국제통상·법학·사회학·문헌정보·심리학·아동가족학·사회복지·정치외교·의상디자인)</td><td class="n" data-l="인원">164</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문사회 통합</strong> 국·수·영·탐 중 백분위 우수 영역 순 30·25·25·20. 백분위, 탐구 1과목(상위)</td><td class="p" data-l="근거">정시 p.10, p.17, p.26</td></tr>
+<tr data-u="덕성여대"><td data-l="대학"><a class="u" href="#m-덕성여대">덕성여대</a></td><td class="g" data-l="계열 묶음"><span>사범(문과)</span></td><td class="unit" data-l="모집단위">유아교육과 15</td><td class="n" data-l="인원">15</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>사범</strong> 국·수·영·탐 중 백분위 우수 영역 순 30·25·25·20. 백분위, 탐구 1과목(상위)</td><td class="p" data-l="근거">정시 p.10, p.17, p.26</td></tr>
+<tr data-u="동덕여대"><td data-l="대학"><a class="u" href="#m-동덕여대">동덕여대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">인문사회문화학부 125</td><td class="n" data-l="인원">125</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자유전공</strong> 국/수 중 우수 35 · 열세 25 · 영 20 · 탐 20. 백분위, 탐구 1과목. 한국사 가산 3점</td><td class="p" data-l="근거">정시 p.8</td></tr>
+<tr data-u="서울여대"><td data-l="대학"><a class="u" href="#m-서울여대">서울여대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">자유전공학부(인문) 29 · (사회과학) 40 · (미래산업융합, 계열 구분 없음) 27 · (광역, 계열 구분 없음) 16</td><td class="n" data-l="인원">112</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">국 · 수 · 영 · 탐 중 우수 영역 순 35 · 30 · 20 · 15. 백분위(영어 등급 환산), 탐구 1과목</td><td class="p" data-l="근거">정시 p.6, p.17</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td class="g" data-l="계열 묶음"><span>어문</span></td><td class="unit" data-l="모집단위">국어국문 5 · 영어영문 8 · 독일어문·문화 4 · 프랑스어문·문화 4 · 일본어문·문화 6 · 중국어문·문화 6</td><td class="n" data-l="인원">33</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>어문·인문</strong> 국 30 · 수 20 · 영 30 · 탐 20. 백분위, 탐구 2과목</td><td class="p" data-l="근거">정시 p.8</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td class="g" data-l="계열 묶음"><span>인문</span></td><td class="unit" data-l="모집단위">사학 4 · 문화예술경영 4</td><td class="n" data-l="인원">8</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>어문·인문</strong> 국 30 · 수 20 · 영 30 · 탐 20. 백분위, 탐구 2과목</td><td class="p" data-l="근거">정시 p.8</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td class="g" data-l="계열 묶음"><span>사회</span></td><td class="unit" data-l="모집단위">심리 6 · 지리 4 · 미디어커뮤니케이션 6 · 사회복지 6</td><td class="n" data-l="인원">22</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>사회</strong> 국 30 · 수 25 · 영 20 · 탐 25. 백분위, 탐구 2과목</td><td class="p" data-l="근거">정시 p.8</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td class="g" data-l="계열 묶음"><span>상경</span></td><td class="unit" data-l="모집단위">경제 8 · 경영 17</td><td class="n" data-l="인원">25</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>사회</strong> 국 30 · 수 25 · 영 20 · 탐 25. 백분위, 탐구 2과목</td><td class="p" data-l="근거">정시 p.8</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td class="g" data-l="계열 묶음"><span>법·행정</span></td><td class="unit" data-l="모집단위">정치외교 5 · 법학부 15</td><td class="n" data-l="인원">20</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>사회</strong> 국 30 · 수 25 · 영 20 · 탐 25. 백분위, 탐구 2과목</td><td class="p" data-l="근거">정시 p.8</td></tr>
+<tr data-u="숙명여대"><td data-l="대학"><a class="u" href="#m-숙명여대">숙명여대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">자유전공학부 264 (계열 구분 없음, 이공계에도 포함)</td><td class="n" data-l="인원">264</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자유전공학부</strong> 국 30 · 수 30 · 영 15 · 탐 25. 표준점수, 탐구 2과목, 탐구 가산 없음</td><td class="p" data-l="근거">정시 p.6, p.36</td></tr>
+<tr data-u="이화여대"><td data-l="대학"><a class="u" href="#m-이화여대">이화여대</a></td><td class="g" data-l="계열 묶음"><span>사범(문과)</span></td><td class="unit" data-l="모집단위">교육학과 12 · 유아교육과 16 · 교육공학과 14 · 특수교육과 15 · 영어교육과 18 · 사회과교육과 35</td><td class="n" data-l="인원">110</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문계열</strong> 국 30 · 수 30 · 영 20 · 탐 20. 표준점수, 탐구 2과목 변환표준점수, 가산점 없음</td><td class="p" data-l="근거">정시 p.12, p.13</td></tr>
+<tr data-u="이화여대"><td data-l="대학"><a class="u" href="#m-이화여대">이화여대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">계열별 통합선발 인문계열 174 (입학 후 1학년 말 전공 선택, 계열 구분은 지원 시 선택)</td><td class="n" data-l="인원">174</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문계열</strong> 국 30 · 수 30 · 영 20 · 탐 20. 표준점수, 탐구 2과목 변환표준점수, 가산점 없음</td><td class="p" data-l="근거">정시 p.3, p.7, p.12</td></tr>
+<tr data-u="이화여대"><td data-l="대학"><a class="u" href="#m-이화여대">이화여대</a></td><td class="g" data-l="계열 묶음"><span>인문</span></td><td class="unit" data-l="모집단위">뇌·인지과학부(인문계열) 5</td><td class="n" data-l="인원">5</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문계열</strong> 국 30 · 수 30 · 영 20 · 탐 20. 표준점수, 탐구 2과목 변환표준점수, 가산점 없음</td><td class="p" data-l="근거">정시 p.12, p.13</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>상경</span></td><td class="unit" data-l="모집단위">회계세무학과</td><td class="n" data-l="인원">15</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>일반전형1</strong> 국·수 중 높은 쪽 40, 낮은 쪽 30 · 영·탐 중 높은 쪽 20, 낮은 쪽 10. 백분위로 계산, 탐구 1과목</td><td class="p" data-l="근거">정시 p.6</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>사회</span></td><td class="unit" data-l="모집단위">사회복지 13 · 유아교육 13 · 심리 15</td><td class="n" data-l="인원">41</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>일반전형1</strong> 국·수 중 높은 쪽 40, 낮은 쪽 30 · 영·탐 중 높은 쪽 20, 낮은 쪽 10. 백분위로 계산, 탐구 1과목</td><td class="p" data-l="근거">정시 p.6</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>어문</span></td><td class="unit" data-l="모집단위">AI인문대학 5개 학과 (단과대 합계)</td><td class="n" data-l="인원">88 (일반1 61 + 일반2 27)</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>일반전형1·2로 나눠 모집</strong> 비율은 같다: 국·수 중 높은 쪽 40, 낮은 쪽 30 · 영·탐 중 높은 쪽 20, 낮은 쪽 10. 일반1은 백분위, 일반2는 등급 점수(1~4등급 100 / 96 / 89 / 77)로 계산. 탐구 1과목</td><td class="p" data-l="근거">정시 p.6</td></tr>
@@ -533,6 +614,13 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <tr data-u="명지대"><td data-l="대학"><a class="u" href="#m-명지대">명지대</a></td><td class="g" data-l="계열 묶음"><span>상경</span></td><td class="unit" data-l="모집단위">경영대학 광역 (경영학전공·AI경영정보)</td><td class="n" data-l="인원">57</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>경영대학</strong> 국 30 · 수 30 · 영 20 · 탐 20. 백분위, 탐구 1과목</td><td class="p" data-l="근거">정시 p.16</td></tr>
 <tr data-u="삼육대"><td data-l="대학"><a class="u" href="#m-삼육대">삼육대</a></td><td class="g" data-l="계열 묶음"><span>어문</span></td><td class="unit" data-l="모집단위">영어영문 3 · 항공관광외국어 3 · 글로벌한국학 3</td><td class="n" data-l="인원">9</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>높은 순 반영</strong> 국·수·영·탐 중 점수가 높은 순서대로 35 / 25 / 25 / 15. 가장 낮은 영역이 15%. 백분위, 탐구 1과목</td><td class="p" data-l="근거">정시 p.14</td></tr>
 <tr data-u="삼육대"><td data-l="대학"><a class="u" href="#m-삼육대">삼육대</a></td><td class="g" data-l="계열 묶음"><span>사범(문과)</span></td><td class="unit" data-l="모집단위">유아교육과</td><td class="n" data-l="인원">5</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>높은 순 반영</strong> 국·수·영·탐 중 점수가 높은 순서대로 35 / 25 / 25 / 15. 가장 낮은 영역이 15%. 백분위, 탐구 1과목</td><td class="p" data-l="근거">정시 p.14</td></tr>
+<tr data-u="덕성여대"><td data-l="대학"><a class="u" href="#m-덕성여대">덕성여대</a></td><td class="g" data-l="계열 묶음"><span>자유전공</span></td><td class="unit" data-l="모집단위">자유전공학부 100 (계열 구분 없음)</td><td class="n" data-l="인원">100</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>자유전공</strong> 수능 90%: 국·수·영·탐 중 백분위 우수 영역 순 30·25·25·20. 백분위, 탐구 1과목(상위). 학생부 교과 10% 별도</td><td class="p" data-l="근거">정시 p.10, p.18, p.26</td></tr>
+<tr data-u="서울여대"><td data-l="대학"><a class="u" href="#m-서울여대">서울여대</a></td><td class="g" data-l="계열 묶음"><span>인문</span></td><td class="unit" data-l="모집단위">AI융합콘텐츠 12 · 국어국문 19 · 사학 11 · 기독교 6 · 첨단미디어디자인 10</td><td class="n" data-l="인원">58</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">국 · 수 · 영 · 탐 중 우수 영역 순 35 · 30 · 20 · 15. 백분위(영어 등급 환산), 탐구 1과목</td><td class="p" data-l="근거">정시 p.6, p.20</td></tr>
+<tr data-u="서울여대"><td data-l="대학"><a class="u" href="#m-서울여대">서울여대</a></td><td class="g" data-l="계열 묶음"><span>어문</span></td><td class="unit" data-l="모집단위">프랑스문화콘텐츠 12 · 독일문화콘텐츠 14 · 영어영문 19 · 중어중문 12 · 일어일문 18</td><td class="n" data-l="인원">75</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">국 · 수 · 영 · 탐 중 우수 영역 순 35 · 30 · 20 · 15. 백분위(영어 등급 환산), 탐구 1과목</td><td class="p" data-l="근거">정시 p.6, p.20</td></tr>
+<tr data-u="서울여대"><td data-l="대학"><a class="u" href="#m-서울여대">서울여대</a></td><td class="g" data-l="계열 묶음"><span>사회</span></td><td class="unit" data-l="모집단위">문헌정보 12</td><td class="n" data-l="인원">12</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">국 · 수 · 영 · 탐 중 우수 영역 순 35 · 30 · 20 · 15. 백분위(영어 등급 환산), 탐구 1과목</td><td class="p" data-l="근거">정시 p.6, p.20</td></tr>
+<tr data-u="서울여대"><td data-l="대학"><a class="u" href="#m-서울여대">서울여대</a></td><td class="g" data-l="계열 묶음"><span>상경</span></td><td class="unit" data-l="모집단위">경제 19</td><td class="n" data-l="인원">19</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">국 · 수 · 영 · 탐 중 우수 영역 순 35 · 30 · 20 · 15. 백분위(영어 등급 환산), 탐구 1과목</td><td class="p" data-l="근거">정시 p.6, p.20</td></tr>
+<tr data-u="서울여대"><td data-l="대학"><a class="u" href="#m-서울여대">서울여대</a></td><td class="g" data-l="계열 묶음"><span>법·행정</span></td><td class="unit" data-l="모집단위">행정 19</td><td class="n" data-l="인원">19</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)">국 · 수 · 영 · 탐 중 우수 영역 순 35 · 30 · 20 · 15. 백분위(영어 등급 환산), 탐구 1과목</td><td class="p" data-l="근거">정시 p.6, p.20</td></tr>
+<tr data-u="이화여대"><td data-l="대학"><a class="u" href="#m-이화여대">이화여대</a></td><td class="g" data-l="계열 묶음"><span>인문</span></td><td class="unit" data-l="모집단위">인공지능데이터사이언스학부(인문계열) 22</td><td class="n" data-l="인원">22</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>인문계열</strong> 국 30 · 수 30 · 영 20 · 탐 20. 표준점수, 탐구 2과목 변환표준점수, 가산점 없음</td><td class="p" data-l="근거">정시 p.12, p.13</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>상경</span></td><td class="unit" data-l="모집단위">경영학과 53 (일반1 38 + 일반2 15) · 의료산업경영 17</td><td class="n" data-l="인원">70</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>일반전형1·2로 나눠 모집</strong> 비율은 같다: 국·수 중 높은 쪽 40, 낮은 쪽 30 · 영·탐 중 높은 쪽 20, 낮은 쪽 10. 일반1은 백분위, 일반2는 등급 점수(1~4등급 100 / 96 / 89 / 77)로 계산. 탐구 1과목</td><td class="p" data-l="근거">정시 p.6</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td class="g" data-l="계열 묶음"><span>사회</span></td><td class="unit" data-l="모집단위">미디어커뮤니케이션 10 · 패션산업 13</td><td class="n" data-l="인원">23</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>일반전형1</strong> 국·수 중 높은 쪽 40, 낮은 쪽 30 · 영·탐 중 높은 쪽 20, 낮은 쪽 10. 백분위로 계산, 탐구 1과목</td><td class="p" data-l="근거">정시 p.6</td></tr>
 <tr data-u="경기대"><td data-l="대학"><a class="u" href="#m-경기대">경기대</a></td><td class="g" data-l="계열 묶음"><span>인문·어문</span></td><td class="unit" data-l="모집단위">국문 16 · 영문 21 · 사학 10 · 문헌정보 5 · 글로벌어문 17 · 유아교육 7</td><td class="n" data-l="인원">76</td><td class="ty" data-l="수능 과목 반영 (국/수/영/탐 %)"><strong>B형</strong> 국 35 · 수 30 · 영 20 · 탐 15. 백분위, 탐구 1과목</td><td class="p" data-l="근거">정시 p.7</td></tr>
@@ -579,6 +667,12 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <tr data-u="상명대 서울"><td data-l="대학"><a class="u" href="#m-상명대-서울">상명대 서울</a></td><td data-l="가">—</td><td data-l="나">250</td><td data-l="다">—</td><td data-l="합계">250</td></tr>
 <tr data-u="삼육대"><td data-l="대학"><a class="u" href="#m-삼육대">삼육대</a></td><td data-l="가">54</td><td data-l="나">—</td><td data-l="다">14</td><td data-l="합계">68</td></tr>
 <tr data-u="서울과기대"><td data-l="대학"><a class="u" href="#m-서울과기대">서울과기대</a></td><td data-l="가">35</td><td data-l="나">26</td><td data-l="다">—</td><td data-l="합계">61</td></tr>
+<tr data-u="덕성여대"><td data-l="대학"><a class="u" href="#m-덕성여대">덕성여대</a></td><td data-l="가">—</td><td data-l="나">179</td><td data-l="다">100</td><td data-l="합계">279</td></tr>
+<tr data-u="동덕여대"><td data-l="대학"><a class="u" href="#m-동덕여대">동덕여대</a></td><td data-l="가">110</td><td data-l="나">125</td><td data-l="다">—</td><td data-l="합계">235</td></tr>
+<tr data-u="서울여대"><td data-l="대학"><a class="u" href="#m-서울여대">서울여대</a></td><td data-l="가">116</td><td data-l="나">112</td><td data-l="다">183</td><td data-l="합계">411</td></tr>
+<tr data-u="성신여대"><td data-l="대학"><a class="u" href="#m-성신여대">성신여대</a></td><td data-l="가">215</td><td data-l="나">108</td><td data-l="다">—</td><td data-l="합계">323</td></tr>
+<tr data-u="숙명여대"><td data-l="대학"><a class="u" href="#m-숙명여대">숙명여대</a></td><td data-l="가">316</td><td data-l="나">264</td><td data-l="다">—</td><td data-l="합계">580</td></tr>
+<tr data-u="이화여대"><td data-l="대학"><a class="u" href="#m-이화여대">이화여대</a></td><td data-l="가">28</td><td data-l="나">289</td><td data-l="다">22</td><td data-l="합계">339</td></tr>
 <tr data-u="가천대"><td data-l="대학"><a class="u" href="#m-가천대">가천대</a></td><td data-l="가">110</td><td data-l="나">144</td><td data-l="다">93</td><td data-l="합계">347</td></tr>
 <tr data-u="가톨릭대"><td data-l="대학"><a class="u" href="#m-가톨릭대">가톨릭대</a></td><td data-l="가">187</td><td data-l="나">166</td><td data-l="다">—</td><td data-l="합계">353</td></tr>
 <tr data-u="경기대"><td data-l="대학"><a class="u" href="#m-경기대">경기대</a></td><td data-l="가">52</td><td data-l="나">107</td><td data-l="다">352</td><td data-l="합계">511</td></tr>
@@ -615,6 +709,16 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
       t._page += +d; render(t);
       if (t.getBoundingClientRect().top < 0) t.scrollIntoView();
     });
+    // 위쪽에도 같은 넘기기를 둔다(누르면 그 자리에서 넘어간다)
+    var top = pg.cloneNode(true);
+    top.className = "pager top";
+    t.parentNode.insertBefore(top, t);
+    t._pagerTop = top;
+    top.addEventListener("click", function (e) {
+      var d = e.target.getAttribute && e.target.getAttribute("data-d");
+      if (!d || e.target.disabled) return;
+      t._page += +d; render(t);
+    });
   });
   function render(t) {
     var rows = Array.prototype.slice.call(t.querySelectorAll("tbody tr")).filter(function (r) { return !r.classList.contains("hide") && r.getAttribute("data-u") !== "합계"; });
@@ -622,11 +726,13 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
     t._page = Math.min(Math.max(t._page, 0), pages - 1);
     rows.forEach(function (r, k) { r.classList.toggle("pg", !!size && Math.floor(k / size) !== t._page); });
     t.classList.toggle("empty", !rows.length);
-    t._pager.hidden = pages < 2;
     var from = t._page * size + 1, to = Math.min(rows.length, from + size - 1);
-    t._pager.querySelector(".pos").textContent = from + "–" + to + " / " + rows.length + "줄";
-    t._pager.querySelector('[data-d="-1"]').disabled = t._page === 0;
-    t._pager.querySelector('[data-d="1"]').disabled = t._page === pages - 1;
+    [t._pager, t._pagerTop].forEach(function (pg) {
+      pg.hidden = pages < 2;
+      pg.querySelector(".pos").textContent = from + "–" + to + " / " + rows.length + "줄";
+      pg.querySelector('[data-d="-1"]').disabled = t._page === 0;
+      pg.querySelector('[data-d="1"]').disabled = t._page === pages - 1;
+    });
   }
   function renderAll() { tbls.forEach(render); }
   function setView(v, save) {
