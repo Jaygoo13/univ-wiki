@@ -90,6 +90,16 @@ a.u { color: inherit; text-decoration: underline; text-decoration-color: var(--l
 a.u:hover { text-decoration-color: var(--navy); color: var(--navy); }
 tr:target td { background: var(--navy-soft); }
 tr.hide { display: none !important; }
+tr.pg { display: none !important; }
+.pager { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 8px 0 18px; font-size: 13px; }
+.pager[hidden] { display: none; }
+.pager button { font: inherit; font-size: 13px; min-height: 36px; min-width: 64px; border: 1px solid var(--line); background: var(--paper); color: var(--navy); border-radius: 999px; padding: 4px 14px; cursor: pointer; }
+.pager button:disabled { opacity: .4; cursor: default; }
+.pager button:not(:disabled):hover { border-color: var(--navy); }
+.pager button:focus-visible { outline: 2px solid var(--omr); outline-offset: 2px; }
+.pager .pos { font-family: var(--font-mono); font-size: 12px; color: var(--muted); min-width: 110px; text-align: center; }
+.tbl { scroll-margin-top: 70px; }
+.seg.size button { padding: 6px 12px; }
 .tbl.empty { display: none; }
 table.t-gun { min-width: 760px; }
 table.t-sum { min-width: 0; }
@@ -101,6 +111,7 @@ td.e { min-width: 170px; font-size: 13px; }
 
 html[data-view="m"] .wrap { max-width: 1040px; }
 html[data-view="m"] .only-m { display: block; }
+@media (max-width: 560px) { h2, h3, tr[id], .tbl { scroll-margin-top: 112px; } }
 html[data-view="m"] .only-pc { display: none; }
 html[data-view="m"] body { font-size: 16px; }
 html[data-view="m"] header { padding-block: 24px 16px; }
@@ -143,6 +154,9 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
     <div class="seg" role="group" aria-label="보기 방식">
       <button type="button" data-v="pc" aria-pressed="true">PC</button><button type="button" data-v="m" aria-pressed="false">모바일</button>
     </div>
+    <div class="seg size" role="group" aria-label="한 번에 보일 줄 수">
+      <button type="button" data-n="5" aria-pressed="false">5개</button><button type="button" data-n="10" aria-pressed="true">10개</button><button type="button" data-n="0" aria-pressed="false">전체</button>
+    </div>
     <input class="q" id="q" type="search" list="univs" placeholder="대학 이름으로 거르기" aria-label="대학 이름으로 거르기" autocomplete="off">
     <datalist id="univs"><option value="서울대"><option value="연세대"><option value="고려대"><option value="서강대"><option value="성균관대"><option value="한양대 서울"><option value="중앙대"><option value="경희대"><option value="한국외대"><option value="서울시립대"><option value="건국대 서울"><option value="동국대 서울"><option value="홍익대 서울"><option value="국민대"><option value="숭실대"><option value="세종대"><option value="광운대"><option value="명지대"><option value="상명대 서울"><option value="삼육대"><option value="서울과기대"><option value="가천대"><option value="가톨릭대"><option value="경기대"><option value="단국대 죽전"><option value="아주대"><option value="인하대"><option value="인천대"><option value="한양대 ERICA"><option value="한국항공대"><option value="수원대"><option value="용인대"></datalist>
     <span class="cnt" id="cnt" aria-live="polite"></span>
@@ -154,8 +168,8 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
     <div class="key"><b>탐구 1과목</b> · 명지대, 상명대, 삼육대, 가천대, 가톨릭대, 경기대, 한국항공대, 수원대, 용인대, 성균관대 다군.</div>
     <div class="key"><b>학생부 반영</b> · 서울대, 연세대, 한양대 서울, 중앙대(출결), 동국대 다군, 경기대 자유전공학부.</div>
   </div>
-  <p class="note only-pc">표가 화면보다 넓으면 표 안에서 좌우로 밀어 볼 수 있습니다. 좁은 화면에서는 위의 <b>모바일</b> 보기를 누르면 카드로 바뀝니다.</p>
-  <p class="note only-m">카드 보기입니다. 넓은 화면에서 표로 보려면 위의 <b>PC</b>를 누르세요.</p>
+  <p class="note only-pc">표는 5개·10개 단위로 나눠 보이고, 표 아래의 이전·다음으로 넘깁니다. 표가 화면보다 넓으면 표 안에서 좌우로 밀어 볼 수 있습니다. 좁은 화면에서는 위의 <b>모바일</b> 보기를 누르면 카드로 바뀝니다.</p>
+  <p class="note only-m">카드 보기입니다. 5개·10개 단위로 나눠 보이고, 목록 아래의 이전·다음으로 넘깁니다. 넓은 화면에서 표로 보려면 위의 <b>PC</b>를 누르세요.</p>
 <ul>
 <li>기준: 2027학년도 정시 모집요강. 수도권 대학 32곳.</li>
 <li>범위: 정시 <strong>수능위주 일반전형, 정원 내</strong>. 인문·어문·사회·상경·법·행정·사범(문과)·문과 자유전공. 이공계·의약·간호·예체능은 뺐다.</li>
@@ -554,35 +568,89 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 </div>
 <script>
 (function () {
-  var root = document.documentElement, btns = document.querySelectorAll(".seg button"), q = document.getElementById("q"), cnt = document.getElementById("cnt");
-  var rows = Array.prototype.slice.call(document.querySelectorAll("tr[data-u]"));
+  var root = document.documentElement, q = document.getElementById("q"), cnt = document.getElementById("cnt");
+  var vbtns = document.querySelectorAll(".seg button[data-v]"), nbtns = document.querySelectorAll(".seg button[data-n]");
+  var tbls = Array.prototype.slice.call(document.querySelectorAll(".tbl")), size = 10;
+  function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function put(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  tbls.forEach(function (t) {
+    t._page = 0;
+    var pg = document.createElement("div");
+    pg.className = "pager";
+    pg.innerHTML = '<button type="button" data-d="-1">이전</button><span class="pos" aria-live="polite"></span><button type="button" data-d="1">다음</button>';
+    t.parentNode.insertBefore(pg, t.nextSibling);
+    t._pager = pg;
+    pg.addEventListener("click", function (e) {
+      var d = e.target.getAttribute && e.target.getAttribute("data-d");
+      if (!d || e.target.disabled) return;
+      t._page += +d; render(t);
+      if (t.getBoundingClientRect().top < 0) t.scrollIntoView();
+    });
+  });
+  function render(t) {
+    var rows = Array.prototype.slice.call(t.querySelectorAll("tbody tr")).filter(function (r) { return !r.classList.contains("hide") && r.getAttribute("data-u") !== "합계"; });
+    var pages = size ? Math.max(1, Math.ceil(rows.length / size)) : 1;
+    t._page = Math.min(Math.max(t._page, 0), pages - 1);
+    rows.forEach(function (r, k) { r.classList.toggle("pg", !!size && Math.floor(k / size) !== t._page); });
+    t.classList.toggle("empty", !rows.length);
+    t._pager.hidden = pages < 2;
+    var from = t._page * size + 1, to = Math.min(rows.length, from + size - 1);
+    t._pager.querySelector(".pos").textContent = from + "–" + to + " / " + rows.length + "줄";
+    t._pager.querySelector('[data-d="-1"]').disabled = t._page === 0;
+    t._pager.querySelector('[data-d="1"]').disabled = t._page === pages - 1;
+  }
+  function renderAll() { tbls.forEach(render); }
   function setView(v, save) {
     root.setAttribute("data-view", v);
-    btns.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-v") === v ? "true" : "false"); });
-    if (save) { try { localStorage.setItem("view", v); } catch (e) {} }
+    vbtns.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-v") === v ? "true" : "false"); });
+    if (save) put("view", v);
   }
-  setView(root.getAttribute("data-view"), false);
-  btns.forEach(function (b) { b.addEventListener("click", function () { setView(b.getAttribute("data-v"), true); }); });
+  function setSize(n, save) {
+    size = n;
+    nbtns.forEach(function (b) { b.setAttribute("aria-pressed", +b.getAttribute("data-n") === n ? "true" : "false"); });
+    tbls.forEach(function (t) { t._page = 0; });
+    renderAll();
+    if (save) put("size", String(n));
+  }
   function filter() {
     var s = q.value.replace(/\s+/g, "").replace(/대학교$|대$/, ""), n = 0;
-    rows.forEach(function (r) {
+    document.querySelectorAll("tr[data-u]").forEach(function (r) {
       var u = r.getAttribute("data-u").replace(/\s+/g, "");
       var hit = !s || u.indexOf(s) >= 0 || u === "합계";
       r.classList.toggle("hide", !hit);
       if (hit && s && u !== "합계") n++;
     });
-    document.querySelectorAll(".tbl").forEach(function (t) {
-      t.classList.toggle("empty", !t.querySelector("tbody tr:not(.hide):not([data-u='합계'])"));
-    });
+    tbls.forEach(function (t) { t._page = 0; });
+    renderAll();
     cnt.textContent = s ? n + "줄" : "";
   }
+  function reveal(id) {
+    var r = id && document.getElementById(id);
+    if (!r || r.tagName !== "TR") return;
+    if (r.classList.contains("hide")) { q.value = ""; filter(); }
+    var t = r.closest(".tbl");
+    if (size) {
+      var rows = Array.prototype.slice.call(t.querySelectorAll("tbody tr")).filter(function (x) { return !x.classList.contains("hide"); });
+      t._page = Math.floor(rows.indexOf(r) / size); render(t);
+    }
+    r.scrollIntoView();
+  }
+  setView(root.getAttribute("data-view"), false);
+  var saved = get("size");
+  setSize(saved === "5" || saved === "10" || saved === "0" ? +saved : (root.getAttribute("data-view") === "m" ? 5 : 10), false);
+  vbtns.forEach(function (b) { b.addEventListener("click", function () { setView(b.getAttribute("data-v"), true); }); });
+  nbtns.forEach(function (b) { b.addEventListener("click", function () { setSize(+b.getAttribute("data-n"), true); }); });
   q.addEventListener("input", filter);
+  window.addEventListener("hashchange", function () { reveal(decodeURIComponent(location.hash.slice(1))); });
   document.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest("a.u");
     if (!a) return;
-    var t = document.getElementById(decodeURIComponent(a.getAttribute("href").slice(1)));
-    if (t && t.classList.contains("hide")) { q.value = ""; filter(); }
+    e.preventDefault();
+    var id = decodeURIComponent(a.getAttribute("href").slice(1));
+    reveal(id);
+    try { history.replaceState(null, "", "#" + id); } catch (err) {}
   });
+  if (location.hash) reveal(decodeURIComponent(location.hash.slice(1)));
 })();
 </script>
 </body>
