@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>입시결과 검색 2026</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: 단일 칼럼. 결론 → 수시 → 정시(미반영 / 선택형) → 참고. hongik-art-2028과 같은 OMR 붉은 괘선 + 남색 잉크 */
+:root {
+  --bg: #fbfaf8; --paper: #ffffff; --ink: #1d2433; --muted: #5d6474; --line: #e6e2dc;
+  --omr: #c8414f; --omr-soft: #fbe9eb; --navy: #26407a; --navy-soft: #e9eef8; --sub: #f4f2ee;
+  --green: #2f6b4f; --green-soft: #e6f1eb;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #141821; --paper: #1b2030; --ink: #e8eaf0; --muted: #a2a9b8; --line: #2c3344;
+  --omr: #f07a86; --omr-soft: #3a2228; --navy: #9db4ea; --navy-soft: #222c44; --sub: #20263a;
+  --green: #8fd0ac; --green-soft: #1f3329; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #141821; --paper: #1b2030; --ink: #e8eaf0; --muted: #a2a9b8; --line: #2c3344;
+  --omr: #f07a86; --omr-soft: #3a2228; --navy: #9db4ea; --navy-soft: #222c44; --sub: #20263a;
+  --green: #8fd0ac; --green-soft: #1f3329; color-scheme: dark }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.65; word-break: keep-all;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 56px; }
+.wrap { max-width: 1040px; margin: 0 auto; }
+header { padding-block: 40px 20px; border-bottom: 2px solid var(--omr); position: relative; }
+header::after { content: ""; position: absolute; left: 0; right: 0; bottom: -7px; border-bottom: 1px solid var(--omr); opacity: .5; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; color: var(--omr); }
+h1 { font-size: clamp(26px, 5vw, 38px); line-height: 1.25; margin: 6px 0 8px; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0; font-size: 14px; }
+h2 { font-size: 20px; margin: 44px 0 6px; text-wrap: balance; }
+.lead { color: var(--muted); font-size: 14px; margin: 0 0 8px; }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); margin: 10px 0; }
+table { border-collapse: collapse; width: 100%; min-width: 1080px; font-size: 13.5px; }
+th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { font-size: 12px; color: var(--muted); font-weight: 500; background: var(--bg); white-space: nowrap; }
+td:first-child { white-space: nowrap; font-weight: 500; }
+td.unit { min-width: 170px; }
+td.n { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--font-mono); white-space: nowrap; }
+td.p { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+td.c { white-space: nowrap; }
+td.m { min-width: 220px; font-size: 13px; }
+tbody tr:last-child td { border-bottom: 0; }
+td strong { color: var(--omr); }
+.b { display: inline-block; font-size: 11.5px; border-radius: 4px; padding: 0 7px; white-space: nowrap; font-weight: 500; }
+.b.sil { background: var(--omr-soft); color: var(--omr); }
+.b.jeok { background: var(--navy-soft); color: var(--navy); }
+.b.no { background: var(--green-soft); color: var(--green); }
+.legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+.note { font-size: 13px; color: var(--muted); margin: 6px 0; }
+ul { padding-left: 1.2em; margin: 8px 0; }
+li { margin: 4px 0; }
+.keys { display: grid; gap: 10px; margin: 14px 0; }
+.key { border-left: 3px solid var(--navy); background: var(--navy-soft); padding: 10px 14px; border-radius: 0 6px 6px 0; }
+.key b { color: var(--navy); }
+.fix { border-left: 3px solid var(--omr); background: var(--omr-soft); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 13.5px; margin: 12px 0; }
+.tag { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; border: 1.5px solid var(--omr); color: var(--omr); border-radius: 999px; padding: 0 9px; margin-right: 6px; vertical-align: 2px; }
+.tag.navy { border-color: var(--navy); color: var(--navy); }
+nav.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
+nav.toc a { font-size: 13px; color: var(--navy); text-decoration: none; border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: 3px 12px; }
+nav.toc a:hover { border-color: var(--navy); }
+footer { margin-top: 48px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+
+
+.wrap { max-width: 980px; }
+header { padding-block: 24px 16px; }
+h3 { font-size: 17px; margin: 0; }
+form.search { display: flex; gap: 8px; margin: 14px 0 0; }
+.q { font: inherit; font-size: 16px; flex: 1 1 auto; min-width: 0; min-height: 46px; border: 1.5px solid var(--navy); border-radius: 999px; padding: 6px 18px; background: var(--paper); color: var(--ink); }
+.q:focus-visible, button:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--omr); outline-offset: 2px; }
+.btn { font: inherit; font-size: 14px; font-weight: 500; min-height: 46px; padding: 6px 18px; border-radius: 999px; border: 1.5px solid var(--navy); background: var(--navy); color: var(--paper); cursor: pointer; flex: none; }
+.btn.ghost { background: var(--paper); color: var(--navy); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; min-height: 4px; }
+.chip { font-size: 13px; background: var(--navy-soft); color: var(--navy); border-radius: 999px; padding: 2px 12px; }
+.chip i { font-style: normal; font-size: 11px; opacity: .75; margin-right: 6px; }
+#info { font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin: 8px 0 0; }
+.examples { margin: 14px 0 0; }
+.examples p { margin: 0 0 6px; font-size: 13px; color: var(--muted); }
+.examples button, .ubtn { font: inherit; cursor: pointer; }
+.examples button { font-size: 13.5px; border: 1px solid var(--line); background: var(--paper); color: var(--navy); border-radius: 999px; padding: 6px 14px; margin: 0 6px 6px 0; min-height: 36px; }
+.examples button:hover, .ubtn:hover { border-color: var(--navy); }
+.tabs { position: sticky; top: 0; z-index: 5; background: var(--bg); display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid var(--line); margin: 14px 0 0; padding: 10px 0; }
+.tabs button { font: inherit; font-size: 14px; font-weight: 500; flex: 1 1 30%; white-space: nowrap; min-height: 40px; padding: 6px 12px; border: 1.5px solid var(--navy); border-radius: 999px; background: var(--paper); color: var(--navy); cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--navy); color: var(--paper); font-weight: 700; }
+section.tab[hidden] { display: none; }
+.note.warn { border-left: 3px solid var(--omr); background: var(--omr-soft); padding: 8px 12px; border-radius: 0 6px 6px 0; color: var(--ink); }
+.ugrp { margin: 22px 0 0; }
+.uhead { border-bottom: 2px solid var(--navy); padding-bottom: 6px; margin-bottom: 10px; }
+.uhead h2 { margin: 0; font-size: 20px; }
+details.guide { font-size: 13px; color: var(--muted); margin-top: 4px; }
+details.guide summary, .entry summary { cursor: pointer; color: var(--navy); font-size: 13px; font-weight: 500; min-height: 30px; padding-top: 4px; }
+details.guide p { margin: 4px 0; }
+details.guide ul { margin: 4px 0; }
+.blk { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin: 0 0 12px; }
+.blk > header { padding: 0; border: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-bottom: 4px; }
+.blk > header::after { display: none; }
+.blk h3 { flex: 1 1 100%; font-size: 19px; font-weight: 700; }
+.blk mark { background: var(--omr-soft); color: var(--omr); border-radius: 3px; padding: 0 2px; }
+.per { font-size: 12px; font-weight: 700; border-radius: 4px; padding: 1px 8px; background: var(--navy); color: var(--paper); }
+.per.p1 { background: var(--omr); }
+.per.p2 { background: var(--muted); }
+.yr { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.yr.old { color: var(--omr); font-weight: 700; }
+.entry { border-top: 1px solid var(--line); padding: 10px 0 4px; }
+.etype { font-size: 14px; font-weight: 500; color: var(--navy); }
+.etype em { font-style: normal; font-weight: 400; font-size: 12px; color: var(--muted); margin-left: 6px; }
+.kvs { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 8px; margin: 8px 0 2px; }
+.kv { background: var(--sub); border-radius: 8px; padding: 8px 10px; min-width: 0; }
+.kv b { display: block; font-family: var(--font-mono); font-size: 19px; line-height: 1.25; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.kv span { display: block; font-size: 11.5px; color: var(--muted); line-height: 1.35; margin-top: 3px; overflow-wrap: anywhere; }
+.kv.score { background: var(--navy-soft); }
+.kv.score b { color: var(--navy); font-size: 22px; }
+.kv.none b { font-family: var(--font-body); font-size: 13px; color: var(--muted); font-weight: 500; }
+.nos { font-size: 12.5px; color: var(--omr); margin: 4px 0 0; }
+.part { margin: 8px 0 12px; }
+.ptitle { font-size: 12.5px; font-weight: 500; margin-bottom: 4px; overflow-wrap: anywhere; }
+.cite { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); font-weight: 400; white-space: nowrap; }
+.part table { min-width: 0; width: 100%; font-size: 13px; border: 1px solid var(--line); border-radius: 6px; border-collapse: separate; border-spacing: 0; }
+.part th { text-align: left; font-weight: 400; color: var(--muted); background: none; white-space: normal; width: 62%; font-size: 12.5px; padding: 5px 8px; }
+.part td { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; padding: 5px 8px; white-space: normal; font-weight: 500; overflow-wrap: anywhere; }
+.part td:first-child { white-space: normal; }
+.part tr.prev th, .part tr.prev td { opacity: .62; }
+.pnotes { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+.pager { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 14px 0; font-size: 13px; }
+.pager[hidden] { display: none; }
+.pager button { font: inherit; font-size: 13px; min-height: 40px; min-width: 72px; border: 1px solid var(--line); background: var(--paper); color: var(--navy); border-radius: 999px; padding: 4px 14px; cursor: pointer; }
+.pager button:disabled { opacity: .4; cursor: default; }
+#pos { font-family: var(--font-mono); font-size: 12px; color: var(--muted); min-width: 80px; text-align: center; }
+#ulist { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 8px; margin: 12px 0; }
+.ubtn { text-align: left; border: 1px solid var(--line); background: var(--paper); border-radius: 10px; padding: 10px 14px; color: var(--ink); min-height: 56px; }
+.ubtn b { display: block; font-size: 15px; }
+.ubtn span { font-size: 12px; color: var(--muted); font-family: var(--font-mono); }
+a.qlink { color: var(--navy); }
+@media (max-width: 560px) { .btn.ghost { display: none; } .blk { padding: 12px 12px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">2026학년도 · 수시 / 정시 · 36개 대학</div>
+    <h1>입시결과 검색</h1>
+    <p class="sub">대학과 학과를 한 줄로 입력하면 전형별 등급컷·백분위 컷·경쟁률·충원을 보여 줍니다. 각 대학이 발표한 입시결과 원문 그대로이며, 값 아래에 지표 이름을 함께 적었습니다.</p>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="구분">
+    <button type="button" role="tab" data-t="search" aria-selected="true">검색</button><button type="button" role="tab" data-t="univs" aria-selected="false">대학별 보기</button><button type="button" role="tab" data-t="about" aria-selected="false">안내</button>
+  </div>
+
+  <section class="tab" id="search" role="tabpanel">
+    <form class="search" id="form" role="search">
+      <input class="q" id="q" type="search" list="dl" placeholder="예: 경희대 경영 수시" aria-label="대학·학과·수시/정시로 검색" autocomplete="off" enterkeyhint="search">
+      <datalist id="dl"></datalist>
+      <button class="btn" type="submit">검색</button>
+      <button class="btn ghost" type="button" id="clear">지우기</button>
+    </form>
+    <div class="chips" id="chips" aria-live="polite"></div>
+    <p id="info" aria-live="polite"></p>
+    <p class="note" id="loading">자료를 불러오는 중…</p>
+    <div class="examples" id="examples">
+      <p>이렇게 찾아 보세요</p>
+      <button type="button" data-q="경희대 경영 수시">경희대 경영 수시</button><button type="button" data-q="인하대 컴퓨터공학 정시">인하대 컴퓨터공학 정시</button><button type="button" data-q="시립대 세무">시립대 세무</button><button type="button" data-q="간호 수시 교과">간호 수시 교과</button><button type="button" data-q="과기대 컴공">과기대 컴공</button><button type="button" data-q="의대 정시">의대 정시</button><button type="button" data-q="에리카 로봇">에리카 로봇</button>
+      <p style="margin-top:10px">대학 이름은 줄여 써도 됩니다(시립대, 과기대, 외대, 에리카, 항공대). "수시"·"정시", "교과"·"종합"·"논술"을 붙이면 그 전형만 보여 줍니다.</p>
+    </div>
+    <div id="results"></div>
+    <div class="pager" id="pager" hidden><button type="button" id="prev">이전</button><span id="pos"></span><button type="button" id="next">다음</button></div>
+  </section>
+
+  <section class="tab" id="univs" role="tabpanel" hidden>
+    <h2>대학별 보기</h2>
+    <p class="lead">대학을 누르면 그 대학의 모든 모집단위를 보여 줍니다. 학과 이름을 덧붙여 좁힐 수 있습니다.</p>
+    <div id="ulist"></div>
+  </section>
+
+  <section class="tab" id="about" role="tabpanel" hidden>
+    <h2>안내</h2>
+    <h3>자료</h3>
+    <ul>
+      <li>진학사 입시결과 자료실에 각 대학이 올린 2026학년도 입시결과(PDF·엑셀·이미지)를 옮겼습니다. 36개 대학, 표 572개, 약 13,400줄입니다.</li>
+      <li>값은 대학이 발표한 숫자 그대로입니다. 계산하거나 환산하지 않았습니다.</li>
+      <li>카드 위쪽의 큰 값은 그 전형의 대표 지표(등급 70%컷, 백분위 70%컷 등)를 골라 보여 준 것입니다. "전체 값 보기"를 누르면 대학이 발표한 모든 열과 근거 쪽이 나옵니다.</li>
+    </ul>
+    <h3>꼭 알아 둘 점</h3>
+    <ul>
+      <li><b>대학마다 지표가 다릅니다.</b> 최종등록자 기준인지 최초합격자 기준인지, 50%컷·70%컷·평균·최저 중 무엇인지, 등급·환산점수·백분위 중 무엇인지가 대학마다 다릅니다. 서로 다른 대학의 수치를 그대로 비교하면 안 됩니다.</li>
+      <li><b>2025학년도 자료로 대신한 대학</b>: 서울대학교, 고려대학교 서울캠퍼스, 건국대학교 서울캠퍼스. 진학사에 2026학년도 결과가 없습니다.</li>
+      <li><b>서울대학교</b>는 지원 현황(모집·지원·경쟁률)만 있고 성적 컷이 없습니다.</li>
+      <li><b>정시 결과가 없는 대학</b>(수시만 게시): 가천대, 국민대, 세종대, 중앙대, 홍익대, 연세대(서울).</li>
+      <li><b>정시 성적 컷이 없는 대학</b>: 성균관대, 한국외대는 정시 경쟁률·충원만 발표했습니다.</li>
+      <li><b>자료가 없는 대학</b>: 포항공대, UNIST, GIST, DGIST는 진학사에 없습니다. 그 밖의 대학도 이 36곳에 없으면 나오지 않습니다.</li>
+      <li>캠퍼스는 대표 캠퍼스만 넣었습니다. 단국대는 죽전, 상명대는 서울, 한양대는 서울과 ERICA입니다.</li>
+      <li>경기대·성균관대·삼육대·서울대는 원본이 스캔 이미지라 사람이 아닌 프로그램이 이미지를 판독해 옮겼습니다. 지원 전에는 대학 입학처의 원문을 꼭 확인하세요.</li>
+    </ul>
+    <h3>검색이 못 하는 것</h3>
+    <ul>
+      <li>문장의 뜻을 이해하지 않습니다. 낱말을 대학·시기·전형·학과로 나눠 찾습니다. "작년보다 올랐나"처럼 묻는 질문에는 답하지 못합니다.</li>
+      <li>대학 간 순위나 비교는 제공하지 않습니다.</li>
+    </ul>
+  </section>
+
+  <footer>출처: 각 대학 2026학년도 입시결과(진학사 입시결과 자료실). 근거의 쪽수는 각 대학 원문 쪽·시트 기준. 정리 기준일 2026-11-17.</footer>
+</div>
+<script>
+/* 입시결과 검색 코어: 질의 해석 · 순위 · 카드 데이터. 브라우저와 node 테스트가 같이 쓴다. */
+(function (root) {
+  "use strict";
+
+  // 대학 별칭(정규화 전 표기). 값은 index.univs 의 n(대학명).
+  var ALIAS = {
+    "가천대학교": ["가천대", "가천"],
+    "건국대학교 서울캠퍼스": ["건국대", "건대", "건국", "건국대서울"],
+    "경기대학교": ["경기대", "경기"],
+    "경북대학교": ["경북대", "경대", "경북"],
+    "경희대학교": ["경희대", "경희"],
+    "고려대학교 서울캠퍼스": ["고려대", "고대", "고려", "고려대서울"],
+    "광운대학교": ["광운대", "광운"],
+    "국민대학교": ["국민대", "국민"],
+    "단국대학교": ["단국대", "단대", "단국", "단국대죽전"],
+    "동국대학교 서울캠퍼스": ["동국대", "동대", "동국", "동국대서울"],
+    "명지대학교": ["명지대", "명지"],
+    "부산대학교": ["부산대", "부대", "부산"],
+    "삼육대학교": ["삼육대", "삼육"],
+    "상명대학교": ["상명대", "상명", "상명대서울"],
+    "서강대학교": ["서강대", "서강"],
+    "서울과학기술대학교": ["서울과기대", "과기대", "서울과학기술대", "설과기"],
+    "서울대학교": ["서울대", "설대"],
+    "서울시립대학교": ["서울시립대", "시립대", "서울시립", "시립"],
+    "성균관대학교": ["성균관대", "성대", "성균관"],
+    "세종대학교": ["세종대", "세종"],
+    "수원대학교": ["수원대", "수원"],
+    "숭실대학교": ["숭실대", "숭실"],
+    "아주대학교": ["아주대", "아주"],
+    "연세대학교 서울캠퍼스": ["연세대", "연대", "연세", "연세대서울"],
+    "용인대학교": ["용인대", "용인"],
+    "인천대학교": ["인천대", "인천"],
+    "인하대학교": ["인하대", "인하"],
+    "전남대학교": ["전남대", "전남"],
+    "전북대학교": ["전북대", "전북"],
+    "중앙대학교": ["중앙대", "중대", "중앙"],
+    "충남대학교": ["충남대", "충남"],
+    "한국외국어대학교": ["한국외대", "외대", "한국외국어대", "외국어대"],
+    "한국항공대학교": ["한국항공대", "항공대"],
+    "한양대학교 ERICA캠퍼스": ["한양대에리카", "에리카", "erica", "한양대erica", "한양에리카"],
+    "한양대학교 서울캠퍼스": ["한양대", "한양", "한양대서울"],
+    "홍익대학교": ["홍익대", "홍대", "홍익"]
+  };
+  // 자료가 없는 대학(이름을 알아듣고 이유를 말해 준다)
+  var MISSING = {
+    "포스텍": "포항공과대학교", "포항공대": "포항공과대학교", "포항공과대": "포항공과대학교", "postech": "포항공과대학교",
+    "유니스트": "UNIST", "unist": "UNIST", "울산과기원": "UNIST",
+    "지스트": "GIST", "gist": "GIST", "광주과기원": "GIST",
+    "디지스트": "DGIST", "dgist": "DGIST", "대구경북과기원": "DGIST",
+    "카이스트": "KAIST", "kaist": "KAIST",
+    "이화여대": "이화여자대학교", "이대": "이화여자대학교", "숙명여대": "숙명여자대학교", "숙대": "숙명여자대학교",
+    "성신여대": "성신여자대학교", "가톨릭대": "가톨릭대학교", "한성대": "한성대학교"
+  };
+  var TYPE_WORDS = { "교과": "교과", "학생부교과": "교과", "종합": "종합", "학종": "종합", "학생부종합": "종합", "논술": "논술",
+    "실기": "실기", "지역균형": "지역균형", "지균": "지역균형", "농어촌": "농어촌", "기회균형": "기회균형", "추천": "추천",
+    "특기자": "특기자", "재직자": "재직자", "지역인재": "지역인재", "면접": "면접", "서류": "서류" };
+  var NOISE = /^(등급컷|등급|컷|입결|입시결과|입시|결과|합격선|합격컷|커트라인|경쟁률|충원|충원율|예비번호|알려줘|알려줘요|얼마|어때|뭐야|은|는|의|대|과|학과|학부|전공|20\d\d|\d\d학년도|20\d\d학년도|학년도|내신|성적|점수|백분위)$/;
+  var SYN = {
+    "컴공": ["컴퓨터공학", "컴퓨터"], "컴퓨터공학": ["컴퓨터공학", "컴퓨터학"], "전전": ["전자전기", "전기전자"], "전자전기": ["전자전기", "전기전자"],
+    "전기전자": ["전기전자", "전자전기"], "화공": ["화학공학", "화공"], "산공": ["산업공학", "산업경영공학"], "정외": ["정치외교"],
+    "미컴": ["미디어커뮤니케이션", "미디어"], "신방": ["미디어", "언론", "신문방송"], "국문": ["국어국문"], "영문": ["영어영문"],
+    "사복": ["사회복지"], "생공": ["생명공학"], "신소재": ["신소재"], "기공": ["기계공학"], "건공": ["건축공학"], "토목": ["토목", "건설환경", "사회환경", "사회기반"],
+    "ai": ["인공지능", "ai"], "인공지능": ["인공지능", "ai"], "sw": ["소프트웨어", "sw"], "소프트웨어": ["소프트웨어", "sw"],
+    "의대": ["의예", "의학"], "의예": ["의예", "의학과", "의학부"], "치대": ["치의예", "치의학"], "한의대": ["한의예", "한의학"], "약대": ["약학"],
+    "수의대": ["수의예", "수의학"], "간호": ["간호"], "경영": ["경영"], "자전": ["자유전공", "자율전공"], "자유전공": ["자유전공", "자율전공"],
+    "자율전공": ["자율전공", "자유전공"], "체교": ["체육교육"], "수교": ["수학교육"], "국교": ["국어교육"], "영교": ["영어교육"],
+    "행정": ["행정"], "심리": ["심리"], "통계": ["통계"], "반도체": ["반도체"], "데이터": ["데이터"]
+  };
+
+  function nz(s) { return String(s == null ? "" : s).toLowerCase().replace(/[\s·\-_/()\[\]「」.,]+/g, ""); }
+  function stem(s) { return nz(s).replace(/(학과|학부|전공|계열|대학|과|부)$/, ""); }
+
+  var aliasMap = null;
+  function buildAlias(index) {
+    aliasMap = {};
+    index.univs.forEach(function (u, i) {
+      var list = (ALIAS[u.n] || []).concat([u.n, u.n.replace(/학교/, ""), u.n.replace(/\s*(서울)?캠퍼스$/, ""), u.n.replace(/학교.*$/, "")]);
+      list.forEach(function (a) { var k = nz(a); if (k) (aliasMap[k] = aliasMap[k] || []).indexOf(i) < 0 && aliasMap[k].push(i); });
+    });
+  }
+
+  /* 질의 -> {univs:[idx], period:null|0|1, gun, types:[], dept:[{raw,vars}], missing:[], noise:[]} */
+  function parse(q, index) {
+    if (!aliasMap) buildAlias(index);
+    var out = { univs: [], period: null, gun: null, types: [], dept: [], missing: [], raw: q };
+    var toks = String(q || "").trim().split(/\s+/).filter(Boolean);
+    // "경희 대" 처럼 떨어진 꼬리말은 앞 낱말에 붙여 본다
+    var merged = [];
+    toks.forEach(function (t) {
+      if (/^(대|대학교|대학|학과|학부|과|전공)$/.test(t) && merged.length) merged[merged.length - 1] += t; else merged.push(t);
+    });
+    merged.forEach(function (t) {
+      var k = nz(t);
+      if (!k) return;
+      if (/^(수시|수시모집)$/.test(k)) { out.period = 0; return; }
+      if (/^(정시|정시모집)$/.test(k)) { out.period = 1; return; }
+      var g = k.match(/^([가나다])군$/);
+      if (g) { out.period = 1; out.gun = g[1]; return; }
+      var k2 = k.replace(/(학교|대학교)$/, "대").replace(/대대$/, "대");
+      var hit = aliasMap[k] || aliasMap[k2] || aliasMap[k.replace(/대$/, "")];
+      if (hit) { hit.forEach(function (i) { if (out.univs.indexOf(i) < 0) out.univs.push(i); }); return; }
+      if (MISSING[k] || MISSING[k2]) { out.missing.push(MISSING[k] || MISSING[k2]); return; }
+      if (TYPE_WORDS[k]) { if (out.types.indexOf(TYPE_WORDS[k]) < 0) out.types.push(TYPE_WORDS[k]); return; }
+      if (NOISE.test(k)) return;
+      var s = stem(t) || k;
+      var vars = (SYN[s] || SYN[k] || [s]).map(nz);
+      if (vars.indexOf(s) < 0 && !SYN[s] && !SYN[k]) vars.push(s);
+      out.dept.push({ raw: t, key: s, vars: vars });
+    });
+    return out;
+  }
+
+  var normCache = null;
+  function prep(index) {
+    if (normCache) return;
+    normCache = index.rows.map(function (r) { return [nz(r[5]), stem(r[5]), nz(r[4])]; });
+  }
+
+  /* 검색 -> 블록 목록. 블록 = 한 대학·한 시기·한 모집단위. lines = [rowIdx...] */
+  function search(pq, index) {
+    prep(index);
+    var uset = pq.univs.length ? pq.univs : null;
+    var hits = [];
+    if (pq.missing.length && !uset) return { blocks: [], rows: 0, note: [] };
+    if (!uset && !pq.dept.length && pq.period === null && !pq.types.length) return { blocks: [], rows: 0, note: [] };
+    var typeRe = pq.types.length ? pq.types : null;
+    for (var i = 0; i < index.rows.length; i++) {
+      var r = index.rows[i];
+      if (uset && uset.indexOf(r[0]) < 0) continue;
+      if (pq.period !== null && r[1] !== pq.period) continue;
+      var n = normCache[i], sc = 0;
+      if (pq.dept.length) {
+        var ok = true;
+        for (var d = 0; d < pq.dept.length && ok; d++) {
+          var best = 0, vs = pq.dept[d].vars;
+          for (var v = 0; v < vs.length; v++) {
+            var x = vs[v];
+            if (!x) continue;
+            if (n[1] === x || n[0] === x) best = Math.max(best, 4);
+            else if (n[0].indexOf(x) === 0) best = Math.max(best, 3);
+            else if (n[0].indexOf(x) > 0) best = Math.max(best, 2);
+          }
+          if (!best) ok = false; else sc += best;
+        }
+        if (!ok) continue;
+      }
+      hits.push([i, sc]);
+    }
+    // 전형 유형·군은 맞는 줄이 있을 때만 거른다(없으면 무시하고 알린다)
+    var note = [];
+    function narrow(test, label) {
+      var f = hits.filter(function (h) { return test(normCache[h[0]][2], index.rows[h[0]]); });
+      if (f.length) hits = f; else if (hits.length) note.push(label);
+    }
+    if (typeRe) typeRe.forEach(function (t) { narrow(function (tn) { return tn.indexOf(nz(t)) >= 0; }, "'" + t + "' 전형을 찾지 못해 전체 전형을 보여 줍니다"); });
+    if (pq.gun) narrow(function (tn) { return tn.indexOf(pq.gun + "군") >= 0 || tn.indexOf("(" + pq.gun + ")") >= 0 || tn.indexOf(nz("정시(" + pq.gun + ")")) >= 0; }, "'" + pq.gun + "군' 표기를 찾지 못해 정시 전체를 보여 줍니다");
+
+    var blocks = {}, order = [];
+    hits.forEach(function (h) {
+      var r = index.rows[h[0]];
+      var key = r[0] + "|" + r[1] + "|" + normCache[h[0]][0];
+      var b = blocks[key];
+      if (!b) { b = blocks[key] = { u: r[0], p: r[1], name: r[5], score: 0, lines: [] }; order.push(key); }
+      b.score = Math.max(b.score, h[1]);
+      b.lines.push(h[0]);
+    });
+    var list = order.map(function (k) { return blocks[k]; });
+    list.sort(function (a, b) {
+      return (b.score - a.score) || (a.u - b.u) || (a.p - b.p) || (a.name.length - b.name.length) || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+    });
+    return { blocks: list, rows: hits.length, note: note };
+  }
+
+  function blank(v) { return v == null || v === "" || v === "-" || v === "—" || v === "▨"; }
+
+  /* 한 줄의 카드 데이터: {type, sub, title, keys:[{label,value,kind}], all:[{label,value,prev}], cite, noScore} */
+  function line(udata, ti, ri) {
+    var t = udata.tables[ti], r = t.rows[ri], k = t.key, off = 2;
+    function kv(i, kind) { return { label: t.cols[i], value: blank(r[off + i]) ? "비공개·없음" : r[off + i], kind: kind, empty: blank(r[off + i]) }; }
+    var keys = [];
+    (k.score || []).forEach(function (i) { keys.push(kv(i, "score")); });
+    if (k.ratio != null) keys.push(kv(k.ratio, "ratio"));
+    if (k.fill != null) keys.push(kv(k.fill, "fill"));
+    if (k.n != null) keys.push(kv(k.n, "n"));
+    var cls = (k.cls || []).map(function (i) { return r[off + i]; }).filter(function (v) { return !blank(v); });
+    var all = t.cols.map(function (c, i) { return { label: c, value: r[off + i], prev: t.prev.indexOf(i) >= 0 }; })
+      .filter(function (x) { return !blank(x.value); });
+    return { type: r[0], unit: r[1], sub: t.sub, title: t.t, period: t.p, keys: keys, cls: cls, all: all,
+      cite: r[r.length - 1] || t.cite, noScore: !(k.score && k.score.length), notes: t.notes };
+  }
+
+  /* 전형 이름에서 표 설명 꼬리를 떼어, 같은 전형의 경쟁률 표와 성적 표를 한 줄로 합칠 열쇠를 만든다 */
+  function typeKey(t) {
+    return nz(String(t).replace(/\s*(경쟁률|입시\s*결과|성적\s*현황|지원자\s*현황|교과성적|모집인원[·,]|최초합격자[·,]|내신등급[·,]|충원\(|충원율\s*·).*$/, "")
+      .replace(/\s*\((최종등록자|20\d\d)[^)]*\)\s*$/, ""));
+  }
+
+  /* 블록의 줄들을 전형별로 합친다 -> [{type, keys, parts:[line], noScore}] (성적이 있는 전형이 먼저) */
+  function entries(block, index, getU) {
+    var map = {}, order = [];
+    block.lines.forEach(function (i) {
+      var r = index.rows[i], ln = line(getU(r[0]), r[2], r[3]);
+      var k = typeKey(ln.type);
+      var e = map[k];
+      if (!e) { e = map[k] = { type: ln.type, parts: [], keys: [], cls: [] }; order.push(k); }
+      if (ln.type.length < e.type.length) e.type = ln.type;
+      e.parts.push(ln);
+    });
+    return order.map(function (k) {
+      var e = map[k], seen = {};
+      ["score", "ratio", "fill", "n"].forEach(function (kind) {
+        for (var a = 0; a < e.parts.length; a++) {
+          if (e.parts[a].sub && kind === "score") continue;
+          var ks = e.parts[a].keys.filter(function (x) { return x.kind === kind; });
+          if (kind !== "score") ks = ks.slice(0, 1);
+          if (ks.length && !seen[kind]) { seen[kind] = 1; e.keys = e.keys.concat(ks); }
+        }
+      });
+      e.parts.forEach(function (p) { p.cls.forEach(function (c) { if (e.cls.indexOf(c) < 0) e.cls.push(c); }); });
+      e.noScore = !seen.score;
+      return e;
+    }).sort(function (a, b) { return (a.noScore ? 1 : 0) - (b.noScore ? 1 : 0); });
+  }
+
+  var api = { parse: parse, search: search, line: line, entries: entries, typeKey: typeKey, nz: nz, stem: stem, ALIAS: ALIAS, MISSING: MISSING, _reset: function () { aliasMap = null; normCache = null; } };
+  if (typeof module !== "undefined" && module.exports) module.exports = api; else root.ResultCore = api;
+})(typeof window !== "undefined" ? window : globalThis);
+
+</script>
+<script>
+/* 입시결과 검색 페이지 UI. ResultCore(result_core.js)와 data/result/*.json 을 쓴다. */
+(function () {
+  "use strict";
+  var C = window.ResultCore, DATA = "data/result/", PAGE = 10;
+  var $ = function (id) { return document.getElementById(id); };
+  var index = null, ucache = {}, state = { q: "", page: 0, res: null, pq: null };
+  var P = ["수시", "정시", "기타"];
+
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function getU(i) { return ucache[i]; }
+  function loadU(i) {
+    if (ucache[i]) return Promise.resolve(ucache[i]);
+    return fetch(DATA + "u/" + index.univs[i].f).then(function (r) { return r.json(); }).then(function (d) { ucache[i] = d; return d; });
+  }
+  function hl(name, pq) {
+    var out = esc(name);
+    (pq.dept || []).forEach(function (d) {
+      d.vars.concat([d.raw]).forEach(function (v) {
+        if (!v || v.length < 2) return;
+        var re = new RegExp(v.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").split("").join("\\s*"), "i");
+        if (out.indexOf("<mark>") < 0) out = out.replace(re, function (m) { return "<mark>" + m + "</mark>"; });
+      });
+    });
+    return out;
+  }
+
+  /* ---------- 탭 ---------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tabs button"));
+  function showTab(id) {
+    tabs.forEach(function (b) {
+      var on = b.getAttribute("data-t") === id;
+      b.setAttribute("aria-selected", on ? "true" : "false");
+      $(b.getAttribute("data-t")).hidden = !on;
+    });
+  }
+  tabs.forEach(function (b) { b.addEventListener("click", function () { showTab(b.getAttribute("data-t")); }); });
+
+  /* ---------- 검색 ---------- */
+  function setQuery(q, push) {
+    $("q").value = q;
+    state.q = q;
+    state.page = 0;
+    run();
+    if (push !== false) { try { history.replaceState(null, "", q ? "?q=" + encodeURIComponent(q) : location.pathname); } catch (e) {} }
+  }
+  function chips(pq) {
+    var h = [];
+    pq.univs.forEach(function (i) { h.push(["대학", index.univs[i].n, "u" + i]); });
+    if (pq.period !== null) h.push(["시기", P[pq.period] + (pq.gun ? " " + pq.gun + "군" : ""), "p"]);
+    pq.types.forEach(function (t) { h.push(["전형", t, "t" + t]); });
+    pq.dept.forEach(function (d) { h.push(["학과", d.raw, "d" + d.raw]); });
+    return h.map(function (x) { return '<span class="chip"><i>' + x[0] + "</i>" + esc(x[1]) + "</span>"; }).join("");
+  }
+  function emptyMessage(pq) {
+    var m = [];
+    pq.missing.forEach(function (n) { m.push("<b>" + esc(n) + "</b>는 진학사 입시결과 자료실에 없어 이 페이지에 자료가 없습니다."); });
+    pq.univs.forEach(function (i) {
+      var u = index.univs[i];
+      if (pq.period !== null && u.has.indexOf(P[pq.period]) < 0)
+        m.push("<b>" + esc(u.n) + "</b>는 " + P[pq.period] + " 입시결과가 진학사에 게시되지 않았습니다. " + (u.has.length ? u.has.join("·") + " 결과만 있습니다." : ""));
+    });
+    if (!m.length) {
+      if (!pq.univs.length && !pq.dept.length && pq.period === null && !pq.types.length) m.push("대학이나 학과 이름을 입력해 주세요. 예: 경희대 경영 수시");
+      else m.push("조건에 맞는 모집단위를 찾지 못했습니다. 학과 이름을 더 짧게 쓰거나(예: 컴퓨터, 경영) 수시·정시 조건을 빼 보세요.");
+      if (pq.dept.length && pq.univs.length) {
+        var alt = C.search({ univs: [], period: pq.period, gun: null, types: [], dept: pq.dept, missing: [] }, index);
+        var us = [];
+        alt.blocks.forEach(function (b) { if (us.indexOf(b.u) < 0) us.push(b.u); });
+        if (us.length) m.push("같은 학과명이 있는 다른 대학: " + us.slice(0, 8).map(function (i) {
+          return '<a href="#" class="qlink" data-q="' + esc(index.univs[i].n.replace(/학교.*/, "") + " " + pq.dept.map(function (d) { return d.raw; }).join(" ")) + '">' + esc(index.univs[i].n) + "</a>";
+        }).join(" · "));
+      }
+    }
+    return '<div class="fix">' + m.join("<br>") + "</div>";
+  }
+
+  function keyHtml(k) {
+    return '<div class="kv ' + k.kind + (k.empty ? " none" : "") + '"><b>' + esc(k.value) + "</b><span>" + esc(k.label) + "</span></div>";
+  }
+  function entryHtml(e, u, bi, ei) {
+    var id = "x" + bi + "_" + ei;
+    var head = '<div class="etype">' + esc(e.type) + (e.cls.length ? ' <em>' + esc(e.cls.slice(0, 3).join(" · ")) + "</em>" : "") + "</div>";
+    var keys = '<div class="kvs">' + e.keys.map(keyHtml).join("") + "</div>";
+    var warn = e.noScore ? '<p class="nos">이 전형은 성적 컷이 공개되지 않았습니다(경쟁률·충원만 있음).</p>' : "";
+    var more = e.parts.map(function (p) {
+      var rows = p.all.map(function (x) { return "<tr" + (x.prev ? ' class="prev"' : "") + "><th>" + esc(x.label) + "</th><td>" + esc(x.value) + "</td></tr>"; }).join("");
+      return '<div class="part"><div class="ptitle">' + esc((p.sub ? p.sub + " · " : "") + (p.title || p.type)) + ' <span class="cite">근거 ' + esc(p.cite || "") + "</span></div><table>" + rows + "</table>" +
+        (p.notes && p.notes.length ? '<ul class="pnotes">' + p.notes.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("") + "</ul>" : "") + "</div>";
+    }).join("");
+    return '<div class="entry">' + head + keys + warn + '<details id="' + id + '"><summary>전체 값 보기</summary>' + more + "</details></div>";
+  }
+  function blockHtml(b, bi, pq) {
+    var u = getU(b.u), es = C.entries(b, index, getU);
+    es.sort(function (x, y) {
+      function w(e) { return e.noScore ? 2 : e.keys.some(function (k) { return k.kind === "score" && !k.empty; }) ? 0 : 1; }
+      return w(x) - w(y);
+    });
+    var prevYear = index.univs[b.u].y !== 2026;
+    return '<article class="blk"><header><span class="per p' + b.p + '">' + P[b.p] + "</span>" +
+      '<span class="yr' + (prevYear ? " old" : "") + '">' + index.univs[b.u].y + "학년도" + (prevYear ? " (2026 자료 없음)" : "") + "</span>" +
+      "<h3>" + hl(b.name, pq) + "</h3></header>" + es.map(function (e, ei) { return entryHtml(e, u, bi, ei); }).join("") + "</article>";
+  }
+
+  function run() {
+    var q = state.q.trim(), box = $("results"), info = $("info");
+    $("chips").innerHTML = "";
+    if (!q) { box.innerHTML = ""; info.textContent = ""; $("pager").hidden = true; $("examples").hidden = false; return; }
+    $("examples").hidden = true;
+    var pq = C.parse(q, index), res = C.search(pq, index);
+    state.pq = pq; state.res = res;
+    $("chips").innerHTML = chips(pq);
+    if (!res.blocks.length) { box.innerHTML = emptyMessage(pq); info.textContent = ""; $("pager").hidden = true; return; }
+    render();
+  }
+  function render() {
+    var res = state.res, pq = state.pq, box = $("results");
+    var pages = Math.ceil(res.blocks.length / PAGE);
+    state.page = Math.min(Math.max(state.page, 0), pages - 1);
+    var slice = res.blocks.slice(state.page * PAGE, state.page * PAGE + PAGE);
+    var need = [];
+    slice.forEach(function (b) { if (need.indexOf(b.u) < 0) need.push(b.u); });
+    var nu = [];
+    res.blocks.forEach(function (b) { if (nu.indexOf(b.u) < 0) nu.push(b.u); });
+    $("info").textContent = "모집단위 " + res.blocks.length + "개" + (nu.length > 1 ? " · 대학 " + nu.length + "곳" : "");
+    box.innerHTML = '<p class="note">불러오는 중…</p>';
+    var token = ++render.token;
+    Promise.all(need.map(loadU)).then(function () {
+      if (token !== render.token) return;
+      var h = [];
+      if (res.note.length) h.push('<p class="note">' + res.note.map(esc).join("<br>") + "</p>");
+      if (nu.length > 1) h.push('<p class="note warn">대학마다 발표 지표가 다릅니다(최종등록자 70%컷, 평균, 환산점수 등). 값 아래의 지표 이름을 확인하고, 서로 다른 대학의 수치를 그대로 비교하지 마세요.</p>');
+      var cur = -1;
+      slice.forEach(function (b, bi) {
+        if (b.u !== cur) {
+          if (cur !== -1) h.push("</section>");
+          cur = b.u;
+          var u = getU(b.u), g = u.guide || {};
+          var gl = [g["수시"] && pq.period !== 1 ? "수시: " + g["수시"] : "", g["정시"] && pq.period !== 0 ? "정시: " + g["정시"] : ""].filter(Boolean);
+          h.push('<section class="ugrp"><div class="uhead"><h2>' + esc(u.name) + "</h2>" +
+            (gl.length ? '<details class="guide"><summary>이 대학의 지표</summary><p>' + gl.map(esc).join("<br>") + "</p>" +
+              (u.how && u.how.length ? "<ul>" + u.how.slice(0, 6).map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "") + "</details>" : "") + "</div>");
+        }
+        h.push(blockHtml(b, bi, pq));
+      });
+      h.push("</section>");
+      box.innerHTML = h.join("");
+      var pg = $("pager");
+      pg.hidden = pages < 2;
+      $("pos").textContent = (state.page + 1) + " / " + pages + "쪽";
+      $("prev").disabled = state.page === 0;
+      $("next").disabled = state.page === pages - 1;
+    });
+  }
+  render.token = 0;
+
+  /* ---------- 대학별 보기 · 초기화 ---------- */
+  function fillUnivs() {
+    $("ulist").innerHTML = index.univs.map(function (u) {
+      return '<button type="button" class="ubtn" data-q="' + esc(u.n) + '"><b>' + esc(u.n) + "</b><span>" + u.y + "학년도 · " + (u.has.join("·") || "경쟁률") + "</span></button>";
+    }).join("");
+    $("dl").innerHTML = index.univs.map(function (u) { return '<option value="' + esc(u.n.replace(/학교.*/, "")) + '">'; }).join("");
+  }
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest ? e.target.closest("[data-q]") : null;
+    if (!t) return;
+    e.preventDefault();
+    showTab("search");
+    setQuery(t.getAttribute("data-q"));
+    window.scrollTo(0, 0);
+  });
+  $("form").addEventListener("submit", function (e) { e.preventDefault(); setQuery($("q").value); $("q").blur(); });
+  var timer = null;
+  $("q").addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(function () { setQuery($("q").value); }, 250); });
+  $("clear").addEventListener("click", function () { setQuery(""); $("q").focus(); });
+  $("prev").addEventListener("click", function () { state.page--; render(); $("chips").scrollIntoView(); });
+  $("next").addEventListener("click", function () { state.page++; render(); $("chips").scrollIntoView(); });
+
+  fetch(DATA + "index.json").then(function (r) { return r.json(); }).then(function (d) {
+    index = d;
+    fillUnivs();
+    $("loading").hidden = true;
+    var m = location.search.match(/[?&]q=([^&]*)/);
+    if (m) setQuery(decodeURIComponent(m[1].replace(/\+/g, " ")), false);
+  }).catch(function (e) { $("loading").textContent = "자료를 불러오지 못했습니다: " + e; });
+})();
+
+</script>
+</body>
+</html>
