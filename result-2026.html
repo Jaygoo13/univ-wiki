@@ -363,12 +363,25 @@ a.qlink { color: var(--navy); }
     var blocks = {}, order = [];
     hits.forEach(function (h) {
       var r = index.rows[h[0]];
-      var key = r[0] + "|" + r[1] + "|" + normCache[h[0]][0];
+      var key = r[0] + "|" + r[1] + "|" + (r[7] || normCache[h[0]][0]);
       var b = blocks[key];
       if (!b) { b = blocks[key] = { u: r[0], p: r[1], name: r[5], score: 0, lines: [] }; order.push(key); }
+      if (r[5].length > b.name.length) b.name = r[5];  // 건축 / 건축학과 -> 더 온전한 이름을 쓴다
       b.score = Math.max(b.score, h[1]);
       b.lines.push(h[0]);
     });
+    var inBlock = {};
+    hits.forEach(function (h) { inBlock[h[0]] = 1; });
+    if (pq.dept.length && order.length && order.length <= 400) {
+      for (var j = 0; j < index.rows.length; j++) {
+        if (inBlock[j]) continue;
+        var rr = index.rows[j], bk = blocks[rr[0] + "|" + rr[1] + "|" + (rr[7] || normCache[j][0])];
+        if (!bk) continue;
+        if (typeRe && !typeRe.every(function (t) { return normCache[j][2].indexOf(nz(t)) >= 0; })) continue;
+        bk.lines.push(j);
+        if (rr[5].length > bk.name.length) bk.name = rr[5];
+      }
+    }
     var list = order.map(function (k) { return blocks[k]; });
     list.sort(function (a, b) {
       return (b.score - a.score) || (a.u - b.u) || (a.p - b.p) || (a.name.length - b.name.length) || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
@@ -516,7 +529,7 @@ a.qlink { color: var(--navy); }
     var id = "x" + bi + "_" + ei;
     var head = '<div class="etype">' + esc(e.type) + (e.cls.length ? ' <em>' + esc(e.cls.slice(0, 3).join(" · ")) + "</em>" : "") + "</div>";
     var keys = '<div class="kvs">' + e.keys.map(keyHtml).join("") + "</div>";
-    var warn = e.noScore ? '<p class="nos">이 전형은 성적 컷이 공개되지 않았습니다(경쟁률·충원만 있음).</p>' : "";
+    var warn = e.noScore ? '<p class="nos">이 표에는 성적 컷이 없습니다(경쟁률·충원만). 대학이 성적을 다른 이름의 모집단위로 발표했다면 다른 카드에 있을 수 있습니다.</p>' : "";
     var more = e.parts.map(function (p) {
       var rows = p.all.map(function (x) { return "<tr" + (x.prev ? ' class="prev"' : "") + "><th>" + esc(x.label) + "</th><td>" + esc(x.value) + "</td></tr>"; }).join("");
       return '<div class="part"><div class="ptitle">' + esc((p.sub ? p.sub + " · " : "") + (p.title || p.type)) + ' <span class="cite">근거 ' + esc(p.cite || "") + "</span></div><table>" + rows + "</table>" +
