@@ -405,7 +405,7 @@ a.qlink { color: var(--navy); }
     var t = udata.tables[ti], r = t.rows[ri], k = t.key, off = 2;
     function kv(i, kind) { return { label: t.cols[i], value: blank(r[off + i]) ? "비공개·없음" : r[off + i], kind: kind, empty: blank(r[off + i]) }; }
     var keys = [];
-    (k.score || []).forEach(function (i) { keys.push(kv(i, "score")); });
+    (k.score || []).forEach(function (i) { var x = kv(i, "score"); x.head = (t.kh && t.kh[i]) || "성적"; keys.push(x); });
     if (k.ratio != null) keys.push(kv(k.ratio, "ratio"));
     if (k.fill != null) keys.push(kv(k.fill, "fill"));
     if (k.n != null) keys.push(kv(k.n, "n"));
@@ -535,14 +535,14 @@ a.qlink { color: var(--navy); }
      성적을 아예 발표하지 않은 전형(서울대 등)만 경쟁률 · 충원 · 모집인원 세 칸으로 줄인다. */
   var HEAD = { score: "성적", ratio: "경쟁률", fill: "충원", n: "모집인원" };
   function slotHtml(kind, k, head) {
-    if (!k) return '<div class="kv ' + kind + ' none"><i>' + head + '</i><b>–</b><span>발표 자료 없음</span></div>';
+    if (!k) return '<div class="kv ' + kind + ' none"><i>' + head + '</i><b>–</b><span>' + (kind === "score" ? "이 대학은 지표를 하나만 발표" : "발표 자료 없음") + "</span></div>";
     return '<div class="kv ' + kind + (k.empty ? " none" : "") + '"><i>' + head + "</i><b>" + esc(k.empty ? "–" : k.value) + "</b><span>" + esc(k.label) + (k.empty ? " · 비공개" : "") + "</span></div>";
   }
   function slotsHtml(e) {
     var sc = e.keys.filter(function (k) { return k.kind === "score"; });
     function one(kind) { return e.keys.filter(function (k) { return k.kind === kind; })[0]; }
     var h = "";
-    if (!e.noScore) h += slotHtml("score", sc[0], "성적 ①") + slotHtml("score", sc[1], "성적 ②");
+    if (!e.noScore) h += slotHtml("score", sc[0], sc[0] ? sc[0].head : "성적") + slotHtml("score", sc[1], sc[1] ? sc[1].head : "성적 (둘째 지표)");
     h += slotHtml("ratio", one("ratio"), HEAD.ratio) + slotHtml("fill", one("fill"), HEAD.fill) + slotHtml("n", one("n"), HEAD.n);
     return '<div class="kvs' + (e.noScore ? " three" : "") + '">' + h + "</div>";
   }
