@@ -91,6 +91,7 @@ a.u:hover { text-decoration-color: var(--navy); color: var(--navy); }
 tr:target td { background: var(--navy-soft); }
 tr.hide { display: none !important; }
 tr.pg { display: none !important; }
+section.tab .note { margin: 4px 0 10px; }
 .tabs { position: sticky; top: 0; z-index: 5; background: var(--bg); display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; border-bottom: 2px solid var(--line); margin: 18px 0 0; padding-top: 6px; }
 .tabs::-webkit-scrollbar { display: none; }
 .tabs button { font: inherit; font-size: 14px; font-weight: 500; flex: none; white-space: nowrap; min-height: 42px; padding: 6px 14px; border: 0; border-bottom: 3px solid transparent; margin-bottom: -2px; background: transparent; color: var(--muted); cursor: pointer; }
@@ -169,13 +170,16 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
     <span class="cnt" id="cnt" aria-live="polite"></span>
   </div>
 
+  <div class="tabs" role="tablist" aria-label="구분"><button type="button" role="tab" id="t-overview" data-t="overview" aria-controls="overview" aria-selected="true">개요</button><button type="button" role="tab" id="t-method" data-t="method" aria-controls="method" aria-selected="false" tabindex=-1>과목 반영</button><button type="button" role="tab" id="t-ga" data-t="ga" aria-controls="ga" aria-selected="false" tabindex=-1>가군</button><button type="button" role="tab" id="t-na" data-t="na" aria-controls="na" aria-selected="false" tabindex=-1>나군</button><button type="button" role="tab" id="t-da" data-t="da" aria-controls="da" aria-selected="false" tabindex=-1>다군</button><button type="button" role="tab" id="t-sum" data-t="sum" aria-controls="sum" aria-selected="false" tabindex=-1>대학별 인원</button><button type="button" role="tab" id="t-edge" data-t="edge" aria-controls="edge" aria-selected="false" tabindex=-1>경계·제외</button><button type="button" role="tab" id="t-caveat" data-t="caveat" aria-controls="caveat" aria-selected="false" tabindex=-1>주의</button></div>
+<section class="tab" id="overview" role="tabpanel" aria-labelledby="t-overview">
+<h2>개요</h2>
   <div class="keys">
     <div class="key"><b>수능최저 없음</b> · 32곳 모두 일반전형에 수능최저학력기준이 없습니다. 26곳은 수능 100입니다.</div>
     <div class="key"><b>수학 미반영</b> · 용인대 인문사회(국 40 · 영 30 · 탐 30), 국민대 미래융합전공(C)(국 50 · 영 20 · 탐 30).</div>
     <div class="key"><b>탐구 1과목</b> · 명지대, 상명대, 삼육대, 가천대, 가톨릭대, 경기대, 한국항공대, 수원대, 용인대, 성균관대 다군.</div>
     <div class="key"><b>학생부 반영</b> · 서울대, 연세대, 한양대 서울, 중앙대(출결), 동국대 다군, 경기대 자유전공학부.</div>
   </div>
-  <details class="how"><summary>기준과 읽는 법</summary>
+<h3>기준과 읽는 법</h3>
 <ul>
 <li>기준: 2027학년도 정시 모집요강. 수도권 대학 32곳.</li>
 <li>범위: 정시 <strong>수능위주 일반전형, 정원 내</strong>. 인문·어문·사회·상경·법·행정·사범(문과)·문과 자유전공. 이공계·의약·간호·예체능은 뺐다.</li>
@@ -186,11 +190,38 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <li>작성 2026-11-17.</li>
 </ul>
 
-  </details>
-  <div class="tabs" role="tablist" aria-label="구분"><button type="button" role="tab" id="t-method" data-t="method" aria-controls="method" aria-selected="true">과목 반영</button><button type="button" role="tab" id="t-ga" data-t="ga" aria-controls="ga" aria-selected="false" tabindex=-1>가군</button><button type="button" role="tab" id="t-na" data-t="na" aria-controls="na" aria-selected="false" tabindex=-1>나군</button><button type="button" role="tab" id="t-da" data-t="da" aria-controls="da" aria-selected="false" tabindex=-1>다군</button><button type="button" role="tab" id="t-sum" data-t="sum" aria-controls="sum" aria-selected="false" tabindex=-1>대학별 인원</button><button type="button" role="tab" id="t-glance" data-t="glance" aria-controls="glance" aria-selected="false" tabindex=-1>한눈에 보기</button><button type="button" role="tab" id="t-edge" data-t="edge" aria-controls="edge" aria-selected="false" tabindex=-1>경계·제외</button><button type="button" role="tab" id="t-caveat" data-t="caveat" aria-controls="caveat" aria-selected="false" tabindex=-1>주의</button></div>
-  <p class="note only-pc">표는 5개·10개 단위로 나눠 보이고, 표 아래의 이전·다음으로 넘깁니다. 표가 화면보다 넓으면 표 안에서 좌우로 밀어 볼 수 있습니다.</p>
-  <p class="note only-m">카드 보기입니다. 5개·10개 단위로 나눠 보이고, 목록 아래의 이전·다음으로 넘깁니다.</p>
-<section class="tab" id="method" role="tabpanel" aria-labelledby="t-method">
+<h3>한눈에 보기</h3>
+<ul>
+<li><strong>수학을 반영하지 않는 곳</strong>: 용인대 인문사회(국 40 · 영 30 · 탐 30), 국민대 미래융합전공(C)(국 50 · 영 20 · 탐 30).</li>
+<li><strong>수학을 빼거나 비중을 낮출 수 있는 선택형</strong></li>
+<ul>
+<li>수원대 일반전형2: 4개 영역 중 상위 3개만 반영.</li>
+<li>삼육대: 점수 높은 순으로 35 / 25 / 25 / 15, 가장 낮은 영역이 15%.</li>
+<li>가천대: 국·수 중 높은 쪽 40, 낮은 쪽 30.</li>
+<li>가톨릭대 일반Ⅱ: 국·수 중 높은 1개만 40.</li>
+<li>용인대 무전공학부: 국·수 중 1개만 40.</li>
+</ul>
+<li><strong>수학 비율이 낮은 곳(25% 이하)</strong>: 숭실대 인문 20, 경희대 인문 25, 연세대 유형Ⅰ 25, 동국대 25, 서울시립대 인문Ⅱ 25, 광운대 인문 25, 서울과기대 인문 25, 명지대 인문사회 25, 상명대 25, 단국대 인문 25, 아주대 인문2 25, 인하대 인문 25.</li>
+<li><strong>수학 비율이 높은 곳(40% 이상)</strong>: 중앙대 사회과학대·경영경제대 40, 건국대 B형 40, 국민대 B유형 40, 아주대 경영대학 40, 서강대 A형 43.3(B형과 비교해 유리한 쪽 적용), 성균관대 가군(국·수 중 높은 쪽 45).</li>
+<li><strong>탐구 1과목만 반영</strong>: 명지대, 상명대, 삼육대, 가천대, 가톨릭대, 경기대, 한국항공대, 수원대, 용인대, 성균관대 다군(글로벌경제·글로벌경영).</li>
+<li><strong>사탐 가산점이 있는 곳</strong>: 연세대 유형Ⅰ(과목당 3%), 중앙대 인문대·사범대(과목당 5%), 서울시립대(2과목 모두 사탐이면 3%), 숭실대(과목당 3%), 인하대 인문(3%), 한양대 ERICA 인문(과목당 3%), 동국대 컴퓨터·AI학부(인문)(3%).</li>
+<li><strong>학생부를 반영하는 곳</strong></li>
+<ul>
+<li>서울대: 교과평가 20(정성).</li>
+<li>연세대: 50점(전 과목 등급 + 출결).</li>
+<li>한양대 서울: 학생부종합평가 10%(정성).</li>
+<li>중앙대: 출결만 10%.</li>
+<li>동국대 다군(경영대학·사범대학·열린전공): 학생부평가 10%(정성).</li>
+<li>경기대 자유전공학부: 교과 5%.</li>
+<li>나머지 26곳은 수능 100이다.</li>
+</ul>
+<li><strong>제2외국어/한문이 필요한 곳</strong>: 서울대 인문·사회·경영·사범(문과).</li>
+<li><strong>면접이 있는 곳</strong>: 서울대 사범대(교직적성·인성), 연세대 언더우드(국제).</li>
+<li><strong>영어 등급 간 차이가 큰 곳(1→3등급)</strong>: 연세대 −12.5, 홍익대 −12, 한양대 서울 −10, 서울시립대 인문Ⅱ −16(200점 기준), 용인대 −15.</li>
+</ul>
+
+</section>
+<section class="tab" id="method" role="tabpanel" aria-labelledby="t-method" hidden>
 <h2>대학별 과목 반영</h2>
 <p class="lead">비율은 국어 / 수학 / 영어 / 탐구 순이다. 영어 칸의 숫자 넷은 1 / 2 / 3 / 4등급 값이다.</p>
 <h3>서울 21곳</h3>
@@ -513,38 +544,6 @@ html[data-view="m"] table.t-sum th, html[data-view="m"] table.t-sum td { padding
 <tr data-u="수원대"><td data-l="대학"><a class="u" href="#m-수원대">수원대</a></td><td data-l="가">—</td><td data-l="나">215</td><td data-l="다">—</td><td data-l="합계">215</td></tr>
 <tr data-u="용인대"><td data-l="대학"><a class="u" href="#m-용인대">용인대</a></td><td data-l="가">—</td><td data-l="나">57</td><td data-l="다">—</td><td data-l="합계">57</td></tr>
 </tbody></table></div>
-
-</section>
-<section class="tab" id="glance" role="tabpanel" aria-labelledby="t-glance" hidden>
-<h2>한눈에 보기</h2>
-<ul>
-<li><strong>수학을 반영하지 않는 곳</strong>: 용인대 인문사회(국 40 · 영 30 · 탐 30), 국민대 미래융합전공(C)(국 50 · 영 20 · 탐 30).</li>
-<li><strong>수학을 빼거나 비중을 낮출 수 있는 선택형</strong></li>
-<ul>
-<li>수원대 일반전형2: 4개 영역 중 상위 3개만 반영.</li>
-<li>삼육대: 점수 높은 순으로 35 / 25 / 25 / 15, 가장 낮은 영역이 15%.</li>
-<li>가천대: 국·수 중 높은 쪽 40, 낮은 쪽 30.</li>
-<li>가톨릭대 일반Ⅱ: 국·수 중 높은 1개만 40.</li>
-<li>용인대 무전공학부: 국·수 중 1개만 40.</li>
-</ul>
-<li><strong>수학 비율이 낮은 곳(25% 이하)</strong>: 숭실대 인문 20, 경희대 인문 25, 연세대 유형Ⅰ 25, 동국대 25, 서울시립대 인문Ⅱ 25, 광운대 인문 25, 서울과기대 인문 25, 명지대 인문사회 25, 상명대 25, 단국대 인문 25, 아주대 인문2 25, 인하대 인문 25.</li>
-<li><strong>수학 비율이 높은 곳(40% 이상)</strong>: 중앙대 사회과학대·경영경제대 40, 건국대 B형 40, 국민대 B유형 40, 아주대 경영대학 40, 서강대 A형 43.3(B형과 비교해 유리한 쪽 적용), 성균관대 가군(국·수 중 높은 쪽 45).</li>
-<li><strong>탐구 1과목만 반영</strong>: 명지대, 상명대, 삼육대, 가천대, 가톨릭대, 경기대, 한국항공대, 수원대, 용인대, 성균관대 다군(글로벌경제·글로벌경영).</li>
-<li><strong>사탐 가산점이 있는 곳</strong>: 연세대 유형Ⅰ(과목당 3%), 중앙대 인문대·사범대(과목당 5%), 서울시립대(2과목 모두 사탐이면 3%), 숭실대(과목당 3%), 인하대 인문(3%), 한양대 ERICA 인문(과목당 3%), 동국대 컴퓨터·AI학부(인문)(3%).</li>
-<li><strong>학생부를 반영하는 곳</strong></li>
-<ul>
-<li>서울대: 교과평가 20(정성).</li>
-<li>연세대: 50점(전 과목 등급 + 출결).</li>
-<li>한양대 서울: 학생부종합평가 10%(정성).</li>
-<li>중앙대: 출결만 10%.</li>
-<li>동국대 다군(경영대학·사범대학·열린전공): 학생부평가 10%(정성).</li>
-<li>경기대 자유전공학부: 교과 5%.</li>
-<li>나머지 26곳은 수능 100이다.</li>
-</ul>
-<li><strong>제2외국어/한문이 필요한 곳</strong>: 서울대 인문·사회·경영·사범(문과).</li>
-<li><strong>면접이 있는 곳</strong>: 서울대 사범대(교직적성·인성), 연세대 언더우드(국제).</li>
-<li><strong>영어 등급 간 차이가 큰 곳(1→3등급)</strong>: 연세대 −12.5, 홍익대 −12, 한양대 서울 −10, 서울시립대 인문Ⅱ −16(200점 기준), 용인대 −15.</li>
-</ul>
 
 </section>
 <section class="tab" id="edge" role="tabpanel" aria-labelledby="t-edge" hidden>
