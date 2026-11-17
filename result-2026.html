@@ -107,13 +107,22 @@ details.guide ul { margin: 4px 0; }
 .entry { border-top: 1px solid var(--line); padding: 10px 0 4px; }
 .etype { font-size: 14px; font-weight: 500; color: var(--navy); }
 .etype em { font-style: normal; font-weight: 400; font-size: 12px; color: var(--muted); margin-left: 6px; }
-.kvs { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 8px; margin: 8px 0 2px; }
-.kv { background: var(--sub); border-radius: 8px; padding: 8px 10px; min-width: 0; }
-.kv b { display: block; font-family: var(--font-mono); font-size: 19px; line-height: 1.25; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.kvs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: 8px 0 2px; }
+.kv { grid-column: span 2; background: var(--sub); border-radius: 8px; padding: 8px 10px; min-width: 0; }
+.kv.score { grid-column: span 3; background: var(--navy-soft); }
+.kv i { display: block; font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--muted); margin-bottom: 2px; }
+.kv.score i { color: var(--navy); }
+.kv b { display: block; font-family: var(--font-mono); font-size: 18px; line-height: 1.25; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 .kv span { display: block; font-size: 11.5px; color: var(--muted); line-height: 1.35; margin-top: 3px; overflow-wrap: anywhere; }
-.kv.score { background: var(--navy-soft); }
 .kv.score b { color: var(--navy); font-size: 22px; }
-.kv.none b { font-family: var(--font-body); font-size: 13px; color: var(--muted); font-weight: 500; }
+.kv.none b { color: var(--muted); }
+.kvs.three .kv { grid-column: span 2; }
+@media (min-width: 720px) {
+  .kvs { grid-template-columns: repeat(5, 1fr); }
+  .kv, .kv.score { grid-column: span 1; }
+  .kvs.three { grid-template-columns: repeat(3, 1fr); }
+  .kvs.three .kv { grid-column: span 1; }
+}
 .nos { font-size: 12.5px; color: var(--omr); margin: 4px 0 0; }
 .part { margin: 8px 0 12px; }
 .ptitle { font-size: 12.5px; font-weight: 500; margin-bottom: 4px; overflow-wrap: anywhere; }
@@ -522,14 +531,26 @@ a.qlink { color: var(--navy); }
     return '<div class="fix">' + m.join("<br>") + "</div>";
   }
 
-  function keyHtml(k) {
-    return '<div class="kv ' + k.kind + (k.empty ? " none" : "") + '"><b>' + esc(k.value) + "</b><span>" + esc(k.label) + "</span></div>";
+  /* 모든 대학을 같은 칸 배치로 보여 준다: 성적 ① · 성적 ② · 경쟁률 · 충원 · 모집인원.
+     성적을 아예 발표하지 않은 전형(서울대 등)만 경쟁률 · 충원 · 모집인원 세 칸으로 줄인다. */
+  var HEAD = { score: "성적", ratio: "경쟁률", fill: "충원", n: "모집인원" };
+  function slotHtml(kind, k, head) {
+    if (!k) return '<div class="kv ' + kind + ' none"><i>' + head + '</i><b>–</b><span>발표 자료 없음</span></div>';
+    return '<div class="kv ' + kind + (k.empty ? " none" : "") + '"><i>' + head + "</i><b>" + esc(k.empty ? "–" : k.value) + "</b><span>" + esc(k.label) + (k.empty ? " · 비공개" : "") + "</span></div>";
+  }
+  function slotsHtml(e) {
+    var sc = e.keys.filter(function (k) { return k.kind === "score"; });
+    function one(kind) { return e.keys.filter(function (k) { return k.kind === kind; })[0]; }
+    var h = "";
+    if (!e.noScore) h += slotHtml("score", sc[0], "성적 ①") + slotHtml("score", sc[1], "성적 ②");
+    h += slotHtml("ratio", one("ratio"), HEAD.ratio) + slotHtml("fill", one("fill"), HEAD.fill) + slotHtml("n", one("n"), HEAD.n);
+    return '<div class="kvs' + (e.noScore ? " three" : "") + '">' + h + "</div>";
   }
   function entryHtml(e, u, bi, ei) {
     var id = "x" + bi + "_" + ei;
     var head = '<div class="etype">' + esc(e.type) + (e.cls.length ? ' <em>' + esc(e.cls.slice(0, 3).join(" · ")) + "</em>" : "") + "</div>";
-    var keys = '<div class="kvs">' + e.keys.map(keyHtml).join("") + "</div>";
-    var warn = e.noScore ? '<p class="nos">이 표에는 성적 컷이 없습니다(경쟁률·충원만). 대학이 성적을 다른 이름의 모집단위로 발표했다면 다른 카드에 있을 수 있습니다.</p>' : "";
+    var keys = slotsHtml(e);
+    var warn = e.noScore ? '<p class="nos">이 전형은 대학이 성적 컷을 발표하지 않아 경쟁률·충원·모집인원만 보여 줍니다.</p>' : "";
     var more = e.parts.map(function (p) {
       var rows = p.all.map(function (x) { return "<tr" + (x.prev ? ' class="prev"' : "") + "><th>" + esc(x.label) + "</th><td>" + esc(x.value) + "</td></tr>"; }).join("");
       return '<div class="part"><div class="ptitle">' + esc((p.sub ? p.sub + " · " : "") + (p.title || p.type)) + ' <span class="cite">근거 ' + esc(p.cite || "") + "</span></div><table>" + rows + "</table>" +
