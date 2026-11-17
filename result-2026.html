@@ -137,7 +137,7 @@ details.guide ul { margin: 4px 0; }
 .pager[hidden] { display: none; }
 .pager button { font: inherit; font-size: 13px; min-height: 40px; min-width: 72px; border: 1px solid var(--line); background: var(--paper); color: var(--navy); border-radius: 999px; padding: 4px 14px; cursor: pointer; }
 .pager button:disabled { opacity: .4; cursor: default; }
-#pos { font-family: var(--font-mono); font-size: 12px; color: var(--muted); min-width: 80px; text-align: center; }
+#pos, .pos { font-family: var(--font-mono); font-size: 12px; color: var(--muted); min-width: 80px; text-align: center; }
 #ulist { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 8px; margin: 12px 0; }
 .ubtn { text-align: left; border: 1px solid var(--line); background: var(--paper); border-radius: 10px; padding: 10px 14px; color: var(--ink); min-height: 56px; }
 .ubtn b { display: block; font-size: 15px; }
@@ -173,6 +173,7 @@ a.qlink { color: var(--navy); }
       <button type="button" data-q="경희대 경영 수시">경희대 경영 수시</button><button type="button" data-q="인하대 컴퓨터공학 정시">인하대 컴퓨터공학 정시</button><button type="button" data-q="시립대 세무">시립대 세무</button><button type="button" data-q="간호 수시 교과">간호 수시 교과</button><button type="button" data-q="과기대 컴공">과기대 컴공</button><button type="button" data-q="의대 정시">의대 정시</button><button type="button" data-q="에리카 로봇">에리카 로봇</button>
       <p style="margin-top:10px">대학 이름은 줄여 써도 됩니다(시립대, 과기대, 외대, 에리카, 항공대). "수시"·"정시", "교과"·"종합"·"논술"을 붙이면 그 전형만 보여 줍니다.</p>
     </div>
+    <div class="pager" id="pagerTop" hidden><button type="button" id="prevT">이전</button><span id="posT" class="pos"></span><button type="button" id="nextT">다음</button></div>
     <div id="results"></div>
     <div class="pager" id="pager" hidden><button type="button" id="prev">이전</button><span id="pos"></span><button type="button" id="next">다음</button></div>
   </section>
@@ -573,12 +574,12 @@ a.qlink { color: var(--navy); }
   function run() {
     var q = state.q.trim(), box = $("results"), info = $("info");
     $("chips").innerHTML = "";
-    if (!q) { box.innerHTML = ""; info.textContent = ""; $("pager").hidden = true; $("examples").hidden = false; return; }
+    if (!q) { box.innerHTML = ""; info.textContent = ""; $("pager").hidden = true; $("pagerTop").hidden = true; $("examples").hidden = false; return; }
     $("examples").hidden = true;
     var pq = C.parse(q, index), res = C.search(pq, index);
     state.pq = pq; state.res = res;
     $("chips").innerHTML = chips(pq);
-    if (!res.blocks.length) { box.innerHTML = emptyMessage(pq); info.textContent = ""; $("pager").hidden = true; return; }
+    if (!res.blocks.length) { box.innerHTML = emptyMessage(pq); info.textContent = ""; $("pager").hidden = true; $("pagerTop").hidden = true; return; }
     render();
   }
   function render() {
@@ -613,11 +614,12 @@ a.qlink { color: var(--navy); }
       });
       h.push("</section>");
       box.innerHTML = h.join("");
-      var pg = $("pager");
-      pg.hidden = pages < 2;
-      $("pos").textContent = (state.page + 1) + " / " + pages + "쪽";
-      $("prev").disabled = state.page === 0;
-      $("next").disabled = state.page === pages - 1;
+      [["pager", "pos", "prev", "next"], ["pagerTop", "posT", "prevT", "nextT"]].forEach(function (ids) {
+        $(ids[0]).hidden = pages < 2;
+        $(ids[1]).textContent = (state.page + 1) + " / " + pages + "쪽";
+        $(ids[2]).disabled = state.page === 0;
+        $(ids[3]).disabled = state.page === pages - 1;
+      });
     });
   }
   render.token = 0;
@@ -641,8 +643,9 @@ a.qlink { color: var(--navy); }
   var timer = null;
   $("q").addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(function () { setQuery($("q").value); }, 250); });
   $("clear").addEventListener("click", function () { setQuery(""); $("q").focus(); });
-  $("prev").addEventListener("click", function () { state.page--; render(); $("chips").scrollIntoView(); });
-  $("next").addEventListener("click", function () { state.page++; render(); $("chips").scrollIntoView(); });
+  [["prev", -1, true], ["next", 1, true], ["prevT", -1, false], ["nextT", 1, false]].forEach(function (x) {
+    $(x[0]).addEventListener("click", function () { state.page += x[1]; render(); if (x[2]) $("chips").scrollIntoView(); });
+  });
 
   fetch(DATA + "index.json").then(function (r) { return r.json(); }).then(function (d) {
     index = d;
