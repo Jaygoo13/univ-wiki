@@ -525,11 +525,19 @@ table.t-sum { min-width: 0; }
     if (save) put("size2", String(n));
   }
   function filter() {
-    var s = q.value.replace(/\s+/g, "").replace(/대학교$|대$/, ""), n = 0;
+    // "서울대"는 서울대만: 이름 앞부분(또는 캠퍼스 이름 앞부분)이 맞는 대학을 먼저 찾고, 없을 때만 이름 중간까지 찾는다
+    var s = q.value.replace(/\s+/g, "").replace(/대학교$/, "대"), n = 0;
     var kind = root.getAttribute("data-k");
-    document.querySelectorAll("tr[data-u], .sch[data-u]").forEach(function (r) {
-      var u = r.getAttribute("data-u").replace(/\s+/g, ""), rk = r.getAttribute("data-k");
-      var hit = (!s || u.indexOf(s) >= 0 || u === "합계") && (kind === "a" || !rk || rk === kind);
+    var els = Array.prototype.slice.call(document.querySelectorAll("tr[data-u], .sch[data-u]"));
+    function starts(raw) {
+      if (raw.replace(/\s+/g, "").indexOf(s) === 0) return true;
+      return raw.split(/[\s()·]+/).some(function (t) { return t && t.indexOf(s) === 0; });
+    }
+    var pre = !!s && els.some(function (r) { var u = r.getAttribute("data-u"); return u !== "합계" && starts(u); });
+    els.forEach(function (r) {
+      var raw = r.getAttribute("data-u"), u = raw.replace(/\s+/g, ""), rk = r.getAttribute("data-k");
+      var nameHit = !s || u === "합계" || (pre ? starts(raw) : u.indexOf(s) >= 0);
+      var hit = nameHit && (kind === "a" || !rk || rk === kind);
       r.classList.toggle("hide", !hit);
       if (hit && s && u !== "합계" && r.tagName === "TR") n++;
     });
