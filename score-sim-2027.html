@@ -136,7 +136,7 @@ footer { margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--line);
 </details>
 
 <h2>1. 수능 성적 입력</h2>
-<p class="lead">성적표의 칸 그대로 넣습니다. 판정에는 국어·수학·탐구의 <b>백분위</b>가 꼭 필요하고, 등급은 등급 평균을 발표한 대학(부산대) 비교에 씁니다. 등급을 비우면 백분위로 추정합니다.</p>
+<p class="lead">성적표의 칸 그대로 넣습니다. 판정에는 국어·수학·탐구의 <b>백분위</b>가 꼭 필요하고, 등급은 등급 평균을 발표한 대학(부산대) 비교에 씁니다. 등급을 비우면 백분위로 추정합니다. 표준점수는 성적표 확인용으로 받고 판정에는 쓰지 않습니다(국어·수학은 평균 100, 탐구는 평균 50 기준이라 대학마다 비교 방식이 다릅니다).</p>
 <div class="row">
   <button type="button" class="btn" id="ex">예시 성적 넣기</button>
   <button type="button" class="btn" id="clr">지우기</button>
@@ -214,6 +214,9 @@ footer { margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--line);
     ["t2", "탐구 2", "tam", 100, true, "사회·과학탐구"],
     ["f2", "제2외국어/한문", "f2", 0, false, "선택 · 등급만"]
   ];
+  // 표준점수: 국어·수학은 평균 100·표준편차 20, 탐구는 평균 50·표준편차 10 기준. 최고점은 해마다 달라 막지 않고 안내만 한다
+  var STDTOP = { kor: 147, math: 139 };   // 2026학년도 수능 최고점
+  var STDPH = { kor: "예: 130 (2026 최고 147)", math: "예: 130 (2026 최고 139)", t1: "예: 65 (평균 50)", t2: "예: 65 (평균 50)" };
   function opts(list, ph) { return '<option value="">' + ph + '</option>' + list.map(function (s) { return '<option>' + s + '</option>'; }).join(""); }
   function gradeSel(id) { var o = '<option value="">선택</option>'; for (var i = 1; i <= 9; i++) o += '<option value="' + i + '">' + i + '</option>'; return '<select id="' + id + '">' + o + '</select>'; }
   $("sheet").innerHTML = AREAS.map(function (a) {
@@ -224,7 +227,7 @@ footer { margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--line);
       else sel = opts(SUB[a[2]], a[2] === "f2" ? "미응시" : "과목 선택");
       h += '<label for="' + id + '-s">선택과목</label><select id="' + id + '-s">' + sel + "</select>";
     }
-    if (a[3]) h += '<label for="' + id + '-std">표준점수</label><input id="' + id + '-std" inputmode="numeric" pattern="[0-9]*" maxlength="3" data-max="' + a[3] + '" placeholder="0~' + a[3] + '">';
+    if (a[3]) h += '<label for="' + id + '-std">표준점수</label><input id="' + id + '-std" inputmode="numeric" pattern="[0-9]*" maxlength="3" data-max="' + a[3] + '" placeholder="' + STDPH[id] + '">';
     if (a[4]) h += '<label for="' + id + '-pct">백분위</label><input id="' + id + '-pct" inputmode="numeric" pattern="[0-9]*" maxlength="3" data-max="100" placeholder="0~100">';
     h += '<label for="' + id + '-grd">등급</label>' + gradeSel(id + "-grd");
     if (a[4]) h += '<span class="est" id="' + id + '-est"></span>';
@@ -249,11 +252,16 @@ footer { margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--line);
   // 성적 → 계산값
   var ME = null;
   function compute() {
-    var bad = [], warn = [];
+    var bad = [], warn = [], stdNote = [];
+    var names0 = { kor: "국어", math: "수학", t1: "탐구 1", t2: "탐구 2" };
     var P = {}, G = {};
     ["kor", "math", "t1", "t2"].forEach(function (k) {
       var mx = k === "kor" || k === "math" ? 200 : 100;
       var s = num(k + "-std", 0, mx); if (isNaN(s)) bad.push(k);
+      if (typeof s === "number" && !isNaN(s)) {
+        if (STDTOP[k] && s > STDTOP[k]) stdNote.push(names0[k] + " 표준점수 " + s + "점은 2026학년도 최고점(" + STDTOP[k] + "점)보다 높습니다. 2027 최고점은 시험 난이도에 따라 달라지므로 그대로 받습니다. 값을 한 번 더 확인하세요.");
+        if (!STDTOP[k] && s > 80) stdNote.push(names0[k] + " 표준점수 " + s + "점: 탐구 표준점수는 평균 50·표준편차 10 기준이라 보통 80을 넘지 않습니다. 값을 확인하세요.");
+      }
       var p = num(k + "-pct", 0, 100); if (isNaN(p)) bad.push(k);
       P[k] = typeof p === "number" && !isNaN(p) ? p : null;
       var g = $(k + "-grd").value; G[k] = g ? +g : (P[k] != null ? estGrade(P[k]) : null);
@@ -272,7 +280,7 @@ footer { margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--line);
     if (t.length === 1) warn.push("탐구는 1과목만 넣었습니다. 2과목 평균을 쓰는 대학에도 이 과목 하나로 계산합니다.");
     if (G.eng == null) warn.push("영어 등급을 넣으면 부산대 등급 평균 비교에 씁니다.");
     $("msg").className = "msg" + (msg.length ? " err" : "");
-    $("msg").innerHTML = msg.concat(warn).map(esc).join("<br>");
+    $("msg").innerHTML = msg.concat(stdNote, warn).map(esc).join("<br>");
     var ok = P.kor != null && P.math != null && tavg != null && !bad.length;
     ME = {
       ok: ok, P: P, G: G, tavg: tavg, ttop: ttop, tn: t.length,
