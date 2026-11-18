@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>수능 점수 합격선 비교 2027</title>
+<meta name="description" content="2027 수능 성적표 값을 넣으면 2026학년도 정시 입시결과(백분위·등급 합격선)와 비교해 안정·적정·소신·상향 대학·학과를 보여 주는 시뮬레이션">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: 단일 칼럼. 성적 입력 카드 → 비교 결과 카드 → 참고(환산점수·컷 미공개). result-2026과 같은 OMR 붉은 괘선 + 남색 잉크 */
+:root {
+  --bg: #fbfaf8; --paper: #ffffff; --ink: #1d2433; --muted: #5d6474; --line: #e6e2dc;
+  --omr: #c8414f; --omr-soft: #fbe9eb; --navy: #26407a; --navy-soft: #e9eef8; --sub: #f4f2ee;
+  --green: #2f6b4f; --green-soft: #e6f1eb; --amber: #9a5b00; --amber-soft: #fbf0dc;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #141821; --paper: #1b2030; --ink: #e8eaf0; --muted: #a2a9b8; --line: #2c3344;
+  --omr: #f07a86; --omr-soft: #3a2228; --navy: #9db4ea; --navy-soft: #222c44; --sub: #20263a;
+  --green: #8fd0ac; --green-soft: #1f3329; --amber: #f0bd6a; --amber-soft: #3a2f1c; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #141821; --paper: #1b2030; --ink: #e8eaf0; --muted: #a2a9b8; --line: #2c3344;
+  --omr: #f07a86; --omr-soft: #3a2228; --navy: #9db4ea; --navy-soft: #222c44; --sub: #20263a;
+  --green: #8fd0ac; --green-soft: #1f3329; --amber: #f0bd6a; --amber-soft: #3a2f1c; color-scheme: dark }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.65; word-break: keep-all; overflow-wrap: anywhere;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 56px; }
+.wrap { max-width: 1040px; margin: 0 auto; }
+header { padding-block: 32px 18px; border-bottom: 2px solid var(--omr); position: relative; }
+header::after { content: ""; position: absolute; left: 0; right: 0; bottom: -7px; border-bottom: 1px solid var(--omr); opacity: .5; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; color: var(--omr); }
+h1 { font-size: clamp(24px, 5vw, 36px); line-height: 1.25; margin: 6px 0 8px; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0; font-size: 14px; }
+h2 { font-size: 20px; margin: 36px 0 6px; }
+.lead { color: var(--muted); font-size: 14px; margin: 0 0 10px; }
+a { color: var(--navy); }
+button, select, input { font: inherit; color: var(--ink); }
+.btn { min-height: 40px; padding: 6px 16px; border-radius: 999px; border: 1.5px solid var(--navy); background: var(--paper); color: var(--navy); font-weight: 500; cursor: pointer; }
+.btn.main { background: var(--navy); color: var(--paper); }
+.btn:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--omr); outline-offset: 2px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+details.warn { margin: 18px 0 0; background: var(--amber-soft); border-left: 3px solid var(--amber); border-radius: 0 6px 6px 0; padding: 8px 14px; font-size: 14px; }
+details.warn summary { cursor: pointer; font-weight: 700; color: var(--amber); min-height: 32px; }
+details.warn ul { margin: 6px 0; padding-left: 1.2em; }
+
+/* 성적 입력 */
+.sheet { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 10px; margin: 10px 0; }
+.area { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-width: 0; }
+.area h3 { margin: 0 0 6px; font-size: 16px; color: var(--navy); display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
+.area h3 small { font-size: 12px; font-weight: 400; color: var(--muted); }
+.f { display: grid; grid-template-columns: 76px 1fr; gap: 6px 8px; align-items: center; margin-top: 6px; }
+.f label { font-size: 13px; color: var(--muted); }
+.f select, .f input { width: 100%; min-width: 0; min-height: 40px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); padding: 4px 10px; font-size: 16px; }
+.f input.bad { border-color: var(--omr); background: var(--omr-soft); }
+.est { font-size: 12px; color: var(--muted); grid-column: 2; margin-top: -2px; }
+.msg { font-size: 14px; margin: 6px 0; }
+.msg.err { color: var(--omr); }
+.mine { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: 8px; margin: 10px 0; }
+.mine div { background: var(--navy-soft); border-radius: 8px; padding: 8px 10px; }
+.mine b { display: block; font-family: var(--font-mono); font-size: 20px; color: var(--navy); }
+.mine span { font-size: 12px; color: var(--muted); }
+
+/* 거르기 */
+.ctl { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 8px; }
+.seg { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.seg button { min-height: 36px; padding: 4px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--bg); cursor: pointer; font-size: 14px; }
+.seg button[aria-pressed="true"] { border-color: currentColor; font-weight: 700; }
+.seg button.j1[aria-pressed="true"] { color: var(--green); background: var(--green-soft); }
+.seg button.j2[aria-pressed="true"] { color: var(--navy); background: var(--navy-soft); }
+.seg button.j3[aria-pressed="true"] { color: var(--amber); background: var(--amber-soft); }
+.seg button.j4[aria-pressed="true"] { color: var(--omr); background: var(--omr-soft); }
+.seg button.g[aria-pressed="true"] { color: var(--navy); background: var(--navy-soft); }
+.ctl input[type="search"], .ctl select { min-height: 40px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); padding: 4px 14px; font-size: 15px; flex: 1 1 140px; min-width: 0; }
+.ctl label.chk { font-size: 14px; display: inline-flex; gap: 6px; align-items: center; min-height: 32px; }
+.ctl input[type="range"] { flex: 1 1 120px; min-width: 0; }
+.ctl .lb { font-size: 12px; color: var(--muted); flex: none; }
+.count { font-size: 14px; color: var(--muted); margin: 10px 0 4px; }
+
+/* 결과 카드 */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 10px; }
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-width: 0; }
+.card .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.card .u { font-size: 13px; color: var(--muted); }
+.card .d { font-size: 17px; font-weight: 700; line-height: 1.35; }
+.card .tp { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.jb { flex: none; text-align: center; border-radius: 8px; padding: 4px 8px; min-width: 64px; }
+.jb b { display: block; font-size: 14px; }
+.jb span { font-family: var(--font-mono); font-size: 13px; }
+.jb.j1 { background: var(--green-soft); color: var(--green); }
+.jb.j2 { background: var(--navy-soft); color: var(--navy); }
+.jb.j3 { background: var(--amber-soft); color: var(--amber); }
+.jb.j4 { background: var(--omr-soft); color: var(--omr); }
+.kv { display: grid; grid-template-columns: 64px 1fr; gap: 2px 8px; font-size: 14px; margin-top: 8px; }
+.kv dt { color: var(--muted); font-size: 12.5px; padding-top: 2px; }
+.kv dd { margin: 0; }
+.kv .num { font-family: var(--font-mono); font-weight: 500; }
+.tag { display: inline-block; font-size: 11.5px; border-radius: 4px; padding: 0 6px; background: var(--sub); color: var(--muted); margin-left: 4px; white-space: nowrap; }
+.tag.soft { background: var(--amber-soft); color: var(--amber); }
+.card .ft { display: flex; justify-content: space-between; gap: 8px; margin-top: 8px; font-size: 12.5px; color: var(--muted); }
+.pager { display: flex; justify-content: center; align-items: center; gap: 10px; margin: 14px 0; }
+.pager[hidden] { display: none; }
+.pager .pos { font-family: var(--font-mono); font-size: 12px; color: var(--muted); min-width: 110px; text-align: center; }
+.pager button:disabled { opacity: .4; }
+details.ref { margin: 18px 0 0; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 8px 14px; }
+details.ref summary { cursor: pointer; font-weight: 700; color: var(--navy); min-height: 36px; padding-top: 4px; }
+.refu { margin: 10px 0; }
+.refu h4 { margin: 0 0 4px; font-size: 15px; }
+.refu ul { margin: 0; padding-left: 1.1em; font-size: 14px; }
+.refu li { margin: 2px 0; }
+.empty { background: var(--paper); border: 1px dashed var(--line); border-radius: 10px; padding: 16px; color: var(--muted); font-size: 14px; }
+footer { margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+@media (max-width: 759px) {
+  body { font-size: 16px; }
+  .f { grid-template-columns: 68px 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">2027 수능 · 2026 정시 입시결과 · 시뮬레이션</div>
+  <h1>2027 수능 점수로 보는 2026 합격선</h1>
+  <p class="sub">수능 성적표 값을 넣으면 2026학년도 정시 입시결과(42개 대학 중 백분위·등급 합격선을 발표한 곳)와 비교해 안정·적정·소신·상향으로 나눠 보여 줍니다. 입력값은 이 기기에만 저장되고 어디로도 보내지 않습니다.</p>
+</header>
+
+<details class="warn">
+  <summary>먼저 읽어 주세요 — 참고용 시뮬레이션입니다</summary>
+  <ul>
+    <li>비교 기준은 <b>2026학년도</b> 정시 결과입니다. 서울대·고려대 서울·건국대 서울은 2026 자료가 없어 <b>2025학년도</b> 결과입니다. 2027 수능 난이도와 지원 경향은 반영하지 않았습니다.</li>
+    <li>판정은 <b>국어·수학·탐구 백분위 평균</b>(또는 대학이 밝힌 방식)만으로 합니다. 영어·한국사 점수, 가산점, 대학별 반영비율, 수학·탐구 지정 과목은 반영하지 않습니다.</li>
+    <li>대학마다 발표 지표가 다릅니다. 70%컷, 50%컷, 최종등록자 평균, 상위 80% 평균, 최초합격자 평균 등이 섞여 있습니다. 카드마다 어떤 지표와 비교했는지 적었습니다. "평균"과 비교한 줄은 컷보다 기준이 높게 잡혀 있을 수 있습니다.</li>
+    <li>대학별 환산점수로만 컷을 발표한 대학은 판정하지 않고, 아래 참고 목록에 컷 값만 보여 줍니다.</li>
+    <li>지원 전에는 반드시 각 대학 2027 모집요강과 <a href="result-2026.html">2026 입시결과 검색</a>의 "지표 읽는 법"을 확인하세요.</li>
+  </ul>
+</details>
+
+<h2>1. 수능 성적 입력</h2>
+<p class="lead">성적표의 칸 그대로 넣습니다. 판정에는 국어·수학·탐구의 <b>백분위</b>가 꼭 필요하고, 등급은 등급 평균을 발표한 대학(부산대) 비교에 씁니다. 등급을 비우면 백분위로 추정합니다.</p>
+<div class="row">
+  <button type="button" class="btn" id="ex">예시 성적 넣기</button>
+  <button type="button" class="btn" id="clr">지우기</button>
+  <button type="button" class="btn" id="share">이 성적으로 주소 복사</button>
+</div>
+<div class="sheet" id="sheet"></div>
+<div class="msg" id="msg" aria-live="polite"></div>
+<div class="mine" id="mine"></div>
+
+<h2>2. 2026 정시 합격선과 비교</h2>
+<p class="lead">차이 = 내 점수 − 대학 발표 값(등급은 반대). 경계 폭 기본 2점: <b>안정</b> +2 이상 · <b>적정</b> 0~+2 · <b>소신</b> −2~0 · <b>상향</b> −4~−2. 그보다 낮은 곳은 숨깁니다.</p>
+<div class="ctl">
+  <div class="seg" role="group" aria-label="판정 단계">
+    <button type="button" class="j1" data-j="1" aria-pressed="true">안정</button><button type="button" class="j2" data-j="2" aria-pressed="true">적정</button><button type="button" class="j3" data-j="3" aria-pressed="true">소신</button><button type="button" class="j4" data-j="4" aria-pressed="true">상향</button>
+  </div>
+  <div class="seg" role="group" aria-label="모집군">
+    <button type="button" class="g" data-g="" aria-pressed="true">전체 군</button><button type="button" class="g" data-g="가" aria-pressed="false">가군</button><button type="button" class="g" data-g="나" aria-pressed="false">나군</button><button type="button" class="g" data-g="다" aria-pressed="false">다군</button>
+  </div>
+  <div class="row">
+    <input type="search" id="fu" list="ulist" placeholder="대학 이름으로 거르기" aria-label="대학 이름으로 거르기" autocomplete="off">
+    <datalist id="ulist"></datalist>
+    <input type="search" id="fd" placeholder="학과 이름으로 거르기 (예: 경영, 컴퓨터)" aria-label="학과 이름으로 거르기" autocomplete="off">
+  </div>
+  <div class="row">
+    <span class="lb">경계 폭</span><input type="range" id="w" min="1" max="5" step="0.5" value="2" aria-label="경계 폭"><b id="wv" class="num">2</b><span class="lb">점</span>
+    <select id="sort" aria-label="정렬"><option value="near">컷에 가까운 순</option><option value="high">합격선 높은 순</option><option value="diff">차이 큰 순</option><option value="univ">대학 이름순</option></select>
+  </div>
+  <div class="row">
+    <label class="chk"><input type="checkbox" id="sp"> 특별전형 포함 (농어촌·기회균형·특성화고·지역인재 등)</label>
+    <label class="chk"><input type="checkbox" id="ar"> 예체능·실기 모집단위 포함</label>
+  </div>
+</div>
+<div class="count" id="count" aria-live="polite">자료를 불러오는 중…</div>
+<div class="pager" id="pgTop" hidden><button type="button" class="btn" data-d="-1">이전</button><span class="pos"></span><button type="button" class="btn" data-d="1">다음</button></div>
+<div class="cards" id="cards"></div>
+<div class="pager" id="pgBot" hidden><button type="button" class="btn" data-d="-1">이전</button><span class="pos"></span><button type="button" class="btn" data-d="1">다음</button></div>
+
+<details class="ref" id="ref">
+  <summary>환산점수로만 발표한 대학 (참고, 판정 안 함)</summary>
+  <p class="lead">대학별 반영비율·영어 환산·가산점을 적용한 점수라 성적표 값만으로는 비교할 수 없습니다. 위 거르기(대학·학과·군·특별전형)가 그대로 적용됩니다.</p>
+  <div id="refBody"></div>
+</details>
+<details class="ref" id="none">
+  <summary>정시 합격선을 발표하지 않은 대학</summary>
+  <div id="noneBody"></div>
+</details>
+
+<footer>자료: 진학사 입시결과 자료실의 각 대학 2026학년도(일부 2025학년도) 입시결과. 원문 값 그대로이며 근거 쪽은 각 대학 입시결과 문서 쪽 기준. 이 페이지는 입력한 성적을 서버로 보내지 않습니다. 정리 기준일 2026-11-18.</footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var DATA = "data/result/";
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function put(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  // ---------- 성적표 ----------
+  var SUB = {
+    kor: ["화법과 작문", "언어와 매체"],
+    math: ["확률과 통계", "미적분", "기하"],
+    soc: ["생활과 윤리", "윤리와 사상", "한국지리", "세계지리", "동아시아사", "세계사", "경제", "정치와 법", "사회·문화"],
+    sci: ["물리학Ⅰ", "화학Ⅰ", "생명과학Ⅰ", "지구과학Ⅰ", "물리학Ⅱ", "화학Ⅱ", "생명과학Ⅱ", "지구과학Ⅱ"],
+    f2: ["독일어Ⅰ", "프랑스어Ⅰ", "스페인어Ⅰ", "중국어Ⅰ", "일본어Ⅰ", "러시아어Ⅰ", "아랍어Ⅰ", "베트남어Ⅰ", "한문Ⅰ"]
+  };
+  // id, 제목, 선택과목 종류, 표준점수 최대(0이면 칸 없음), 백분위 칸, 메모
+  var AREAS = [
+    ["hist", "한국사", null, 0, false, "필수 · 등급만"],
+    ["kor", "국어", "kor", 200, true, "선택과목 1"],
+    ["math", "수학", "math", 200, true, "선택과목 1"],
+    ["eng", "영어", null, 0, false, "등급만"],
+    ["t1", "탐구 1", "tam", 100, true, "사회·과학탐구"],
+    ["t2", "탐구 2", "tam", 100, true, "사회·과학탐구"],
+    ["f2", "제2외국어/한문", "f2", 0, false, "선택 · 등급만"]
+  ];
+  function opts(list, ph) { return '<option value="">' + ph + '</option>' + list.map(function (s) { return '<option>' + s + '</option>'; }).join(""); }
+  function gradeSel(id) { var o = '<option value="">선택</option>'; for (var i = 1; i <= 9; i++) o += '<option value="' + i + '">' + i + '</option>'; return '<select id="' + id + '">' + o + '</select>'; }
+  $("sheet").innerHTML = AREAS.map(function (a) {
+    var id = a[0], h = '<div class="area"><h3>' + a[1] + ' <small>' + a[5] + '</small></h3><div class="f">';
+    if (a[2]) {
+      var sel;
+      if (a[2] === "tam") sel = '<option value="">과목 선택</option><optgroup label="사회탐구">' + SUB.soc.map(function (s) { return "<option>" + s + "</option>"; }).join("") + '</optgroup><optgroup label="과학탐구">' + SUB.sci.map(function (s) { return "<option>" + s + "</option>"; }).join("") + "</optgroup>";
+      else sel = opts(SUB[a[2]], a[2] === "f2" ? "미응시" : "과목 선택");
+      h += '<label for="' + id + '-s">선택과목</label><select id="' + id + '-s">' + sel + "</select>";
+    }
+    if (a[3]) h += '<label for="' + id + '-std">표준점수</label><input id="' + id + '-std" inputmode="numeric" pattern="[0-9]*" maxlength="3" data-max="' + a[3] + '" placeholder="0~' + a[3] + '">';
+    if (a[4]) h += '<label for="' + id + '-pct">백분위</label><input id="' + id + '-pct" inputmode="numeric" pattern="[0-9]*" maxlength="3" data-max="100" placeholder="0~100">';
+    h += '<label for="' + id + '-grd">등급</label>' + gradeSel(id + "-grd");
+    if (a[4]) h += '<span class="est" id="' + id + '-est"></span>';
+    return h + "</div></div>";
+  }).join("");
+
+  var FIELDS = [];
+  AREAS.forEach(function (a) { ["s", "std", "pct", "grd"].forEach(function (k) { if ($(a[0] + "-" + k)) FIELDS.push(a[0] + "-" + k); }); });
+  var EX = { "hist-grd": "1", "kor-s": "화법과 작문", "kor-std": "142", "kor-pct": "99", "kor-grd": "1", "math-s": "확률과 통계", "math-std": "137", "math-pct": "100", "math-grd": "1", "eng-grd": "1",
+    "t1-s": "사회·문화", "t1-std": "70", "t1-pct": "100", "t1-grd": "1", "t2-s": "지구과학Ⅰ", "t2-std": "70", "t2-pct": "99", "t2-grd": "1", "f2-s": "일본어Ⅰ", "f2-grd": "1" };
+  function readForm() { var o = {}; FIELDS.forEach(function (f) { var v = $(f).value.trim(); if (v) o[f] = v; }); return o; }
+  function writeForm(o) { FIELDS.forEach(function (f) { $(f).value = (o && o[f]) || ""; }); }
+  function num(f, lo, hi) {
+    var el = $(f); if (!el) return null;
+    var v = el.value.trim(); if (v === "") { el.classList.remove("bad"); return null; }
+    var n = Number(v), ok = /^\d{1,3}$/.test(v) && n >= lo && n <= hi;
+    el.classList.toggle("bad", !ok);
+    return ok ? n : NaN;
+  }
+  function estGrade(p) { return p >= 96 ? 1 : p >= 89 ? 2 : p >= 77 ? 3 : p >= 60 ? 4 : p >= 40 ? 5 : p >= 23 ? 6 : p >= 11 ? 7 : p >= 4 ? 8 : 9; }
+
+  // 성적 → 계산값
+  var ME = null;
+  function compute() {
+    var bad = [], warn = [];
+    var P = {}, G = {};
+    ["kor", "math", "t1", "t2"].forEach(function (k) {
+      var mx = k === "kor" || k === "math" ? 200 : 100;
+      var s = num(k + "-std", 0, mx); if (isNaN(s)) bad.push(k);
+      var p = num(k + "-pct", 0, 100); if (isNaN(p)) bad.push(k);
+      P[k] = typeof p === "number" && !isNaN(p) ? p : null;
+      var g = $(k + "-grd").value; G[k] = g ? +g : (P[k] != null ? estGrade(P[k]) : null);
+      $(k + "-est").textContent = !g && P[k] != null ? "등급 비움 → 백분위로 추정 " + estGrade(P[k]) + "등급" : "";
+    });
+    G.eng = $("eng-grd").value ? +$("eng-grd").value : null;
+    G.hist = $("hist-grd").value ? +$("hist-grd").value : null;
+    var names = { kor: "국어", math: "수학", t1: "탐구 1", t2: "탐구 2" };
+    var msg = [];
+    if (bad.length) msg.push("범위를 벗어난 값이 있습니다: " + bad.filter(function (x, i, a) { return a.indexOf(x) === i; }).map(function (k) { return names[k]; }).join(", ") + " (표준점수 국어·수학 0~200, 탐구 0~100, 백분위 0~100).");
+    var t = [P.t1, P.t2].filter(function (x) { return x != null; });
+    var tavg = t.length ? t.reduce(function (a, b) { return a + b; }, 0) / t.length : null;
+    var ttop = t.length ? Math.max.apply(null, t) : null;
+    if ($("t1-s").value && $("t2-s").value && $("t1-s").value === $("t2-s").value) msg.push("탐구 1과 탐구 2에 같은 과목을 골랐습니다.");
+    if (P.kor == null || P.math == null || tavg == null) msg.push("국어·수학·탐구 백분위를 모두 넣어야 백분위 합격선과 비교할 수 있습니다." + (t.length === 1 ? "" : ""));
+    if (t.length === 1) warn.push("탐구는 1과목만 넣었습니다. 2과목 평균을 쓰는 대학에도 이 과목 하나로 계산합니다.");
+    if (G.eng == null) warn.push("영어 등급을 넣으면 부산대 등급 평균 비교에 씁니다.");
+    $("msg").className = "msg" + (msg.length ? " err" : "");
+    $("msg").innerHTML = msg.concat(warn).map(esc).join("<br>");
+    var ok = P.kor != null && P.math != null && tavg != null && !bad.length;
+    ME = {
+      ok: ok, P: P, G: G, tavg: tavg, ttop: ttop, tn: t.length,
+      avg2: ok ? (P.kor + P.math + tavg) / 3 : null,
+      top1: ok ? (P.kor + P.math + ttop) / 3 : null,
+      art: P.kor != null && tavg != null && !bad.length ? (P.kor + tavg) / 2 : null,
+      sum: ok ? P.kor + P.math + tavg : null,
+      gavg: (G.kor && G.math && G.eng && (G.t1 || G.t2)) ? (G.kor + G.math + G.eng + ((G.t1 || G.t2) + (G.t2 || G.t1)) / 2) / 4 : null
+    };
+    var fx = function (v, d) { return v == null ? "—" : v.toFixed(d == null ? 2 : d); };
+    $("mine").innerHTML = ok || ME.gavg ? [
+      ["국·수·탐(2과목 평균) 평균 백분위", fx(ME.avg2)],
+      ["국·수·탐(상위 1과목) 평균 백분위", fx(ME.top1)],
+      ["국·탐 평균 백분위 (예체능 방식)", fx(ME.art)],
+      ["국·수·영·탐 등급 평균", fx(ME.gavg)]
+    ].map(function (x) { return "<div><span>" + x[0] + "</span><b>" + x[1] + "</b></div>"; }).join("") : "";
+    var saved = readForm(); put("sim2027", JSON.stringify(saved));
+  }
+
+  // ---------- 2026 입시결과 ----------
+  var ROWS = [], REF = [], NONE = [], UNAMES = [];
+  var SPECIAL = /농어촌|기회균형|기회균등|기초생활|차상위|특성화|저소득|장애|재직|만학|보훈|지역인재|국가안보|정원\s*외|정원외|사회통합|고른기회/;
+  var ARTS = /실기|예능|예체능/;
+  function short(n) { return n.replace("대학교", "대").replace(/\s*캠퍼스$/, "").replace(/캠퍼스/, ""); }
+  function gunOf(s) {
+    var m = /([가나다])\s*」?\s*군|\(\s*([가나다])\s*\)|([가나다])군/.exec(s);
+    return m ? (m[1] || m[2] || m[3]) : "";
+  }
+  function val(v) {
+    if (v == null) return null;
+    var s = String(v).replace(/[,%\s]/g, "");
+    if (!/^-?\d+(\.\d+)?$/.test(s)) return null;
+    return Number(s);
+  }
+  var ARTUNIT = /조형|공연예술|운동건강|스포츠|체육|미술|디자인|무용|음악|연극|영화|실용음악|회화|조소|공예|도예/;
+  // 대학·표·지표별 계산 방법
+  function rule(un, t, label, unit) {
+    var lb = label || "";
+    if (/3개년/.test(t.t)) return null;                       // 같은 값 반복 표
+    if (/영어/.test(lb) || /국어 환산|영어 환산/.test(lb)) return null;
+    if (/환산/.test(lb)) return { kind: "ref" };
+    if (/^성적/.test(lb)) {
+      if (/^서울과학기술/.test(un)) return { kind: "pct", calc: /실기/.test(t.t) && !/산업디자인/.test(unit) ? "art" : "avg2" };
+      if (/^상명/.test(un)) return { kind: "pct", calc: "top1" };
+      if (/^한양대학교 서울/.test(un)) return { kind: "pct", calc: "avg2" };
+      return { kind: "ref" };
+    }
+    if (/등급/.test(lb)) return /^부산/.test(un) ? { kind: "grd", calc: "gavg" } : { kind: "ref" };
+    if (lb === "국어 백분위") return { kind: "pct", calc: "kor" };
+    if (/백분위/.test(lb)) {
+      if (/^경북/.test(un)) return { kind: "pct", calc: "sum" };
+      if (/^명지|^상명/.test(un)) return { kind: "pct", calc: "top1" };
+      if (/^인천/.test(un) && /조형예술|공연예술|운동건강|스포츠과학|체육교육/.test(unit)) return { kind: "pct", calc: "art" };
+      if (/^동국대학교 서울/.test(un)) return { kind: "pct", calc: "avg2", note: "동국대 평균은 계열별 반영비율을 고려한 값이라 단순 평균과 다를 수 있음" };
+      if (/^광운/.test(un)) return { kind: "pct", calc: "avg2", cut: true, note: "환산점수 70% 컷 위치 학생의 국·수·탐 백분위 평균" };
+      return { kind: "pct", calc: "avg2" };
+    }
+    return null;
+  }
+  var CALCN = { avg2: "국·수·탐(2과목 평균) 평균", top1: "국·수·탐(상위 1과목) 평균", art: "국·탐 평균", sum: "국·수·탐 백분위 합", kor: "국어 백분위", gavg: "국·수·영·탐 등급 평균" };
+  function rank(lb, r) { if (r && r.cut) return 0; return /70/.test(lb) ? 0 : /50/.test(lb) ? 1 : 2; }
+
+  function ingest(d, meta) {
+    var un = d.name, year = meta.y, any = false, anyRef = false, hasJ = false;
+    d.tables.forEach(function (t) {
+      if (t.p !== "정시") return;
+      hasJ = true;
+      var sc = (t.key && t.key.score) || [];
+      t.rows.forEach(function (r) {
+        var off = r.length - t.cols.length - 1;
+        var unit = r[1] || "", typ = r[0] || "", ctx = typ + " " + t.t;
+        var cand = [], refs = [];
+        sc.forEach(function (i) {
+          var lb = (t.kh && t.kh[i]) || t.cols[i];
+          var ru = rule(un, t, lb, unit + " " + ctx); if (!ru) return;
+          var v = val(r[off + i]);
+          if (ru.kind === "ref") { if (v != null) refs.push(lb + " " + r[off + i]); return; }
+          if (v == null) return;
+          if (ru.kind === "pct" && (v < 0 || v > (ru.calc === "sum" ? 300 : 100))) return;
+          if (ru.kind === "grd" && (v < 1 || v > 9)) return;
+          cand.push({ lb: lb, col: t.cols[i], v: v, r: ru, k: rank(lb, ru) });
+        });
+        var base = {
+          un: un, us: short(un), year: year, unit: unit, typ: typ, title: t.t, gun: gunOf(ctx), cite: r[r.length - 1],
+          sp: SPECIAL.test(ctx) && !/일반/.test(ctx), ar: ARTS.test(ctx) || ARTUNIT.test(unit),
+          ratio: t.key && t.key.ratio != null ? r[off + t.key.ratio] : null,
+          fill: t.key && t.key.fill != null ? r[off + t.key.fill] : null,
+          fillLb: t.key && t.key.fill != null ? t.cols[t.key.fill] : ""
+        };
+        if (cand.length) {
+          cand.sort(function (a, b) { return a.k - b.k; });
+          base.m = cand[0];
+          ROWS.push(base); any = true;
+        } else if (refs.length) {
+          base.refs = refs; REF.push(base); anyRef = true;
+        }
+      });
+    });
+    if (!any && !anyRef) NONE.push({ un: un, year: year, hasJ: hasJ, guide: (d.guide && d.guide["정시"]) || "" });
+  }
+
+  // ---------- 판정·화면 ----------
+  var state = { j: { 1: true, 2: true, 3: true, 4: true }, g: "", page: 0 };
+  var PAGE = 20, LIST = [];
+  function mineFor(m) {
+    if (!ME) return null;
+    var c = m.r.calc;
+    if (c === "kor") return ME.P.kor;
+    if (c === "gavg") return ME.gavg;
+    return ME[c];
+  }
+  // 정렬용: 등급·합계를 백분위 평균 눈금으로
+  function lvl(m) { return m.r.kind === "grd" ? 100 - (m.v - 1) * 12 : m.r.calc === "sum" ? m.v / 3 : m.v; }
+  function judge(diff, w) { return diff >= w ? 1 : diff >= 0 ? 2 : diff >= -w ? 3 : diff >= -2 * w ? 4 : 0; }
+  var JN = { 1: "안정", 2: "적정", 3: "소신", 4: "상향" };
+  function starts(raw, s) {
+    if (raw.replace(/\s+/g, "").indexOf(s) === 0) return true;
+    return raw.split(/[\s()·]+/).some(function (x) { return x && x.indexOf(s) === 0; });
+  }
+  function univHit(row, s, pre) {
+    if (!s) return true;
+    var a = row.us, b = row.un;
+    return pre ? (starts(a, s) || starts(b, s)) : (a.replace(/\s+/g, "").indexOf(s) >= 0 || b.replace(/\s+/g, "").indexOf(s) >= 0);
+  }
+  function qUniv() { return $("fu").value.replace(/\s+/g, "").replace(/대학교$/, "대"); }
+  function baseFilter(rows) {
+    var s = qUniv(), d = $("fd").value.replace(/\s+/g, "");
+    var pre = !!s && UNAMES.some(function (u) { return starts(u.s, s) || starts(u.n, s); });
+    return rows.filter(function (r) {
+      if (!$("sp").checked && r.sp) return false;
+      if (!$("ar").checked && r.ar) return false;
+      if (state.g && r.gun !== state.g) return false;
+      if (!univHit(r, s, pre)) return false;
+      if (d && r.unit.replace(/\s+/g, "").indexOf(d) < 0) return false;
+      return true;
+    });
+  }
+  function fmt(v, k) { return k === "grd" ? v.toFixed(2) : (Math.abs(v - Math.round(v)) < 1e-9 ? String(v) : v.toFixed(2)); }
+  function render() {
+    var w = +$("w").value; $("wv").textContent = w;
+    if (!ROWS.length) return;
+    var rows = baseFilter(ROWS), out = [], hidden = 0, noMine = 0;
+    rows.forEach(function (r) {
+      var mine = mineFor(r.m);
+      if (mine == null) { noMine++; return; }
+      var gw = r.m.r.kind === "grd" ? w / 10 : w;
+      var diff = r.m.r.kind === "grd" ? r.m.v - mine : mine - r.m.v;
+      if (r.m.r.calc === "sum") gw = w * 3;
+      var j = judge(diff, gw);
+      if (!j) { hidden++; return; }
+      if (!state.j[j]) return;
+      out.push({ r: r, mine: mine, diff: diff, j: j, norm: diff / gw });
+    });
+    var so = $("sort").value;
+    out.sort(function (a, b) {
+      if (so === "univ") return a.r.us.localeCompare(b.r.us, "ko") || a.r.unit.localeCompare(b.r.unit, "ko");
+      if (so === "near") return Math.abs(a.norm) - Math.abs(b.norm);
+      if (so === "high") return lvl(b.r.m) - lvl(a.r.m);
+      return b.norm - a.norm;
+    });
+    LIST = out;
+    var by = { 1: 0, 2: 0, 3: 0, 4: 0 }; out.forEach(function (x) { by[x.j]++; });
+    if (!ME || (!ME.ok && ME.gavg == null)) {
+      $("count").textContent = "위에 국어·수학·탐구 백분위를 넣으면 비교 결과가 나옵니다. (비교할 수 있는 2026 정시 결과 " + ROWS.length.toLocaleString() + "줄)";
+    } else {
+      $("count").textContent = "결과 " + out.length + "곳 — 안정 " + by[1] + " · 적정 " + by[2] + " · 소신 " + by[3] + " · 상향 " + by[4] + (hidden ? " · 기준보다 낮아 숨긴 곳 " + hidden : "") + (noMine ? " · 내 점수로 계산할 수 없는 줄 " + noMine : "");
+    }
+    state.page = Math.min(state.page, Math.max(0, Math.ceil(out.length / PAGE) - 1));
+    paint(); renderRef();
+  }
+  function paint() {
+    var from = state.page * PAGE, list = LIST.slice(from, from + PAGE);
+    $("cards").innerHTML = list.length ? list.map(card).join("") : (ME && (ME.ok || ME.gavg != null) ? '<div class="empty">조건에 맞는 학과가 없습니다. 판정 단계·군·거르기·특별전형 설정을 바꿔 보세요.</div>' : "");
+    var pages = Math.ceil(LIST.length / PAGE);
+    ["pgTop", "pgBot"].forEach(function (id) {
+      var p = $(id); p.hidden = pages < 2;
+      p.querySelector(".pos").textContent = (LIST.length ? from + 1 : 0) + "–" + Math.min(LIST.length, from + PAGE) + " / " + LIST.length;
+      p.querySelector('[data-d="-1"]').disabled = state.page === 0;
+      p.querySelector('[data-d="1"]').disabled = state.page >= pages - 1;
+    });
+  }
+  function card(x) {
+    var r = x.r, m = r.m, k = m.r.kind, soft = /평균/.test(m.lb) && !m.r.cut;
+    var ad = Math.abs(x.diff), sign = ad < (k === "grd" ? 0.005 : 0.05) ? "±" : x.diff >= 0 ? "+" : "−";
+    var q = encodeURIComponent(r.us + " " + r.unit.replace(/\(.*?\)/g, "").trim() + " 정시");
+    var tags = (r.year !== 2026 ? '<span class="tag">' + r.year + ' 결과</span>' : "") + (r.sp ? '<span class="tag">특별전형</span>' : "") + (r.ar ? '<span class="tag">예체능</span>' : "");
+    var extra = [];
+    if (val(r.ratio) != null) extra.push("경쟁률 " + esc(r.ratio));
+    if (r.fill && r.fill !== "-") extra.push(esc(r.fillLb.replace(/^\d{4}\s*/, "") || "충원") + " " + esc(r.fill));
+    return '<article class="card"><div class="top"><div><div class="u">' + esc(r.us) + (r.gun ? " · " + r.gun + "군" : "") + tags + '</div><div class="d">' + esc(r.unit) + '</div><div class="tp">' + esc(r.typ) + '</div></div>' +
+      '<div class="jb j' + x.j + '"><b>' + JN[x.j] + '</b><span>' + sign + (k === "grd" ? ad.toFixed(2) : ad.toFixed(1)) + '</span></div></div>' +
+      '<dl class="kv"><dt>기준</dt><dd><span class="num">' + fmt(m.v, k) + '</span> ' + esc(m.lb) + (soft ? '<span class="tag soft">평균값</span>' : "") + '</dd>' +
+      '<dt>내 점수</dt><dd><span class="num">' + (k === "grd" ? x.mine.toFixed(2) : x.mine.toFixed(2)) + '</span> ' + CALCN[m.r.calc] + '</dd>' +
+      (extra.length ? '<dt>참고</dt><dd>' + extra.join(" · ") + '</dd>' : "") +
+      (m.r.note ? '<dt>주의</dt><dd>' + esc(m.r.note) + '</dd>' : "") +
+      '</dl><div class="ft"><span>' + esc(m.col) + ' · ' + esc(r.cite) + '</span><a href="result-2026.html?q=' + q + '">입시결과 보기</a></div></article>';
+  }
+  function renderRef() {
+    if (!$("ref").open) return;
+    var rows = baseFilter(REF), by = {};
+    rows.forEach(function (r) { (by[r.un] = by[r.un] || []).push(r); });
+    var ks = Object.keys(by);
+    $("refBody").innerHTML = ks.length ? ks.map(function (u) {
+      var list = by[u];
+      return '<div class="refu"><h4>' + esc(short(u)) + (list[0].year !== 2026 ? ' <span class="tag">' + list[0].year + ' 결과</span>' : "") + ' <small>(' + list.length + '줄)</small></h4><ul>' + list.slice(0, 60).map(function (r) {
+        return "<li><b>" + esc(r.unit) + "</b> · " + esc(r.typ) + (r.gun && r.typ.indexOf(r.gun + "군") < 0 ? " · " + r.gun + "군" : "") + " — " + r.refs.map(esc).join(", ") + " <small>" + esc(r.cite) + "</small></li>";
+      }).join("") + (list.length > 60 ? "<li>… 대학·학과로 거르면 나머지도 보입니다.</li>" : "") + "</ul></div>";
+    }).join("") : '<p class="lead">거르기 조건에 맞는 줄이 없습니다.</p>';
+  }
+
+  // ---------- 이벤트 ----------
+  function wire() {
+    FIELDS.forEach(function (f) { $(f).addEventListener("input", function () { compute(); state.page = 0; render(); }); $(f).addEventListener("change", function () { compute(); state.page = 0; render(); }); });
+    $("ex").addEventListener("click", function () { writeForm(EX); compute(); state.page = 0; render(); });
+    $("clr").addEventListener("click", function () { writeForm({}); compute(); state.page = 0; render(); });
+    $("share").addEventListener("click", function () {
+      var url = location.origin + location.pathname + "#s=" + encodeURIComponent(JSON.stringify(readForm()));
+      try { history.replaceState(null, "", url); } catch (e) {}
+      var done = function () { $("share").textContent = "주소를 복사했습니다"; setTimeout(function () { $("share").textContent = "이 성적으로 주소 복사"; }, 1800); };
+      if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, done); else done();
+    });
+    document.querySelectorAll("[data-j]").forEach(function (b) { b.addEventListener("click", function () { var j = b.getAttribute("data-j"); state.j[j] = !state.j[j]; b.setAttribute("aria-pressed", state.j[j] ? "true" : "false"); state.page = 0; render(); }); });
+    document.querySelectorAll("[data-g]").forEach(function (b) { b.addEventListener("click", function () { state.g = b.getAttribute("data-g"); document.querySelectorAll("[data-g]").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); }); state.page = 0; render(); }); });
+    ["fu", "fd", "w", "sort", "sp", "ar"].forEach(function (id) { $(id).addEventListener("input", function () { state.page = 0; render(); }); $(id).addEventListener("change", function () { state.page = 0; render(); }); });
+    ["pgTop", "pgBot"].forEach(function (id) { $(id).addEventListener("click", function (e) { var d = e.target.getAttribute && e.target.getAttribute("data-d"); if (!d || e.target.disabled) return; state.page += +d; paint(); if (id === "pgBot") $("count").scrollIntoView(); }); });
+    $("ref").addEventListener("toggle", renderRef);
+  }
+
+  // 시작: 주소(#s=) → 저장값 순서로 성적 복원
+  var init = null, m = /#s=([^&]+)/.exec(location.hash);
+  if (m) { try { init = JSON.parse(decodeURIComponent(m[1])); } catch (e) {} }
+  if (!init) { try { init = JSON.parse(get("sim2027") || "null"); } catch (e) {} }
+  writeForm(init || {});
+  wire(); compute();
+
+  fetch(DATA + "index.json").then(function (r) { return r.json(); }).then(function (idx) {
+    UNAMES = idx.univs.map(function (u) { return { n: u.n, s: short(u.n) }; });
+    $("ulist").innerHTML = UNAMES.map(function (u) { return '<option value="' + esc(u.s) + '">'; }).join("");
+    var noJ = idx.univs.filter(function (u) { return u.has.indexOf("정시") < 0; });
+    return Promise.all(idx.univs.filter(function (u) { return u.has.indexOf("정시") >= 0; }).map(function (u) {
+      return fetch(DATA + "u/" + u.f).then(function (r) { return r.json(); }).then(function (d) { ingest(d, u); });
+    })).then(function () { return noJ; });
+  }).then(function (noJ) {
+    var lines = NONE.map(function (n) { return "<li><b>" + esc(short(n.un)) + "</b> — 정시 표에 백분위·등급·환산점수 컷이 없습니다. " + esc(n.guide) + "</li>"; })
+      .concat(noJ.map(function (u) { return "<li><b>" + esc(short(u.n)) + "</b> — 진학사 입시결과에 정시 자료가 없습니다.</li>"; }));
+    $("noneBody").innerHTML = "<ul>" + lines.join("") + "</ul><p class=\"lead\">진학사 입시결과 자료실에 자료가 없는 대학(연세대 서울, 중앙대, 세종대, 숙명여대, 홍익대 등)은 <a href=\"result-2026.html\">입시결과 검색</a>의 안내를 보세요.</p>";
+    render();
+  }).catch(function () {
+    $("count").textContent = "입시결과 자료를 불러오지 못했습니다. 잠시 뒤 새로고침해 주세요.";
+  });
+})();
+</script>
+</body>
+</html>
