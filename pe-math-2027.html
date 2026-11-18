@@ -165,5 +165,39 @@ footer { margin-top: 48px; padding-top: 14px; border-top: 1px solid var(--line);
 
   <footer>출처: 각 대학 2027학년도 수시·정시 모집요강(진학사 모집요강 자료실). 원문 쪽수는 각 대학 요강 PDF 쪽 기준. 부산대·인천대 정시 모집인원은 원문 표 이미지를 직접 판독. 정리 기준일 2026-11-15.</footer>
 </div>
+<style>
+/* 좁은 화면(휴대폰)에서는 표를 카드로 바꿔 좌우 스크롤 없이 보이게 한다 */
+@media (max-width: 759px) {
+  .cardwrap { overflow: visible !important; border: 0 !important; background: none !important; box-shadow: none !important; }
+  table.cardify, table.cardify tbody, table.cardify tr, table.cardify td { display: block; width: auto !important; min-width: 0 !important; max-width: 100%; }
+  table.cardify thead { display: none; }
+  table.cardify tr { border: 1px solid rgba(127,127,127,.28); border-radius: 10px; padding: 10px 12px; margin: 0 0 10px; background: var(--paper, #fff); }
+  table.cardify td { border: 0 !important; padding: 0 !important; white-space: normal !important; text-align: left !important; overflow-wrap: anywhere; font-size: 14.5px; }
+  table.cardify td:empty { display: none; }
+  table.cardify td[data-l]::before { content: attr(data-l); display: block; font-size: 11.5px; font-weight: 500; opacity: .65; margin-top: 8px; }
+  table.cardify td:first-child { font-size: 17px; font-weight: 700; }
+  table.cardify td:first-child::before { display: none; }
+  table.cardify td[colspan] { text-align: center !important; }
+  table.cardify td[colspan]::before { display: none; }
+}
+</style>
+<script>
+(function () {
+  function label(t) {
+    var h = [].map.call(t.querySelectorAll("thead th"), function (x) { return x.textContent.replace(/\s+/g, " ").trim(); });
+    t.querySelectorAll("tbody tr").forEach(function (r) {
+      [].forEach.call(r.children, function (td, i) { if (h[i] && !td.hasAttribute("data-l")) td.setAttribute("data-l", h[i]); });
+    });
+  }
+  document.querySelectorAll("table").forEach(function (t) {
+    if (!t.querySelector("thead")) return;
+    t.classList.add("cardify");
+    if (t.parentNode && t.parentNode.tagName === "DIV") t.parentNode.classList.add("cardwrap");
+    label(t);
+    var b = t.querySelector("tbody");
+    if (b && window.MutationObserver) new MutationObserver(function () { label(t); }).observe(b, { childList: true });
+  });
+})();
+</script>
 </body>
 </html>
