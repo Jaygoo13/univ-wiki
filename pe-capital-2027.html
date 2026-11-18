@@ -237,5 +237,66 @@ td.e { min-width: 190px; font-size: 13px; }
   });
 })();
 </script>
+<style>
+/* 대학 이름으로 거르기 */
+.ubar { position: sticky; top: 0; z-index: 6; background: var(--bg, #fbfaf8); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 0; margin: 12px 0 0; border-bottom: 1px solid var(--line, #e6e2dc); }
+.ubar input { font: inherit; font-size: 15px; flex: 1 1 200px; min-width: 0; min-height: 40px; border: 1px solid var(--line, #e6e2dc); border-radius: 999px; padding: 4px 16px; background: var(--paper, #fff); color: var(--ink, #1d2433); }
+.ubar input:focus-visible { outline: 2px solid var(--omr, #c8414f); outline-offset: 2px; }
+.ubar .ucnt { font-family: var(--font-mono, monospace); font-size: 12px; color: var(--muted, #5d6474); flex: none; }
+tr.uhide { display: none !important; }
+.uempty { font-size: 13px; color: var(--muted, #5d6474); margin: 6px 0 14px; }
+.uempty[hidden], .tbl.uoff { display: none; }
+</style>
+<script>
+(function () {
+  var tables = [].filter.call(document.querySelectorAll("table"), function (t) { return t.querySelector("tbody tr td"); });
+  var rows = [], names = {};
+  tables.forEach(function (t) {
+    t.querySelectorAll("tbody tr").forEach(function (r) {
+      var td = r.querySelector("td"); if (!td) return;
+      var u = td.textContent.replace(/\s+/g, " ").trim();
+      r.setAttribute("data-u", u); rows.push(r); names[u] = 1;
+    });
+    var box = t.closest(".tbl") || t.parentNode, em = document.createElement("p");
+    em.className = "uempty"; em.hidden = true; em.textContent = "이 표에는 해당 대학이 없습니다.";
+    box.parentNode.insertBefore(em, box.nextSibling);
+    t._box = box; t._empty = em;
+  });
+  var bar = document.createElement("div");
+  bar.className = "ubar";
+  bar.innerHTML = '<input type="search" list="ulist" placeholder="대학 이름으로 거르기 (예: 경희대, 한양대)" aria-label="대학 이름으로 거르기" autocomplete="off"><datalist id="ulist"></datalist><span class="ucnt" aria-live="polite"></span>';
+  var dl = bar.querySelector("datalist");
+  Object.keys(names).forEach(function (u) { var o = document.createElement("option"); o.value = u; dl.appendChild(o); });
+  var header = document.querySelector("header");
+  header.parentNode.insertBefore(bar, header.nextSibling);
+  var q = bar.querySelector("input"), cnt = bar.querySelector(".ucnt");
+  // 이름(또는 캠퍼스 이름) 앞부분이 맞는 대학을 먼저 찾고, 없을 때만 이름 중간까지 찾는다
+  function starts(raw, s) {
+    if (raw.replace(/\s+/g, "").indexOf(s) === 0) return true;
+    return raw.split(/[\s()·]+/).some(function (w) { return w && w.indexOf(s) === 0; });
+  }
+  function filter() {
+    var s = q.value.replace(/\s+/g, "").replace(/대학교$/, "대");
+    var pre = !!s && rows.some(function (r) { return starts(r.getAttribute("data-u"), s); });
+    var n = 0;
+    rows.forEach(function (r) {
+      var u = r.getAttribute("data-u");
+      var hit = !s || (pre ? starts(u, s) : u.replace(/\s+/g, "").indexOf(s) >= 0);
+      r.classList.toggle("uhide", !hit);
+      if (hit && s) n++;
+    });
+    tables.forEach(function (t) {
+      var any = !!t.querySelector("tbody tr:not(.uhide)");
+      t._box.classList.toggle("uoff", !any);
+      t._empty.hidden = any;
+    });
+    cnt.textContent = s ? n + "줄" : "";
+    try { history.replaceState(null, "", s ? "?u=" + encodeURIComponent(q.value.trim()) + location.hash : location.pathname + location.hash); } catch (e) {}
+  }
+  q.addEventListener("input", filter);
+  var m = /[?&]u=([^&]+)/.exec(location.search);
+  if (m) { q.value = decodeURIComponent(m[1]); filter(); }
+})();
+</script>
 </body>
 </html>
